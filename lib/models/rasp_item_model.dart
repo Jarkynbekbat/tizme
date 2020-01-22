@@ -72,15 +72,17 @@ class RaspItemsModel extends ChangeNotifier {
     String cypher = await LocalCypherService.getCypher();
     Map<String, dynamic> jsonRasps =
         await HttpRaspService.getRaspAndGroupByCypher(cypher);
+
     jsonRasps[jsonRasps.keys.first]
         .forEach((el) => this.all.add(RaspItem.fromJson(el)));
 
-    this.current.addAll(this.all.where((el) => el.dayId == today));
+    this.current = this.all.where((el) => el.dayId == today).toList();
     notifyListeners();
   }
 
-  setCurrent(dayId, weekName) {
-    this.current = this.all.where((el) => el.dayId == dayId);
+  setCurrent(dayId) {
+    this.current = this.all.where((el) => el.dayId == dayId).toList();
+    this.today = dayId - 1;
     notifyListeners();
   }
   //получить расписание по дням недели и типу недели

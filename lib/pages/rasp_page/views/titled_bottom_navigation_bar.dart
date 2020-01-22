@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:titled_navigation_bar/titled_navigation_bar.dart';
 
 class RaspTitledBottomNavigationBar extends StatelessWidget {
-  final int _selectedDay;
-  final Function _jumpTo;
-  RaspTitledBottomNavigationBar(this._selectedDay, this._jumpTo);
+  final int selectedDay;
+  final Function jumpTo;
+  RaspTitledBottomNavigationBar({this.selectedDay, this.jumpTo});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -35,8 +36,8 @@ class RaspTitledBottomNavigationBar extends StatelessWidget {
               child: TitledBottomNavigationBar(
                   activeColor: Theme.of(context).iconTheme.color,
                   currentIndex:
-                      _selectedDay, // Use this to update the Bar giving a position
-                  onTap: (index) => _jumpTo(index),
+                      selectedDay, // Use this to update the Bar giving a position
+                  onTap: (index) => jumpTo(index),
                   items: [
                     TitledNavigationBarItem(
                         title: 'ПН',
