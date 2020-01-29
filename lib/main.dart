@@ -1,68 +1,62 @@
 import 'package:flutter/material.dart';
-import 'package:new_rasp_app/helpers/screen.dart';
 import 'package:new_rasp_app/models/rasp_item_model.dart';
-import 'package:new_rasp_app/pages/rasp_page/views/rasp_item_view.dart';
-import 'package:new_rasp_app/pages/rasp_page/views/titled_bottom_navigation_bar.dart';
+import 'package:new_rasp_app/pages/rasp_page/rasp_page.dart';
 import 'package:provider/provider.dart';
+import 'package:theme_provider/theme_provider.dart';
+import 'pages/login_page/intro_page/intro_page.dart';
+import 'services/local/local_cypher_service.dart';
 
-void main() => runApp(MyApp());
+void main() async {
+  try {
+    Widget _defaultHome = IntroPage();
+    //при авторизации
+    await LocalCypherService.setCypher('16/3000');
+    bool _isAuthorized = await LocalCypherService.getCypher() != null;
+    print(_isAuthorized);
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => RaspItemsModel()),
-      ],
-      child: MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
+    return runApp(ThemeProvider(
+      saveThemesOnChange: true,
+      loadThemeOnInit: true,
+      themes: [],
+      child: MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => RaspItemsModel()),
+        ],
+        child: MaterialApp(
+          home: _defaultHome,
+          routes: <String, WidgetBuilder>{
+            //создаю роуты приложения
+            '/intro': (BuildContext context) =>
+                ThemeConsumer(child: IntroPage()),
+            '/rasp': (BuildContext context) => ThemeConsumer(child: RaspPage()),
+            // '/login': (BuildContext context) =>
+            //     ThemeConsumer(child: LoginPage()),
+            // '/about_app': (BuildContext context) =>
+            //     ThemeConsumer(child: AboutAppPage()),
+            // '/module_graph': (BuildContext context) =>
+            //     ThemeConsumer(child: ModuleGraphPage()),
+            // '/session_graph': (BuildContext context) =>
+            //     ThemeConsumer(child: SessionGraphPage()),
+            // //просмотр заметок выбранного предмета
+            // '/rasp_item_notes': (BuildContext context) =>
+            //     ThemeConsumer(child: RaspItemNotesPage()),
+            // //добавление заметки для выбранного предмета
+            // '/rasp_item_note_add': (BuildContext context) =>
+            //     ThemeConsumer(child: RaspItemNoteAddPage()),
+            // //прочитать заметку детально
+            // '/note_item_hero': (BuildContext context) =>
+            //     ThemeConsumer(child: NoteItemHero()),
+            // //просмотр фотографий выбранного предмета
+            // '/rasp_item_photos': (BuildContext context) =>
+            //     ThemeConsumer(child: RaspItemPhotosPage()),
+            // //посмотреть выбранную фотографию
+            // '/photo_item_hero': (BuildContext context) =>
+            //     ThemeConsumer(child: PhotoItemHero()),
+          },
         ),
-        home: MyHomePage(),
       ),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    final raspItemsModel = Provider.of<RaspItemsModel>(context);
-    return Consumer<RaspItemsModel>(builder: (context, counter, _) {
-      return Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(Screen.heigth(context) * 0.08),
-          child: ClipRRect(
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(10),
-              bottomRight: Radius.circular(10),
-            ),
-            child: AppBar(
-              title: Text('Группа'),
-              centerTitle: true,
-            ),
-          ),
-        ),
-        body: SingleChildScrollView(
-          child: Wrap(
-            crossAxisAlignment: WrapCrossAlignment.center,
-            children: List.generate(
-                raspItemsModel.current.length,
-                (int index) =>
-                    RaspItemView(raspItem: raspItemsModel.current[index])),
-          ),
-        ),
-        bottomNavigationBar: RaspTitledBottomNavigationBar(
-          selectedDay: raspItemsModel.today - 1,
-          jumpTo: raspItemsModel.setCurrent,
-        ),
-      );
-    });
+    ));
+  } catch (ex) {
+    print(ex.toString());
   }
 }

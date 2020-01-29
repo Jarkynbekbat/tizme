@@ -65,9 +65,6 @@ class RaspItemsModel extends ChangeNotifier {
   }
   //init all and current rasp
   _initRasp() async {
-    //при авторизации
-    await LocalCypherService.setCypher('16/3000');
-
     //после входа
     String cypher = await LocalCypherService.getCypher();
     Map<String, dynamic> jsonRasps =

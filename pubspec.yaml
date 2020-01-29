@@ -34,3 +34,19 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - ./lib/assets/student.png
+    - ./lib/assets/preview.png
+    - ./lib/assets/face.png
+    - ./lib/assets/insta.png
+    - ./lib/assets/vk.png
+    # - ./lib/assets/no-img.png
+    - ./lib/assets/norasps.png
+    - ./lib/assets/intro/all.png
+    - ./lib/assets/intro/audit.png
+    - ./lib/assets/intro/dark.png
+    - ./lib/assets/intro/galery.png
+    - ./lib/assets/intro/menu.png
+    - ./lib/assets/intro/notes.png
+    - ./lib/assets/intro/rasp.png
+    - ./lib/assets/intro/weekend.png

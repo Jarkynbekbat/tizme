@@ -19,7 +19,7 @@ class AuthModel extends ChangeNotifier {
   logIn(String cypher, context) async {
     try {
       await LocalCypherService.setCypher(cypher);
-      await Navigator.of(context).pushNamed('/rasp_page');
+      await Navigator.of(context).pushNamed('/rasp');
     } catch (ex) {
       print(ex.toString());
     }
