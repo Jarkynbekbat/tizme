@@ -4,7 +4,6 @@ import 'package:new_rasp_app/models/rasp_item_model.dart';
 import 'package:new_rasp_app/pages/rasp_page/views/rasp_item_view.dart';
 import 'package:new_rasp_app/pages/rasp_page/views/titled_bottom_navigation_bar.dart';
 import 'package:provider/provider.dart';
-import 'package:titled_navigation_bar/titled_navigation_bar.dart';
 
 void main() => runApp(MyApp());
 
