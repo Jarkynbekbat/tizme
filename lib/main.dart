@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:new_rasp_app/models/auth_model.dart';
 import 'package:new_rasp_app/models/rasp_item_model.dart';
+import 'package:new_rasp_app/pages/login_page/login_page.dart';
 import 'package:new_rasp_app/pages/rasp_page/rasp_page.dart';
 import 'package:new_rasp_app/themes/dark_week_theme.dart';
 import 'package:new_rasp_app/themes/white_week_theme.dart';
@@ -11,11 +13,11 @@ import 'services/local/local_cypher_service.dart';
 void main() async {
   try {
     WidgetsFlutterBinding.ensureInitialized();
-    Widget _defaultHome = IntroPage();
     //при авторизации
-    await LocalCypherService.setCypher('16/3000');
-    bool _isAuthorized = await LocalCypherService.getCypher() != null;
-    print(_isAuthorized);
+    // await LocalCypherService.setCypher('16/3000');
+    Widget _defaultHome = IntroPage();
+    // Widget _defaultHome =
+    //     await LocalCypherService.getCypher() != null ? RaspPage() : IntroPage();
 
     return runApp(ThemeProvider(
       saveThemesOnChange: true,
@@ -27,6 +29,7 @@ void main() async {
       child: MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => RaspItemsModel()),
+          ChangeNotifierProvider(create: (_) => AuthModel()),
         ],
         child: MaterialApp(
           home: _defaultHome,
@@ -35,8 +38,8 @@ void main() async {
             '/intro': (BuildContext context) =>
                 ThemeConsumer(child: IntroPage()),
             '/rasp': (BuildContext context) => ThemeConsumer(child: RaspPage()),
-            // '/login': (BuildContext context) =>
-            //     ThemeConsumer(child: LoginPage()),
+            '/login': (BuildContext context) =>
+                ThemeConsumer(child: LoginPage()),
             // '/about_app': (BuildContext context) =>
             //     ThemeConsumer(child: AboutAppPage()),
             // '/module_graph': (BuildContext context) =>

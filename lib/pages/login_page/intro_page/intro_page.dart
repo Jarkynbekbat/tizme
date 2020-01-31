@@ -62,7 +62,6 @@ class _IntroPageState extends State<IntroPage> with TickerProviderStateMixin {
                     lastPage = false;
                     animationController.reset();
                   }
-                  print(lastPage);
                 });
               },
               itemBuilder: (context, index) {
