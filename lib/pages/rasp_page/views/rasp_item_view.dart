@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:new_rasp_app/helpers/screen.dart';
-import 'package:new_rasp_app/models/rasp_item_model.dart';
+import 'package:new_rasp_app/models/rasp_model.dart';
 
 class RaspItemView extends StatelessWidget {
   final RaspItem raspItem;
@@ -15,10 +15,10 @@ class RaspItemView extends StatelessWidget {
         height: Screen.heigth(context) * 0.15,
         color: Colors.lightGreen,
         margin: EdgeInsets.all(8),
-        child: Wrap(
+        child: Flex(
           direction: Axis.horizontal,
-          crossAxisAlignment: WrapCrossAlignment.center,
-          alignment: WrapAlignment.start,
+          // crossAxisAlignment: WrapCrossAlignment.center,
+          // alignment: WrapAlignment.start,
           children: [
             Flexible(
               flex: 3,

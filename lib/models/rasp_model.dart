@@ -55,12 +55,12 @@ class RaspItem {
       };
 }
 
-class RaspItemsModel extends ChangeNotifier {
+class RaspModel extends ChangeNotifier {
   List<RaspItem> all = [];
   List<RaspItem> current = [];
-  int today = DateTime.now().weekday;
+  int today = DateTime.now().weekday - 1;
 
-  RaspItemsModel() {
+  RaspModel() {
     this._initRasp();
   }
   //init all and current rasp
@@ -82,6 +82,10 @@ class RaspItemsModel extends ChangeNotifier {
     this.today = dayId - 1;
     notifyListeners();
   }
+
+  List<RaspItem> getRaspByDayId(int dayId) =>
+      this.all.where((el) => el.dayId == dayId).toList();
+
   //получить расписание по дням недели и типу недели
 
 }

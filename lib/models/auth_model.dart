@@ -3,8 +3,6 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:new_rasp_app/helpers/show_snackbar.dart';
 import 'package:new_rasp_app/services/http/http_fio_service.dart';
-import 'package:new_rasp_app/services/http/http_module_service.dart';
-
 import '../services/local/local_cypher_service.dart';
 import '../services/local/local_fio_service.dart';
 import '../services/local/local_group_service.dart';

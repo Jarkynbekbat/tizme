@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:new_rasp_app/models/auth_model.dart';
-import 'package:new_rasp_app/models/rasp_item_model.dart';
+import 'package:new_rasp_app/models/rasp_model.dart';
 import 'package:new_rasp_app/pages/login_page/login_page.dart';
 import 'package:new_rasp_app/pages/rasp_page/rasp_page.dart';
 import 'package:new_rasp_app/themes/dark_week_theme.dart';
@@ -8,7 +8,6 @@ import 'package:new_rasp_app/themes/white_week_theme.dart';
 import 'package:provider/provider.dart';
 import 'package:theme_provider/theme_provider.dart';
 import 'pages/login_page/intro_page/intro_page.dart';
-import 'services/local/local_cypher_service.dart';
 
 void main() async {
   try {
@@ -28,7 +27,7 @@ void main() async {
       ],
       child: MultiProvider(
         providers: [
-          ChangeNotifierProvider(create: (_) => RaspItemsModel()),
+          ChangeNotifierProvider(create: (_) => RaspModel()),
           ChangeNotifierProvider(create: (_) => AuthModel()),
         ],
         child: MaterialApp(
