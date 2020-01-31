@@ -57,15 +57,14 @@ class RaspItem {
 
 class RaspModel extends ChangeNotifier {
   List<RaspItem> all = [];
-  List<RaspItem> current = [];
-  int today = DateTime.now().weekday - 1;
+  int today = DateTime.now().weekday;
+  String group = "группа";
 
   RaspModel() {
     this._initRasp();
   }
-  //init all and current rasp
+
   _initRasp() async {
-    //после входа
     String cypher = await LocalCypherService.getCypher();
     Map<String, dynamic> jsonRasps =
         await HttpRaspService.getRaspAndGroupByCypher(cypher);
@@ -73,13 +72,12 @@ class RaspModel extends ChangeNotifier {
     jsonRasps[jsonRasps.keys.first]
         .forEach((el) => this.all.add(RaspItem.fromJson(el)));
 
-    this.current = this.all.where((el) => el.dayId == today).toList();
+    group = jsonRasps.keys.first;
     notifyListeners();
   }
 
-  setCurrent(dayId) {
-    this.current = this.all.where((el) => el.dayId == dayId).toList();
-    this.today = dayId - 1;
+  void setCurrent(dayId) {
+    this.today = dayId;
     notifyListeners();
   }
 

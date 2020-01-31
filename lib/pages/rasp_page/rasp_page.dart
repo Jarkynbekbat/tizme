@@ -34,7 +34,7 @@ class _RaspPageState extends State<RaspPage>
             bottomRight: Radius.circular(10),
           ),
           child: AppBar(
-            title: Text('Группа'),
+            title: Text(raspModel.group),
             centerTitle: true,
           ),
         ),
@@ -42,22 +42,23 @@ class _RaspPageState extends State<RaspPage>
       body: Consumer<RaspModel>(builder: (context, raspModel, _) {
         return PageView(
           controller: pageController,
-          onPageChanged: (index) {},
-          children: List.generate(6, (index) {
+          onPageChanged: (index) => raspModel.setCurrent(index + 1),
+          children: List.generate(5, (index) {
             return Wrap(
               direction: Axis.vertical,
-              children: List.generate(raspModel.getRaspByDayId(index).length,
-                  (index2) {
+              children: List.generate(
+                  raspModel.getRaspByDayId(index + 1).length, (index2) {
                 return RaspItemView(
-                    raspItem: raspModel.getRaspByDayId(index)[index2]);
+                    raspItem: raspModel.getRaspByDayId(index + 1)[index2]);
               }),
             );
           }),
         );
       }),
       bottomNavigationBar: RaspTitledBottomNavigationBar(
-        selectedDay: raspModel.today,
-        jumpTo: raspModel.setCurrent,
+        selectedDay: raspModel.today - 1,
+        // jumpTo: raspModel.setCurrent,
+        jumpTo: (index) => pageController.jumpToPage(index),
       ),
     );
   }
