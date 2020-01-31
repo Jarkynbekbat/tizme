@@ -6,7 +6,7 @@ class LocalGroupService {
     return prefs.setString('group', group);
   }
 
-  static getGroup() async {
+  static Future<String> getGroup() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var group = prefs.getString('group');
     return group;

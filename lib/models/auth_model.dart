@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:new_rasp_app/helpers/my_simple_dialog.dart';
 import 'package:new_rasp_app/helpers/show_snackbar.dart';
 import 'package:new_rasp_app/services/http/http_fio_service.dart';
 import '../services/local/local_cypher_service.dart';
@@ -45,13 +46,19 @@ class AuthModel extends ChangeNotifier {
 
   logOut(context) async {
     try {
-      LocalCypherService.deleteCypher();
-      LocalGroupService.deleteGroup();
-      LocalFioService.deleteFio();
-      LocalRaspService.deleteRasp();
-      LocalModuleService.deleteModule();
-      LocalQuoteService.deleteQuote();
-      Navigator.of(context).pushNamed('/login');
+      bool res = await showMyDialog(
+          context, 'Выход', 'Вы уверены что хотите выйти ?', 'Выйти', 'Отмена');
+
+      if (res == true) {
+        LocalCypherService.deleteCypher();
+        LocalFioService.deleteFio();
+        LocalGroupService.deleteGroup();
+        LocalRaspService.deleteRasp();
+        LocalModuleService.deleteModule();
+        LocalQuoteService.deleteQuote();
+        // возможно нужно будет добавить удаление прикрепленных фотографий и заметок
+        Navigator.of(context).pushReplacementNamed('/login');
+      }
     } catch (ex) {
       print(ex.toString());
     }

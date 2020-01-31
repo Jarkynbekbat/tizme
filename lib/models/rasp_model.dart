@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:new_rasp_app/services/http/http_rasp_service.dart';
 import 'package:new_rasp_app/services/local/local_cypher_service.dart';
+import 'package:new_rasp_app/services/local/local_group_service.dart';
 
 RaspItem raspItemFromJson(String str) => RaspItem.fromJson(json.decode(str));
 String raspItemToJson(RaspItem data) => json.encode(data.toJson());
@@ -73,6 +74,7 @@ class RaspModel extends ChangeNotifier {
         .forEach((el) => this.all.add(RaspItem.fromJson(el)));
 
     group = jsonRasps.keys.first;
+    await LocalGroupService.setGroup(group);
     notifyListeners();
   }
 

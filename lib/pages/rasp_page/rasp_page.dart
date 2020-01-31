@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:new_rasp_app/models/rasp_model.dart';
+import 'package:new_rasp_app/pages/rasp_page/views/navigation_drawer.dart';
 import 'package:new_rasp_app/pages/rasp_page/views/rasp_item_view.dart';
 import 'package:provider/provider.dart';
 import '../../helpers/screen.dart';
@@ -26,6 +27,7 @@ class _RaspPageState extends State<RaspPage>
     final raspModel = Provider.of<RaspModel>(context);
 
     return Scaffold(
+      drawer: NavigationDrawer(),
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(Screen.heigth(context) * 0.08),
         child: ClipRRect(
@@ -43,7 +45,7 @@ class _RaspPageState extends State<RaspPage>
         return PageView(
           controller: pageController,
           onPageChanged: (index) => raspModel.setCurrent(index + 1),
-          children: List.generate(5, (index) {
+          children: List.generate(7, (index) {
             return Wrap(
               direction: Axis.vertical,
               children: List.generate(

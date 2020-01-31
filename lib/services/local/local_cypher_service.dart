@@ -6,7 +6,7 @@ class LocalCypherService {
     return prefs.setString('cypher', cypher);
   }
 
-  static getCypher() async {
+  static Future<String> getCypher() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var cypher = prefs.getString('cypher');
     return cypher;

@@ -6,7 +6,7 @@ class LocalFioService {
     return prefs.setString('fio', fio);
   }
 
-  static getFio() async {
+  static Future<String> getFio() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var fio = prefs.getString('fio');
     return fio;
