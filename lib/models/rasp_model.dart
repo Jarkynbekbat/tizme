@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:new_rasp_app/helpers/show_snackbar.dart';
+import 'package:new_rasp_app/services/http/http_module_service.dart';
 import 'package:new_rasp_app/services/http/http_quote_service.dart';
 import 'package:new_rasp_app/services/http/http_rasp_service.dart';
 import 'package:new_rasp_app/services/local/local_cypher_service.dart';
@@ -62,13 +64,14 @@ class RaspModel extends ChangeNotifier {
   int today = DateTime.now().weekday;
   String group = "группа";
   String quote = "цитата/цитата";
+  String cypher = "шифр";
 
   RaspModel() {
     this._initRasp();
   }
 
   _initRasp() async {
-    String cypher = await LocalCypherService.getCypher();
+    cypher = await LocalCypherService.getCypher();
     Map<String, dynamic> jsonRasps =
         await HttpRaspService.getRaspAndGroupByCypher(cypher);
 
@@ -79,11 +82,29 @@ class RaspModel extends ChangeNotifier {
     await LocalGroupService.setGroup(group);
     quote = await HttpQuoteService.getQuote();
 
+    await HttpModuleService.getModule(cypher);
+
     notifyListeners();
   }
 
   void setCurrent(dayId) {
     this.today = dayId;
+    notifyListeners();
+  }
+
+  void onRefresh(_scaffoldKey, _refreshController) async {
+    //refreshing rasps on pull
+    Map<String, dynamic> jsonRasps =
+        await HttpRaspService.getRaspAndGroupByCypher(cypher);
+    jsonRasps[jsonRasps.keys.first]
+        .forEach((el) => this.all.add(RaspItem.fromJson(el)));
+    //refreshing modules on pull
+    await HttpModuleService.getModule(cypher);
+    //refreshing quotes on pull
+    this.quote = await HttpQuoteService.getQuote();
+
+    showSnackBar('Данные обновлены!', _scaffoldKey);
+    _refreshController.refreshCompleted();
     notifyListeners();
   }
 

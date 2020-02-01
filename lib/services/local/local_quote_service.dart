@@ -9,8 +9,6 @@ class LocalQuoteService {
     var quoteJson = json.decode(utf8.decode(quote.bodyBytes));
     String quoteString =
         ' ${quoteJson['letters'][0]['titles']}/${quoteJson['letters'][0]['detail']}';
-    print(quoteString);
-
     return prefs.setString('quote', quoteString);
   }
 

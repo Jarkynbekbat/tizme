@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalModuleService {
-  static Future<bool> setModule(module) async {
+  static Future<bool> setModule(String module) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.setString('module', module);
   }
