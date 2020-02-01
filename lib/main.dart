@@ -3,6 +3,7 @@ import 'package:new_rasp_app/models/auth_model.dart';
 import 'package:new_rasp_app/models/rasp_model.dart';
 import 'package:new_rasp_app/pages/login_page/login_page.dart';
 import 'package:new_rasp_app/pages/rasp_page/rasp_page.dart';
+import 'package:new_rasp_app/services/local/local_cypher_service.dart';
 import 'package:new_rasp_app/themes/dark_week_theme.dart';
 import 'package:new_rasp_app/themes/white_week_theme.dart';
 import 'package:provider/provider.dart';
@@ -12,11 +13,9 @@ import 'pages/login_page/intro_page/intro_page.dart';
 void main() async {
   try {
     WidgetsFlutterBinding.ensureInitialized();
-    //при авторизации
-    // await LocalCypherService.setCypher('16/3000');
-    Widget _defaultHome = IntroPage();
-    // Widget _defaultHome =
-    //     await LocalCypherService.getCypher() != null ? RaspPage() : IntroPage();
+    Widget _defaultHome = await LocalCypherService.getCypher() != null
+        ? ThemeConsumer(child: RaspPage())
+        : ThemeConsumer(child: IntroPage());
 
     return runApp(ThemeProvider(
       saveThemesOnChange: true,

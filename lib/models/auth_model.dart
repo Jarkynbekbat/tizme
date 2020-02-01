@@ -48,7 +48,6 @@ class AuthModel extends ChangeNotifier {
     try {
       bool res = await showMyDialog(
           context, 'Выход', 'Вы уверены что хотите выйти ?', 'Выйти', 'Отмена');
-
       if (res == true) {
         LocalCypherService.deleteCypher();
         LocalFioService.deleteFio();

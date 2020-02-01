@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:new_rasp_app/models/auth_model.dart';
+import 'package:new_rasp_app/models/rasp_model.dart';
 import 'package:new_rasp_app/services/local/local_cypher_service.dart';
 import 'package:new_rasp_app/services/local/local_fio_service.dart';
 import 'package:new_rasp_app/services/local/local_group_service.dart';
@@ -64,22 +65,13 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                                   color: Theme.of(context).iconTheme.color,
                                 ),
                               ),
-                              FutureBuilder(
-                                  future: LocalGroupService.getGroup(),
-                                  builder: (BuildContext context,
-                                      AsyncSnapshot<String> snapshot) {
-                                    String group = snapshot.hasData
-                                        ? snapshot.data
-                                        : "группа";
-                                    return Text(
-                                      group,
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        color:
-                                            Theme.of(context).iconTheme.color,
-                                      ),
-                                    );
-                                  }),
+                              Text(
+                                Provider.of<RaspModel>(context).group,
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Theme.of(context).iconTheme.color,
+                                ),
+                              ),
                             ]),
                             Row(children: [
                               Padding(

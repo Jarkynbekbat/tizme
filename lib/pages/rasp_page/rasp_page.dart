@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:new_rasp_app/models/rasp_model.dart';
 import 'package:new_rasp_app/pages/rasp_page/views/navigation_drawer.dart';
+import 'package:new_rasp_app/pages/rasp_page/views/no_rasps.dart';
 import 'package:new_rasp_app/pages/rasp_page/views/rasp_item_view.dart';
 import 'package:provider/provider.dart';
 import '../../helpers/screen.dart';
@@ -46,6 +47,9 @@ class _RaspPageState extends State<RaspPage>
           controller: pageController,
           onPageChanged: (index) => raspModel.setCurrent(index + 1),
           children: List.generate(7, (index) {
+            if (raspModel.getRaspByDayId(index + 1).length == 0) {
+              return NoRasps();
+            }
             return Wrap(
               direction: Axis.vertical,
               children: List.generate(

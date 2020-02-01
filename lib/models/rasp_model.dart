@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:new_rasp_app/services/http/http_quote_service.dart';
 import 'package:new_rasp_app/services/http/http_rasp_service.dart';
 import 'package:new_rasp_app/services/local/local_cypher_service.dart';
 import 'package:new_rasp_app/services/local/local_group_service.dart';
@@ -60,6 +61,7 @@ class RaspModel extends ChangeNotifier {
   List<RaspItem> all = [];
   int today = DateTime.now().weekday;
   String group = "группа";
+  String quote = "цитата/цитата";
 
   RaspModel() {
     this._initRasp();
@@ -75,6 +77,8 @@ class RaspModel extends ChangeNotifier {
 
     group = jsonRasps.keys.first;
     await LocalGroupService.setGroup(group);
+    quote = await HttpQuoteService.getQuote();
+
     notifyListeners();
   }
 
