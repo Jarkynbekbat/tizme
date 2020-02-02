@@ -10,6 +10,7 @@ class HttpFioService {
     Response response = await http.get(url2);
     Map<String, dynamic> mapFio = json.decode(utf8.decode(response.bodyBytes));
     String fio = mapFio['stud'][0]['studNm'];
+
     //сохраняю ФИО локально
     await LocalFioService.setFio(fio);
     return fio;

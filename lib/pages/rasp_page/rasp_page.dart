@@ -53,13 +53,18 @@ class _RaspPageState extends State<RaspPage>
             children: List.generate(7, (index) {
               if (raspModel.getRaspByDayId(index + 1).length == 0)
                 return NoRasps();
-              return Wrap(
-                direction: Axis.vertical,
-                children: List.generate(
-                    raspModel.getRaspByDayId(index + 1).length, (index2) {
-                  return RaspItemView(
-                      raspItem: raspModel.getRaspByDayId(index + 1)[index2]);
-                }),
+              return SingleChildScrollView(
+                child: Container(
+                  margin: EdgeInsets.only(right: 8, left: 8, top: 8),
+                  child: Column(
+                    children: List.generate(
+                        raspModel.getRaspByDayId(index + 1).length, (index2) {
+                      return RaspItemView(
+                          raspItem:
+                              raspModel.getRaspByDayId(index + 1)[index2]);
+                    }),
+                  ),
+                ),
               );
             }),
           ),
@@ -67,7 +72,6 @@ class _RaspPageState extends State<RaspPage>
       }),
       bottomNavigationBar: RaspTitledBottomNavigationBar(
         selectedDay: raspModel.today - 1,
-        // jumpTo: raspModel.setCurrent,
         jumpTo: (index) => pageController.jumpToPage(index),
       ),
     );

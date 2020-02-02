@@ -118,7 +118,6 @@ class RaspItemView extends StatelessWidget {
         );
       },
       child: Container(
-        width: Screen.width(context) * 0.99,
         height: Screen.isPortrait(context)
             ? Screen.heigth(context) * 0.15
             : Screen.heigth(context) * 0.25,

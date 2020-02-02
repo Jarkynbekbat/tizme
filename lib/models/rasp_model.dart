@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:new_rasp_app/helpers/check_week_type_helper.dart';
 import 'package:new_rasp_app/helpers/show_snackbar.dart';
 import 'package:new_rasp_app/services/http/http_module_service.dart';
 import 'package:new_rasp_app/services/http/http_quote_service.dart';
@@ -81,9 +82,7 @@ class RaspModel extends ChangeNotifier {
     group = jsonRasps.keys.first;
     await LocalGroupService.setGroup(group);
     quote = await HttpQuoteService.getQuote();
-
     await HttpModuleService.getModule(cypher);
-
     notifyListeners();
   }
 
@@ -93,6 +92,7 @@ class RaspModel extends ChangeNotifier {
   }
 
   void onRefresh(_scaffoldKey, _refreshController) async {
+    this.all.clear();
     //refreshing rasps on pull
     Map<String, dynamic> jsonRasps =
         await HttpRaspService.getRaspAndGroupByCypher(cypher);
@@ -108,9 +108,33 @@ class RaspModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<RaspItem> getRaspByDayId(int dayId) =>
-      this.all.where((el) => el.dayId == dayId).toList();
+  List<RaspItem> getRaspByDayId(int dayId) {
+    String weekName = checkWeekType() ? 'Числитель' : 'Знаменатель';
 
-  //получить расписание по дням недели и типу недели
-
+    if (weekName == 'Числитель')
+      return this
+          .all
+          .where((el) => el.dayId == dayId && el.weekName == weekName)
+          .toList();
+    else {
+      //все пары тек дня
+      List<RaspItem> both = this.all.where((el) => el.dayId == dayId).toList();
+      //только четные
+      List<RaspItem> even =
+          both.where((el) => el.weekName == 'Числитель').toList();
+      //только не четные
+      List<RaspItem> notEven =
+          both.where((el) => el.weekName == 'Знаменатель').toList();
+      print('sss');
+      //удаляю дубликаты из четной недели
+      even.forEach((i) {
+        notEven.forEach((j) {
+          if (i.timeFrom == j.timeFrom)
+            both.removeWhere((el) =>
+                el.weekName == 'Числитель' && el.timeFrom == i.timeFrom);
+        });
+      });
+      return both;
+    }
+  }
 }

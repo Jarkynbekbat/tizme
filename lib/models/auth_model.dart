@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:new_rasp_app/helpers/my_simple_dialog.dart';
 import 'package:new_rasp_app/helpers/show_snackbar.dart';
@@ -18,14 +16,10 @@ class AuthModel extends ChangeNotifier {
     try {
       //проверка на существование студента с таким шифром
       var fio = await HttpFioService.getFio(cypher);
-      if (fio.contentLength == 40) {
+      if (fio == null) {
         showSnackBar('Введен неверный шифр.', scaffoldKey);
       } else {
         //если существует
-        //fio string to fio json
-        var temp = json.decode(utf8.decode(fio.bodyBytes));
-        //сохраняю ФИО,шифр локально
-        await LocalFioService.setFio(temp['stud'][0]['studNm']);
         await LocalCypherService.setCypher(cypher);
         //переход на страницу расписаний
         Navigator.of(context).pushReplacementNamed('/rasp');
