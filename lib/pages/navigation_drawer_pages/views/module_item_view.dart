@@ -1,27 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:new_rasp_app/models/module_model.dart';
 
-class ModuleItem extends StatelessWidget {
-  final String subject;
-  final String teacher;
-  final String classroom;
-  final String timeFrom;
-  final String timeTo;
-  final DateTime date;
+class ModuleItemView extends StatelessWidget {
+  final ModuleItem moduleItem;
 
-  ModuleItem(
-      {this.subject,
-      this.teacher,
-      this.classroom,
-      this.timeFrom,
-      this.timeTo,
-      this.date});
+  ModuleItemView({this.moduleItem});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
         Text(
-          "$timeFrom\n$timeTo",
+          "${moduleItem.timeFrom}\n${moduleItem.timeTo}",
           textAlign: TextAlign.center,
           style: TextStyle(
               color: Colors.white,
@@ -47,13 +37,13 @@ class ModuleItem extends StatelessWidget {
               children: <Widget>[
                 const SizedBox(height: 5.0),
                 Text(
-                  "$subject",
+                  moduleItem.subjectName,
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.deepPurple,
                       fontSize: 16.0),
                 ),
-                Text("аудитория : $classroom")
+                Text("аудитория : ${moduleItem.classroomName}")
               ],
             ),
           ),
