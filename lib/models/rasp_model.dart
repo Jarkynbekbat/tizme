@@ -7,8 +7,10 @@ import 'package:new_rasp_app/helpers/show_snackbar.dart';
 import 'package:new_rasp_app/services/http/http_module_service.dart';
 import 'package:new_rasp_app/services/http/http_quote_service.dart';
 import 'package:new_rasp_app/services/http/http_rasp_service.dart';
+import 'package:new_rasp_app/services/http/http_session_service.dart';
 import 'package:new_rasp_app/services/local/local_cypher_service.dart';
 import 'package:new_rasp_app/services/local/local_group_service.dart';
+import 'package:new_rasp_app/services/local/local_quote_service.dart';
 import 'package:new_rasp_app/services/local/local_rasp_service.dart';
 
 RaspItem raspItemFromJson(String str) => RaspItem.fromJson(json.decode(str));
@@ -68,27 +70,41 @@ class RaspModel extends ChangeNotifier {
   String group = "группа";
   String quote = "цитата/цитата";
   String cypher = "шифр";
+  bool isLoaded = false;
 
   RaspModel() {
     this._initRasp();
   }
 
   _initRasp() async {
-    if (await checkConnection()) {
+    String stringRasp = await LocalRaspService.getRasp();
+    //is it is first time or has internet connection
+    if (stringRasp == null || await checkConnection()) {
       cypher = await LocalCypherService.getCypher();
+      //string to json
       Map<String, dynamic> jsonRasps =
           await HttpRaspService.getRaspAndGroupByCypher(cypher);
+      // getting group rasps
       jsonRasps[jsonRasps.keys.first]
           .forEach((el) => this.all.add(RaspItem.fromJson(el)));
+      //getting group name
       group = jsonRasps.keys.first;
       await LocalGroupService.setGroup(group);
       quote = await HttpQuoteService.getQuote();
       await HttpModuleService.getModule(cypher);
-    } else {
-      String rasps = await LocalRaspService.getRasp();
-      //TODO доделать string to json
+      await HttpSessionService.getSession(cypher);
     }
-
+    //if it is not first time and has no internet connection
+    else {
+      String stringRasp = await LocalRaspService.getRasp();
+      // string to json
+      Map<String, dynamic> jsonRasps = jsonDecode(stringRasp);
+      jsonRasps[jsonRasps.keys.first]
+          .forEach((el) => this.all.add(RaspItem.fromJson(el)));
+      group = jsonRasps.keys.first;
+      quote = await LocalQuoteService.getQuote();
+    }
+    isLoaded = true;
     notifyListeners();
   }
 
@@ -131,7 +147,6 @@ class RaspModel extends ChangeNotifier {
       //только не четные
       List<RaspItem> notEven =
           both.where((el) => el.weekName == 'Знаменатель').toList();
-      print('sss');
       //удаляю дубликаты из четной недели
       even.forEach((i) {
         notEven.forEach((j) {

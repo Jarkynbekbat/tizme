@@ -25,8 +25,6 @@ class _ModuleGraphPageState extends State<ModuleGraphPage> {
 
   @override
   Widget build(BuildContext context) {
-    // var moduleModel = Provider.of<ModuleModel>(context);
-
     return Scaffold(
       appBar: AppBar(
         brightness: Brightness.light,
@@ -37,6 +35,7 @@ class _ModuleGraphPageState extends State<ModuleGraphPage> {
         elevation: 0,
       ),
       body: Consumer<ModuleModel>(builder: (context, moduleModel, _) {
+        //TODO доработать дизайн
         //TODO: добавить обработку если нет модулей
         return HeaderWidget(
           backColor: Color(0xFF253B4F),

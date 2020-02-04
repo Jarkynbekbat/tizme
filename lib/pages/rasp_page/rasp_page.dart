@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:new_rasp_app/components/my_app_bar.dart';
 import 'package:new_rasp_app/models/rasp_model.dart';
 import 'package:new_rasp_app/pages/rasp_page/views/navigation_drawer.dart';
-import 'package:new_rasp_app/pages/rasp_page/views/no_rasps.dart';
 import 'package:new_rasp_app/pages/rasp_page/views/rasp_item_view.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -41,34 +40,37 @@ class _RaspPageState extends State<RaspPage>
         () => _scaffoldKey.currentState.openDrawer(),
         'default',
       ),
-      body: Consumer<RaspModel>(builder: (context, raspModel, _) {
-        return SmartRefresher(
-          controller: _refreshController,
-          enablePullDown: true,
-          onRefresh: () =>
-              raspModel.onRefresh(_scaffoldKey, _refreshController),
-          child: PageView(
-            controller: pageController,
-            onPageChanged: (index) => raspModel.setCurrent(index + 1),
-            children: List.generate(7, (index) {
-              if (raspModel.getRaspByDayId(index + 1).length == 0)
-                return NoRasps();
-              return SingleChildScrollView(
-                child: Container(
-                  margin: EdgeInsets.only(right: 8, left: 8, top: 8),
-                  child: Column(
-                    children: List.generate(
-                        raspModel.getRaspByDayId(index + 1).length, (index2) {
-                      return RaspItemView(
-                          raspItem:
-                              raspModel.getRaspByDayId(index + 1)[index2]);
-                    }),
-                  ),
+      body:
+          //TODO change it to loading skeleton
+          Consumer<RaspModel>(builder: (context, raspModel, _) {
+        return !raspModel.isLoaded
+            ? Center(child: CircularProgressIndicator())
+            : SmartRefresher(
+                controller: _refreshController,
+                enablePullDown: true,
+                onRefresh: () =>
+                    raspModel.onRefresh(_scaffoldKey, _refreshController),
+                child: PageView(
+                  controller: pageController,
+                  onPageChanged: (index) => raspModel.setCurrent(index + 1),
+                  children: List.generate(7, (index) {
+                    return SingleChildScrollView(
+                      child: Container(
+                        margin: EdgeInsets.only(right: 8, left: 8, top: 8),
+                        child: Column(
+                          children: List.generate(
+                              raspModel.getRaspByDayId(index + 1).length,
+                              (index2) {
+                            return RaspItemView(
+                                raspItem: raspModel
+                                    .getRaspByDayId(index + 1)[index2]);
+                          }),
+                        ),
+                      ),
+                    );
+                  }),
                 ),
               );
-            }),
-          ),
-        );
       }),
       bottomNavigationBar: RaspTitledBottomNavigationBar(
         selectedDay: raspModel.today - 1,

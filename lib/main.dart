@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:new_rasp_app/models/auth_model.dart';
 import 'package:new_rasp_app/models/module_model.dart';
 import 'package:new_rasp_app/models/rasp_model.dart';
+import 'package:new_rasp_app/models/session_model.dart';
 import 'package:new_rasp_app/pages/login_page/login_page.dart';
 import 'package:new_rasp_app/pages/navigation_drawer_pages/about_app_page.dart';
 import 'package:new_rasp_app/pages/navigation_drawer_pages/mudule_graph_page.dart';
@@ -39,6 +40,7 @@ void main() async {
           ChangeNotifierProvider(create: (_) => RaspModel()),
           ChangeNotifierProvider(create: (_) => AuthModel()),
           ChangeNotifierProvider(create: (_) => ModuleModel()),
+          ChangeNotifierProvider(create: (_) => SessionModel()),
         ],
         child: MaterialApp(
           home: _defaultHome,

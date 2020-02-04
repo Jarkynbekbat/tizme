@@ -9,9 +9,7 @@ class HttpRaspService {
     var httpResponse = await http.get(url);
     Map<String, dynamic> jsonResponse =
         json.decode(utf8.decode(httpResponse.bodyBytes));
-
     await LocalRaspService.setRasp(utf8.decode(httpResponse.bodyBytes));
-
     return jsonResponse;
   }
 }
