@@ -12,7 +12,7 @@ class _RaspItemNoteAddState extends State<RaspItemNotesPage> {
   var searchController = new TextEditingController();
 
   var _notes;
-
+  // TODO передалать на provider подход
   // json to view
   getNoteItems(subject) async {
     var notes = <Widget>[];

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:new_rasp_app/helpers/check_connection_helper.dart';
 import 'package:new_rasp_app/helpers/check_week_type_helper.dart';
 import 'package:new_rasp_app/helpers/show_snackbar.dart';
 import 'package:new_rasp_app/services/http/http_module_service.dart';
@@ -8,6 +9,7 @@ import 'package:new_rasp_app/services/http/http_quote_service.dart';
 import 'package:new_rasp_app/services/http/http_rasp_service.dart';
 import 'package:new_rasp_app/services/local/local_cypher_service.dart';
 import 'package:new_rasp_app/services/local/local_group_service.dart';
+import 'package:new_rasp_app/services/local/local_rasp_service.dart';
 
 RaspItem raspItemFromJson(String str) => RaspItem.fromJson(json.decode(str));
 String raspItemToJson(RaspItem data) => json.encode(data.toJson());
@@ -72,17 +74,21 @@ class RaspModel extends ChangeNotifier {
   }
 
   _initRasp() async {
-    cypher = await LocalCypherService.getCypher();
-    Map<String, dynamic> jsonRasps =
-        await HttpRaspService.getRaspAndGroupByCypher(cypher);
+    if (await checkConnection()) {
+      cypher = await LocalCypherService.getCypher();
+      Map<String, dynamic> jsonRasps =
+          await HttpRaspService.getRaspAndGroupByCypher(cypher);
+      jsonRasps[jsonRasps.keys.first]
+          .forEach((el) => this.all.add(RaspItem.fromJson(el)));
+      group = jsonRasps.keys.first;
+      await LocalGroupService.setGroup(group);
+      quote = await HttpQuoteService.getQuote();
+      await HttpModuleService.getModule(cypher);
+    } else {
+      String rasps = await LocalRaspService.getRasp();
+      //TODO доделать string to json
+    }
 
-    jsonRasps[jsonRasps.keys.first]
-        .forEach((el) => this.all.add(RaspItem.fromJson(el)));
-
-    group = jsonRasps.keys.first;
-    await LocalGroupService.setGroup(group);
-    quote = await HttpQuoteService.getQuote();
-    await HttpModuleService.getModule(cypher);
     notifyListeners();
   }
 

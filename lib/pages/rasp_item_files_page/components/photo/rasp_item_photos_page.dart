@@ -19,6 +19,7 @@ class _RaspItemNoteAddState extends State<RaspItemPhotosPage> {
   bool _loading = false;
   File _image;
   List<Widget> _photos = [];
+  // TODO передалать на provider подход
   // json to view
   getPhotoItems(subject) async {
     try {

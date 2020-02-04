@@ -70,7 +70,7 @@ class AboutAppPage extends StatelessWidget {
                           ),
                           GestureDetector(
                             onTap: () async => await openUrl(
-                                'https://www.instagram.com/omurbek.m/'),
+                                'https://www.instagram.com/studtime_x/'),
                             child: Image.asset(
                               './lib/assets/insta.png',
                               width: 43,

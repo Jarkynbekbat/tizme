@@ -19,6 +19,7 @@ class _RaspItemNoteAddState extends State<RaspItemNoteAddPage> {
 
   @override
   Widget build(BuildContext context) {
+    // TODO передалать на provider подход
     // subject name
     String _subject = ModalRoute.of(context).settings.arguments;
 
