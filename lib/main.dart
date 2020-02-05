@@ -6,6 +6,7 @@ import 'package:new_rasp_app/models/session_model.dart';
 import 'package:new_rasp_app/pages/login_page/login_page.dart';
 import 'package:new_rasp_app/pages/navigation_drawer_pages/about_app_page.dart';
 import 'package:new_rasp_app/pages/navigation_drawer_pages/mudule_graph_page.dart';
+import 'package:new_rasp_app/pages/navigation_drawer_pages/notifications_page.dart';
 import 'package:new_rasp_app/pages/navigation_drawer_pages/session_graph_page.dart';
 import 'package:new_rasp_app/pages/rasp_item_files_page/components/note/note_item_hero.dart';
 import 'package:new_rasp_app/pages/rasp_item_files_page/components/note/rasp_item_note_add_page.dart';
@@ -51,6 +52,8 @@ void main() async {
             '/rasp': (BuildContext context) => ThemeConsumer(child: RaspPage()),
             '/login': (BuildContext context) =>
                 ThemeConsumer(child: LoginPage()),
+            '/notifications': (BuildContext context) =>
+                ThemeConsumer(child: NotificationsPage()),
             '/about_app': (BuildContext context) =>
                 ThemeConsumer(child: AboutAppPage()),
             '/module_graph': (BuildContext context) =>

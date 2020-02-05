@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:new_rasp_app/components/my_app_bar.dart';
+import 'package:new_rasp_app/models/local_notification_model.dart';
 import 'package:new_rasp_app/models/rasp_model.dart';
 import 'package:new_rasp_app/pages/rasp_page/views/navigation_drawer.dart';
 import 'package:new_rasp_app/pages/rasp_page/views/rasp_item_view.dart';
@@ -30,6 +32,7 @@ class _RaspPageState extends State<RaspPage>
   @override
   Widget build(BuildContext context) {
     final raspModel = Provider.of<RaspModel>(context);
+    final localNotifications = LocalNotificationModel();
 
     return Scaffold(
       key: _scaffoldKey,
@@ -38,7 +41,16 @@ class _RaspPageState extends State<RaspPage>
         raspModel.group,
         Icon(Icons.menu),
         () => _scaffoldKey.currentState.openDrawer(),
-        'default',
+        [
+          IconButton(
+              icon: Icon(Icons.notifications),
+              onPressed: () async {
+                await localNotifications.showOngoingNotification(
+                    localNotifications.flutterLocalNotificationsPlugin,
+                    title: 'Расписание на сегодня',
+                    body: 'Физика , химия , физкультура');
+              })
+        ],
       ),
       body:
           //TODO change it to loading skeleton

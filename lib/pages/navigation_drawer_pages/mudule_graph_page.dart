@@ -19,9 +19,7 @@ class _ModuleGraphPageState extends State<ModuleGraphPage> {
   );
 
   @override
-  void initState() {
-    super.initState();
-  }
+  void initState() => super.initState();
 
   @override
   Widget build(BuildContext context) {
