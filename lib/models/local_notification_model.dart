@@ -2,23 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class LocalNotificationModel extends ChangeNotifier {
-  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
-  AndroidInitializationSettings initializationSettingsAndroid;
-  IOSInitializationSettings initializationSettingsIOS;
-  InitializationSettings initializationSettings;
+  FlutterLocalNotificationsPlugin plagin;
+  AndroidInitializationSettings androidSettings;
+  IOSInitializationSettings iosSettings;
+  InitializationSettings settings;
+
+  var time = Time(11, 11, 0);
 
   LocalNotificationModel() {
-    flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-    initializationSettingsAndroid = AndroidInitializationSettings('app_icon');
-    initializationSettingsIOS = IOSInitializationSettings(
+    plagin = FlutterLocalNotificationsPlugin();
+    androidSettings = AndroidInitializationSettings('app_icon');
+    iosSettings = IOSInitializationSettings(
         onDidReceiveLocalNotification: (id, title, body, payload) =>
             onSelectNotification(payload));
-
-    initializationSettings = InitializationSettings(
-        initializationSettingsAndroid, initializationSettingsIOS);
-    flutterLocalNotificationsPlugin.initialize(initializationSettings,
-        onSelectNotification: onSelectNotification);
+    settings = InitializationSettings(androidSettings, iosSettings);
+    plagin.initialize(settings, onSelectNotification: onSelectNotification);
   }
+
+  Future setDailyNotification({int id, String title, String body, Time time}) =>
+      plagin.showDailyAtTime(id, title, body, time, _ongoing);
 
   NotificationDetails get _ongoing {
     final androidChannelSpecifics = AndroidNotificationDetails(
@@ -39,37 +41,38 @@ class LocalNotificationModel extends ChangeNotifier {
     if (payload != null) {
       debugPrint('notification payload: ' + payload);
     }
-    print('you selected the notification!');
     // await Navigator.push(
     //   context,
     //   new MaterialPageRoute(builder: (context) => new SecondScreen(payload)),
     // );
   }
 
+  Future cancelAll() => plagin.cancelAll();
+
   Future showOngoingNotification(
-    FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin, {
+    FlutterLocalNotificationsPlugin plagin, {
     String title,
     String body,
     int id = 0,
   }) =>
       showNotification(
-        flutterLocalNotificationsPlugin,
+        plagin,
         title: title,
         body: body,
         type: _ongoing,
       );
 
   Future showNotification(
-    FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin, {
+    FlutterLocalNotificationsPlugin plagin, {
     String title,
     String body,
     NotificationDetails type,
     int id = 0,
   }) =>
-      flutterLocalNotificationsPlugin.show(id, title, body, type);
+      plagin.show(id, title, body, type);
 
 // TODO----------------------------------Show a daily notification at a specific time----------------------------
-//       var time = new Time(10, 0, 0);
+
 // var androidPlatformChannelSpecifics =
 //     new AndroidNotificationDetails('repeatDailyAtTime channel id',
 //         'repeatDailyAtTime channel name', 'repeatDailyAtTime description');

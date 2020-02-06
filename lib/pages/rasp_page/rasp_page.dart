@@ -34,6 +34,21 @@ class _RaspPageState extends State<RaspPage>
     final raspModel = Provider.of<RaspModel>(context);
     final localNotifications = LocalNotificationModel();
 
+    String body = "";
+    var rasps = raspModel.getRaspByDayId(3);
+    if (rasps.length != 0) {
+      for (RaspItem raspItem in rasps) {
+        body += raspItem.subjectName + '\n';
+      }
+    }
+
+    localNotifications.setDailyNotification(
+      id: 1,
+      title: 'Расписание текущего дня',
+      body: body,
+      time: Time(11, 47, 0),
+    );
+
     return Scaffold(
       key: _scaffoldKey,
       drawer: NavigationDrawer(),
@@ -46,10 +61,14 @@ class _RaspPageState extends State<RaspPage>
               icon: Icon(Icons.notifications),
               onPressed: () async {
                 await localNotifications.showOngoingNotification(
-                    localNotifications.flutterLocalNotificationsPlugin,
+                    localNotifications.plagin,
                     title: 'Расписание на сегодня',
                     body: 'Физика , химия , физкультура');
-              })
+              }),
+          IconButton(
+            icon: Icon(Icons.clear),
+            onPressed: () async => await localNotifications.cancelAll(),
+          )
         ],
       ),
       body:
