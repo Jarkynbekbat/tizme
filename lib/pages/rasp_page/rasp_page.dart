@@ -3,6 +3,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:new_rasp_app/components/my_app_bar.dart';
 import 'package:new_rasp_app/models/local_notification_model.dart';
 import 'package:new_rasp_app/models/rasp_model.dart';
+import 'package:new_rasp_app/pages/rasp_page/views/get_skeleton.dart';
 import 'package:new_rasp_app/pages/rasp_page/views/navigation_drawer.dart';
 import 'package:new_rasp_app/pages/rasp_page/views/rasp_item_view.dart';
 import 'package:provider/provider.dart';
@@ -33,20 +34,14 @@ class _RaspPageState extends State<RaspPage>
   Widget build(BuildContext context) {
     final raspModel = Provider.of<RaspModel>(context);
     final localNotifications = LocalNotificationModel();
-
-    String body = "";
-    var rasps = raspModel.getRaspByDayId(3);
-    if (rasps.length != 0) {
-      for (RaspItem raspItem in rasps) {
-        body += raspItem.subjectName + '\n';
-      }
-    }
+    List<RaspItem> rasps = raspModel.getRaspByDayId(DateTime.now().weekday);
 
     localNotifications.setDailyNotification(
       id: 1,
       title: 'Расписание текущего дня',
-      body: body,
-      time: Time(11, 47, 0),
+      body: '',
+      time: Time(7, 30, 0),
+      rasps: rasps,
     );
 
     return Scaffold(
@@ -58,16 +53,8 @@ class _RaspPageState extends State<RaspPage>
         () => _scaffoldKey.currentState.openDrawer(),
         [
           IconButton(
-              icon: Icon(Icons.notifications),
-              onPressed: () async {
-                await localNotifications.showOngoingNotification(
-                    localNotifications.plagin,
-                    title: 'Расписание на сегодня',
-                    body: 'Физика , химия , физкультура');
-              }),
-          IconButton(
-            icon: Icon(Icons.clear),
-            onPressed: () async => await localNotifications.cancelAll(),
+            icon: Icon(Icons.notifications),
+            onPressed: () {},
           )
         ],
       ),
@@ -75,7 +62,7 @@ class _RaspPageState extends State<RaspPage>
           //TODO change it to loading skeleton
           Consumer<RaspModel>(builder: (context, raspModel, _) {
         return !raspModel.isLoaded
-            ? Center(child: CircularProgressIndicator())
+            ? getSkeleton()
             : SmartRefresher(
                 controller: _refreshController,
                 enablePullDown: true,

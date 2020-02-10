@@ -13,6 +13,7 @@ class HttpFioService {
 
     //сохраняю ФИО локально
     await LocalFioService.setFio(fio);
+
     return fio;
   }
 }
