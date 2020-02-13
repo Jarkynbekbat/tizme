@@ -31,6 +31,9 @@ dependencies:
   # notifications
   flutter_local_notifications: ^1.1.5+1
 
+  #login_page
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -52,3 +55,8 @@ flutter:
     - ./lib/assets/intro/menu.png
     - ./lib/assets/intro/notes.png
     - ./lib/assets/intro/rasp.png
+    #login page
+    - ./lib/assets/login/background.png
+    - ./lib/assets/login/clock.png
+    - ./lib/assets/login/light-1.png
+    - ./lib/assets/login/light-2.png
