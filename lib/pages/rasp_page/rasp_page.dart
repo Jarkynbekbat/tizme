@@ -58,9 +58,7 @@ class _RaspPageState extends State<RaspPage>
           )
         ],
       ),
-      body:
-          //TODO change it to loading skeleton
-          Consumer<RaspModel>(builder: (context, raspModel, _) {
+      body: Consumer<RaspModel>(builder: (context, raspModel, _) {
         return !raspModel.isLoaded
             ? getSkeleton()
             : SmartRefresher(

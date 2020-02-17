@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:new_rasp_app/models/auth_model.dart';
+import 'package:new_rasp_app/models/fcm_models.dart';
 import 'package:new_rasp_app/models/module_model.dart';
 import 'package:new_rasp_app/models/rasp_model.dart';
 import 'package:new_rasp_app/models/session_model.dart';
@@ -29,7 +30,8 @@ void main() async {
         ? ThemeConsumer(child: RaspPage())
         : ThemeConsumer(child: IntroPage());
 
-    //TODO: протестить - автоматическая смена цветовой темы в зависимости он типа недели
+    FcmModel fcmModel = FcmModel();
+
     return runApp(ThemeProvider(
       saveThemesOnChange: true,
       loadThemeOnInit: true,

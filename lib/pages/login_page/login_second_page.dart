@@ -1,7 +1,4 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'dart:io';
-import 'package:http/http.dart' as http;
 import 'package:new_rasp_app/models/auth_model.dart';
 import 'package:new_rasp_app/pages/login_page/Animation/FadeAnimation.dart';
 import 'package:provider/provider.dart';
