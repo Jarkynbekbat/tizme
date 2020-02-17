@@ -16,6 +16,7 @@ import 'package:new_rasp_app/pages/rasp_item_files_page/components/photo/photo_i
 import 'package:new_rasp_app/pages/rasp_item_files_page/components/photo/rasp_item_photos_page.dart';
 import 'package:new_rasp_app/pages/rasp_page/rasp_page.dart';
 import 'package:new_rasp_app/services/local/local_cypher_service.dart';
+import 'package:new_rasp_app/services/local/local_notification_service.dart';
 import 'package:new_rasp_app/themes/dark_week_theme.dart';
 import 'package:new_rasp_app/themes/white_week_theme.dart';
 import 'package:provider/provider.dart';
@@ -31,6 +32,18 @@ void main() async {
         : ThemeConsumer(child: IntroPage());
 
     FcmModel fcmModel = FcmModel();
+
+    LocalNotificationsService.addNotification(
+      notification: {
+        "body": "jarkynbek body",
+        "title": "jarkynbek title",
+        "token": "123987123987"
+      },
+    );
+
+    var temp = await LocalNotificationsService.getNotificattions();
+
+    print(temp);
 
     return runApp(ThemeProvider(
       saveThemesOnChange: true,
