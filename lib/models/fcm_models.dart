@@ -19,6 +19,7 @@ class FcmModel extends ChangeNotifier {
     this.allNotifications =
         (await LocalNotificationsService.getNotificattions())
             .map((el) => json.decode(el));
+            
     notifyListeners();
   }
 
