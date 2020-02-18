@@ -8,7 +8,7 @@ import 'package:new_rasp_app/services/local/local_notification_service.dart';
 class FcmModel extends ChangeNotifier {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
-  List<Map<String, dynamic>> allNotifications = [];
+  List<dynamic> allNotifications = [];
 
   FcmModel() {
     configure();
@@ -18,8 +18,9 @@ class FcmModel extends ChangeNotifier {
   void initData() async {
     this.allNotifications =
         (await LocalNotificationsService.getNotificattions())
-            .map((el) => json.decode(el));
-            
+            .map((el) => json.decode(el))
+            .toList();
+
     notifyListeners();
   }
 

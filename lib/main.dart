@@ -37,6 +37,7 @@ void main() async {
       notification: {
         "body": "jarkynbek body",
         "title": "jarkynbek title",
+        "date": "12.12.2020",
         "token": "123987123987"
       },
     );
@@ -57,6 +58,7 @@ void main() async {
           ChangeNotifierProvider(create: (_) => AuthModel()),
           ChangeNotifierProvider(create: (_) => ModuleModel()),
           ChangeNotifierProvider(create: (_) => SessionModel()),
+          ChangeNotifierProvider(create: (_) => FcmModel()),
         ],
         child: MaterialApp(
           home: _defaultHome,

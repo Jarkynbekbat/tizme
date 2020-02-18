@@ -28,6 +28,7 @@ AppTheme darkWeekTheme() {
       ),
       dividerColor: Color(0xFFE2E3E7).withOpacity(0),
       canvasColor: Color(0xff1c2c3b),
+      accentColor: Colors.white,
     ),
   );
 }
