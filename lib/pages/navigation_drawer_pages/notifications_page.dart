@@ -21,20 +21,37 @@ class _NotificationsPageState extends State<NotificationsPage> {
               return Container(
                 color: Theme.of(context).appBarTheme.color,
                 margin: EdgeInsets.all(8),
-                child: ExpansionTile(
-                  leading: Icon(Icons.mail_outline,
-                      color: Theme.of(context).iconTheme.color),
-                  title: Text(
-                    fcmModel.allNotifications[index]['title'],
-                    style: TextStyle(color: Theme.of(context).iconTheme.color),
+                child: Dismissible(
+                  key: ValueKey(fcmModel.allNotifications[index].toString()),
+                  background: Container(
+                    color: Colors.red,
+                    child: Icon(
+                      Icons.delete_outline,
+                      color: Colors.white,
+                      size: 30,
+                    ),
                   ),
-                  subtitle: Text(
-                    fcmModel.allNotifications[index]['date'],
-                    style: TextStyle(color: Theme.of(context).iconTheme.color),
+                  onDismissed: (DismissDirection key) async {
+                    fcmModel.deleteNotification(
+                        fcmModel.allNotifications[index]['date']);
+                  },
+                  child: ExpansionTile(
+                    leading: Icon(Icons.mail_outline,
+                        color: Theme.of(context).iconTheme.color),
+                    title: Text(
+                      fcmModel.allNotifications[index]['title'],
+                      style:
+                          TextStyle(color: Theme.of(context).iconTheme.color),
+                    ),
+                    subtitle: Text(
+                      fcmModel.allNotifications[index]['date'],
+                      style:
+                          TextStyle(color: Theme.of(context).iconTheme.color),
+                    ),
+                    children: [
+                      Text(fcmModel.allNotifications[index]['body']),
+                    ],
                   ),
-                  children: [
-                    Text(fcmModel.allNotifications[index]['body']),
-                  ],
                 ),
               );
             }),

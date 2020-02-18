@@ -26,8 +26,11 @@ class _ModuleGraphPageState extends State<ModuleGraphPage> {
     return Scaffold(
       appBar: AppBar(
         brightness: Brightness.light,
-        iconTheme: IconThemeData(color: Colors.black),
-        title: Text('График модуля'),
+        iconTheme: IconThemeData(color: Colors.grey.shade700),
+        title: Text(
+          'График модуля',
+          style: TextStyle(color: Colors.black54),
+        ),
         centerTitle: true,
         backgroundColor: Colors.white,
         elevation: 0,

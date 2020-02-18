@@ -25,13 +25,15 @@ class _SessionGraphPageState extends State<SessionGraphPage> {
 
   @override
   Widget build(BuildContext context) {
-    //TODO доработать дизайн
     //TODO: добавить обработку если нет сессий
     return Scaffold(
       appBar: AppBar(
         brightness: Brightness.light,
         iconTheme: IconThemeData(color: Colors.black),
-        title: Text('График сессии'),
+        title: Text(
+          'График сессии',
+          style: TextStyle(color: Colors.grey.shade700),
+        ),
         centerTitle: true,
         backgroundColor: Colors.white,
         elevation: 0,

@@ -12,7 +12,7 @@ class FcmModel extends ChangeNotifier {
 
   FcmModel() {
     configure();
-    initData();
+    // initData();
   }
 
   void initData() async {
@@ -24,14 +24,21 @@ class FcmModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void deleteNotification() {}
+  void deleteNotification(String date) async {
+    LocalNotificationsService.deleteNotification(date);
+    this.allNotifications.removeWhere((el) => el['date'] == date);
+  }
 
   void configure() {
     _firebaseMessaging.configure(
       onMessage: (Map<String, dynamic> message) async {
-        String body = message['notification']['body'];
-        String title = message['notification']['title'];
-        print("on message: $message");
+        //TODO: Доделать , не сохраняет уводемнение в фоновом режиме
+        // Map<String, dynamic> object = {};
+        // object['title'] = message['notification']['title'];
+        // object['body'] = message['notification']['body'];
+        // object['date'] = DateTime.now().toString();
+        // await LocalNotificationsService.addNotification(notification: object);
+        initData();
       },
       onResume: (Map<String, dynamic> message) async {},
       onLaunch: (Map<String, dynamic> message) async {},
