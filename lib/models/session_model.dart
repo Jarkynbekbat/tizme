@@ -86,28 +86,31 @@ class SessionModel extends ChangeNotifier {
     dates.clear();
     weekDays.clear();
 
-    String modules = await LocalSessionService.getSession();
-    Map<String, dynamic> modulesJson = json.decode(modules);
+    try {
+      String modules = await LocalSessionService.getSession();
+      Map<String, dynamic> modulesJson = json.decode(modules);
 
-    List<dynamic> sessionModels = modulesJson[modulesJson.keys.first]
-        .map((el) => SessionItem.fromJson(el))
-        .toList();
+      List<dynamic> sessionModels = modulesJson[modulesJson.keys.first]
+          .map((el) => SessionItem.fromJson(el))
+          .toList();
 
-    weekDays = sessionModels
-        .map((el) => weekDaysStatic[el.dateStart.weekday - 1])
-        .toList();
-    dates = sessionModels
-        .map((el) => int.parse(el.dateStart.day.toString()))
-        .toList();
-    month = sessionModels.map((el) => months[el.dateStart.month - 1]).first;
+      weekDays = sessionModels
+          .map((el) => weekDaysStatic[el.dateStart.weekday - 1])
+          .toList();
+      dates = sessionModels
+          .map((el) => int.parse(el.dateStart.day.toString()))
+          .toList();
+      month = sessionModels.map((el) => months[el.dateStart.month - 1]).first;
 
-    sessionModels.forEach((el) {
-      if (el.dateStart.day == dates[index])
-        moduleViews
-            .addAll([SessionItemView(sessionItem: el), SizedBox(height: 20.0)]);
-    });
-
-    selected = index;
+      sessionModels.forEach((el) {
+        if (el.dateStart.day == dates[index])
+          moduleViews.addAll(
+              [SessionItemView(sessionItem: el), SizedBox(height: 20.0)]);
+      });
+      selected = index;
+    } catch (ex) {
+      moduleViews = [];
+    }
     notifyListeners();
   }
 }

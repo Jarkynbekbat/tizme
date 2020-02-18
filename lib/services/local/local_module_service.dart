@@ -8,7 +8,7 @@ class LocalModuleService {
 
   static getModule() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    var module = prefs.getString('module');
+    String module = prefs.getString('module');
     return module;
   }
 

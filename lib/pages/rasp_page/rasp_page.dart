@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:new_rasp_app/components/my_app_bar.dart';
-import 'package:new_rasp_app/models/local_notification_model.dart';
 import 'package:new_rasp_app/models/rasp_model.dart';
 import 'package:new_rasp_app/pages/rasp_page/views/get_skeleton.dart';
 import 'package:new_rasp_app/pages/rasp_page/views/navigation_drawer.dart';
@@ -34,8 +32,6 @@ class _RaspPageState extends State<RaspPage>
   @override
   Widget build(BuildContext context) {
     final raspModel = Provider.of<RaspModel>(context);
-
-    List<RaspItem> rasps = raspModel.getRaspByDayId(DateTime.now().weekday);
 
     // TODO: доделать работает не корректно
     // final localNotifications = LocalNotificationModel();
@@ -72,22 +68,19 @@ class _RaspPageState extends State<RaspPage>
                   controller: pageController,
                   onPageChanged: (index) => raspModel.setCurrent(index + 1),
                   children: List.generate(7, (index) {
+                    List<RaspItem> raspsList =
+                        raspModel.getRaspByDayId(index + 1);
                     return SingleChildScrollView(
                       child: Container(
                         margin: EdgeInsets.only(right: 8, left: 8, top: 8),
                         child: Column(
-                          children: raspModel
-                                      .getRaspByDayId(index + 1)
-                                      .length ==
-                                  0
+                          children: raspsList.length == 0
                               ? [NoRasps()]
                               : List.generate(
-                                  raspModel.getRaspByDayId(index + 1).length,
-                                  (index2) {
-                                  return RaspItemView(
-                                      raspItem: raspModel
-                                          .getRaspByDayId(index + 1)[index2]);
-                                }),
+                                  raspsList.length,
+                                  (index2) =>
+                                      RaspItemView(raspItem: raspsList[index2]),
+                                ),
                         ),
                       ),
                     );

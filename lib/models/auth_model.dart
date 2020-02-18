@@ -43,12 +43,14 @@ class AuthModel extends ChangeNotifier {
       bool res = await showMyDialog(
           context, 'Выход', 'Вы уверены что хотите выйти ?', 'Выйти', 'Отмена');
       if (res == true) {
-        LocalCypherService.deleteCypher();
-        LocalFioService.deleteFio();
-        LocalGroupService.deleteGroup();
-        LocalRaspService.deleteRasp();
-        LocalModuleService.deleteModule();
-        LocalQuoteService.deleteQuote();
+        List<Future> futures = [];
+        futures.add(LocalCypherService.deleteCypher());
+        futures.add(LocalFioService.deleteFio());
+        futures.add(LocalGroupService.deleteGroup());
+        futures.add(LocalRaspService.deleteRasp());
+        futures.add(LocalModuleService.deleteModule());
+        futures.add(LocalQuoteService.deleteQuote());
+        await Future.wait(futures);
         // возможно нужно будет добавить удаление прикрепленных фотографий и заметок
         Navigator.of(context).pushReplacementNamed('/login');
       }

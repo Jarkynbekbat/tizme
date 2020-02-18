@@ -25,7 +25,6 @@ class _SessionGraphPageState extends State<SessionGraphPage> {
 
   @override
   Widget build(BuildContext context) {
-    //TODO: добавить обработку если нет сессий
     return Scaffold(
       appBar: AppBar(
         brightness: Brightness.light,
@@ -39,92 +38,94 @@ class _SessionGraphPageState extends State<SessionGraphPage> {
         elevation: 0,
       ),
       body: Consumer<SessionModel>(builder: (context, sessionModel, _) {
-        //TODO: добавить обработку если нет модулей
-        return HeaderWidget(
-          backColor: Color(0xFF253B4F),
-          header: Container(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(left: 16.0),
-                  child: Text(
-                    sessionModel.month.toUpperCase(),
-                    style: TextStyle(
-                        color: Colors.grey.shade700,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16.0,
-                        letterSpacing: 2.0),
+        return sessionModel.moduleViews.length == 0
+            ? Center(child: Text('Пока нет данных ...'))
+            : HeaderWidget(
+                backColor: Color(0xFF253B4F),
+                header: Container(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(left: 16.0),
+                        child: Text(
+                          sessionModel.month.toUpperCase(),
+                          style: TextStyle(
+                              color: Colors.grey.shade700,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16.0,
+                              letterSpacing: 2.0),
+                        ),
+                      ),
+                      Row(
+                        children: sessionModel.weekDays.map((w) {
+                          return Expanded(
+                            child: GestureDetector(
+                              onTap: () => sessionModel.onSelectDate(
+                                  sessionModel.weekDays.indexOf(w)),
+                              child: Container(
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                    color: sessionModel.weekDays.indexOf(w) ==
+                                            sessionModel.selected
+                                        ? Colors.orange.shade100
+                                        : Colors.transparent,
+                                    borderRadius: BorderRadius.vertical(
+                                        top: Radius.circular(30.0))),
+                                padding:
+                                    const EdgeInsets.only(top: 20, bottom: 8.0),
+                                child: Text(
+                                  w,
+                                  style: sessionModel.weekDays.indexOf(w) ==
+                                          sessionModel.selected
+                                      ? selectedText
+                                      : daysText,
+                                ),
+                              ),
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                      Row(
+                        children: sessionModel.dates.map((d) {
+                          return Expanded(
+                            child: GestureDetector(
+                              onTap: () => sessionModel
+                                  .onSelectDate(sessionModel.dates.indexOf(d)),
+                              child: Container(
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                    color: sessionModel.dates.indexOf(d) ==
+                                            sessionModel.selected
+                                        ? Colors.orange.shade100
+                                        : Colors.transparent,
+                                    borderRadius: BorderRadius.vertical(
+                                        bottom: Radius.circular(30.0))),
+                                padding: const EdgeInsets.only(
+                                    top: 8.0, bottom: 20.0),
+                                child: Text("$d",
+                                    style: sessionModel.dates.indexOf(d) ==
+                                            sessionModel.selected
+                                        ? selectedText
+                                        : daysText),
+                              ),
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                      const SizedBox(height: 10.0),
+                    ],
                   ),
                 ),
-                Row(
-                  children: sessionModel.weekDays.map((w) {
-                    return Expanded(
-                      child: GestureDetector(
-                        onTap: () => sessionModel
-                            .onSelectDate(sessionModel.weekDays.indexOf(w)),
-                        child: Container(
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                              color: sessionModel.weekDays.indexOf(w) ==
-                                      sessionModel.selected
-                                  ? Colors.orange.shade100
-                                  : Colors.transparent,
-                              borderRadius: BorderRadius.vertical(
-                                  top: Radius.circular(30.0))),
-                          padding: const EdgeInsets.only(top: 20, bottom: 8.0),
-                          child: Text(
-                            w,
-                            style: sessionModel.weekDays.indexOf(w) ==
-                                    sessionModel.selected
-                                ? selectedText
-                                : daysText,
-                          ),
-                        ),
-                      ),
-                    );
-                  }).toList(),
+                body: SingleChildScrollView(
+                  padding: const EdgeInsets.all(32.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: sessionModel.moduleViews,
+                  ),
                 ),
-                Row(
-                  children: sessionModel.dates.map((d) {
-                    return Expanded(
-                      child: GestureDetector(
-                        onTap: () => sessionModel
-                            .onSelectDate(sessionModel.dates.indexOf(d)),
-                        child: Container(
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                              color: sessionModel.dates.indexOf(d) ==
-                                      sessionModel.selected
-                                  ? Colors.orange.shade100
-                                  : Colors.transparent,
-                              borderRadius: BorderRadius.vertical(
-                                  bottom: Radius.circular(30.0))),
-                          padding:
-                              const EdgeInsets.only(top: 8.0, bottom: 20.0),
-                          child: Text("$d",
-                              style: sessionModel.dates.indexOf(d) ==
-                                      sessionModel.selected
-                                  ? selectedText
-                                  : daysText),
-                        ),
-                      ),
-                    );
-                  }).toList(),
-                ),
-                const SizedBox(height: 10.0),
-              ],
-            ),
-          ),
-          body: SingleChildScrollView(
-            padding: const EdgeInsets.all(32.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: sessionModel.moduleViews,
-            ),
-          ),
-        );
+              );
       }),
     );
   }

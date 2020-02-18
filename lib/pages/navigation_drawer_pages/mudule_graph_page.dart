@@ -36,93 +36,94 @@ class _ModuleGraphPageState extends State<ModuleGraphPage> {
         elevation: 0,
       ),
       body: Consumer<ModuleModel>(builder: (context, moduleModel, _) {
-        //TODO доработать дизайн
-        //TODO: добавить обработку если нет модулей
-        return HeaderWidget(
-          backColor: Color(0xFF253B4F),
-          header: Container(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(left: 16.0),
-                  child: Text(
-                    moduleModel.month.toUpperCase(),
-                    style: TextStyle(
-                        color: Colors.grey.shade700,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16.0,
-                        letterSpacing: 2.0),
+        return moduleModel.moduleViews.length == 0
+            ? Center(child: Text('Пока нет данных ...'))
+            : HeaderWidget(
+                backColor: Color(0xFF253B4F),
+                header: Container(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(left: 16.0),
+                        child: Text(
+                          moduleModel.month.toUpperCase(),
+                          style: TextStyle(
+                              color: Colors.grey.shade700,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16.0,
+                              letterSpacing: 2.0),
+                        ),
+                      ),
+                      Row(
+                        children: moduleModel.weekDays.map((w) {
+                          return Expanded(
+                            child: GestureDetector(
+                              onTap: () => moduleModel.onSelectDate(
+                                  moduleModel.weekDays.indexOf(w)),
+                              child: Container(
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                    color: moduleModel.weekDays.indexOf(w) ==
+                                            moduleModel.selected
+                                        ? Colors.orange.shade100
+                                        : Colors.transparent,
+                                    borderRadius: BorderRadius.vertical(
+                                        top: Radius.circular(30.0))),
+                                padding:
+                                    const EdgeInsets.only(top: 20, bottom: 8.0),
+                                child: Text(
+                                  w,
+                                  style: moduleModel.weekDays.indexOf(w) ==
+                                          moduleModel.selected
+                                      ? selectedText
+                                      : daysText,
+                                ),
+                              ),
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                      Row(
+                        children: moduleModel.dates.map((d) {
+                          return Expanded(
+                            child: GestureDetector(
+                              onTap: () => moduleModel
+                                  .onSelectDate(moduleModel.dates.indexOf(d)),
+                              child: Container(
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                    color: moduleModel.dates.indexOf(d) ==
+                                            moduleModel.selected
+                                        ? Colors.orange.shade100
+                                        : Colors.transparent,
+                                    borderRadius: BorderRadius.vertical(
+                                        bottom: Radius.circular(30.0))),
+                                padding: const EdgeInsets.only(
+                                    top: 8.0, bottom: 20.0),
+                                child: Text("$d",
+                                    style: moduleModel.dates.indexOf(d) ==
+                                            moduleModel.selected
+                                        ? selectedText
+                                        : daysText),
+                              ),
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                      const SizedBox(height: 10.0),
+                    ],
                   ),
                 ),
-                Row(
-                  children: moduleModel.weekDays.map((w) {
-                    return Expanded(
-                      child: GestureDetector(
-                        onTap: () => moduleModel
-                            .onSelectDate(moduleModel.weekDays.indexOf(w)),
-                        child: Container(
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                              color: moduleModel.weekDays.indexOf(w) ==
-                                      moduleModel.selected
-                                  ? Colors.orange.shade100
-                                  : Colors.transparent,
-                              borderRadius: BorderRadius.vertical(
-                                  top: Radius.circular(30.0))),
-                          padding: const EdgeInsets.only(top: 20, bottom: 8.0),
-                          child: Text(
-                            w,
-                            style: moduleModel.weekDays.indexOf(w) ==
-                                    moduleModel.selected
-                                ? selectedText
-                                : daysText,
-                          ),
-                        ),
-                      ),
-                    );
-                  }).toList(),
+                body: SingleChildScrollView(
+                  padding: const EdgeInsets.all(32.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: moduleModel.moduleViews,
+                  ),
                 ),
-                Row(
-                  children: moduleModel.dates.map((d) {
-                    return Expanded(
-                      child: GestureDetector(
-                        onTap: () => moduleModel
-                            .onSelectDate(moduleModel.dates.indexOf(d)),
-                        child: Container(
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                              color: moduleModel.dates.indexOf(d) ==
-                                      moduleModel.selected
-                                  ? Colors.orange.shade100
-                                  : Colors.transparent,
-                              borderRadius: BorderRadius.vertical(
-                                  bottom: Radius.circular(30.0))),
-                          padding:
-                              const EdgeInsets.only(top: 8.0, bottom: 20.0),
-                          child: Text("$d",
-                              style: moduleModel.dates.indexOf(d) ==
-                                      moduleModel.selected
-                                  ? selectedText
-                                  : daysText),
-                        ),
-                      ),
-                    );
-                  }).toList(),
-                ),
-                const SizedBox(height: 10.0),
-              ],
-            ),
-          ),
-          body: SingleChildScrollView(
-            padding: const EdgeInsets.all(32.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: moduleModel.moduleViews,
-            ),
-          ),
-        );
+              );
       }),
     );
   }

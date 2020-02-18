@@ -78,28 +78,31 @@ class ModuleModel extends ChangeNotifier {
     dates.clear();
     weekDays.clear();
 
-    String modules = await LocalModuleService.getModule();
-    Map<String, dynamic> modulesJson = json.decode(modules);
+    try {
+      String modules = await LocalModuleService.getModule();
+      Map<String, dynamic> modulesJson = json.decode(modules);
 
-    List<dynamic> moduleModels = modulesJson[modulesJson.keys.first]
-        .map((el) => ModuleItem.fromJson(el))
-        .toList();
+      List<dynamic> moduleModels = modulesJson[modulesJson.keys.first]
+          .map((el) => ModuleItem.fromJson(el))
+          .toList();
 
-    weekDays = moduleModels
-        .map((el) => weekDaysStatic[el.dateStart.weekday - 1])
-        .toList();
-    dates = moduleModels
-        .map((el) => int.parse(el.dateStart.day.toString()))
-        .toList();
-    month = moduleModels.map((el) => months[el.dateStart.month - 1]).first;
+      weekDays = moduleModels
+          .map((el) => weekDaysStatic[el.dateStart.weekday - 1])
+          .toList();
+      dates = moduleModels
+          .map((el) => int.parse(el.dateStart.day.toString()))
+          .toList();
+      month = moduleModels.map((el) => months[el.dateStart.month - 1]).first;
 
-    moduleModels.forEach((el) {
-      if (el.dateStart.day == dates[index])
-        moduleViews
-            .addAll([ModuleItemView(moduleItem: el), SizedBox(height: 20.0)]);
-    });
-
-    selected = index;
+      moduleModels.forEach((el) {
+        if (el.dateStart.day == dates[index])
+          moduleViews
+              .addAll([ModuleItemView(moduleItem: el), SizedBox(height: 20.0)]);
+      });
+      selected = index;
+    } catch (ex) {
+      moduleViews = [];
+    }
     notifyListeners();
   }
 }

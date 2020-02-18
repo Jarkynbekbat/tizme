@@ -133,12 +133,6 @@ class RaspModel extends ChangeNotifier {
   List<RaspItem> getRaspByDayId(int dayId) {
     String weekName = checkWeekType() ? 'Числитель' : 'Знаменатель';
     if (weekName == 'Числитель') {
-      var temp = this
-          .all
-          .where((el) => el.dayId == dayId && el.weekName == weekName)
-          .toList();
-      print('d0');
-
       return this
           .all
           .where((el) => el.dayId == dayId && el.weekName == weekName)
