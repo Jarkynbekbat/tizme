@@ -85,7 +85,11 @@ class RaspItemView extends StatelessWidget {
                       tag: 'classroom_tag',
                       child: ListTile(
                         enabled: false,
-                        subtitle: Text('в разработке'),
+                        subtitle: Text(
+                          'в разработке',
+                          style: TextStyle(
+                              color: Theme.of(context).iconTheme.color),
+                        ),
                         leading: Icon(
                           Icons.location_on,
                           color: Theme.of(context).iconTheme.color,

@@ -39,7 +39,8 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.example.new_rasp_app"
+        // applicationId "com.example.new_rasp_app"
+        applicationId "kg.studtime.kg.studtime"
         minSdkVersion 16
         targetSdkVersion 28
         versionCode flutterVersionCode.toInteger()
