@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:new_rasp_app/models/auth_model.dart';
 import 'package:new_rasp_app/pages/login_page/Animation/FadeAnimation.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -183,12 +184,16 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(
                       height: 30,
                     ),
-                    FadeAnimation(
-                      1.5,
-                      Text(
-                        "Не знаете шифр?",
-                        style:
-                            TextStyle(color: Color.fromRGBO(143, 148, 251, 1)),
+                    GestureDetector(
+                      onTap: () async => await launch(
+                          'https://rasp.homestroy.kg/online/code/'),
+                      child: FadeAnimation(
+                        1.5,
+                        Text(
+                          "Не знаете шифр?",
+                          style: TextStyle(
+                              color: Color.fromRGBO(143, 148, 251, 1)),
+                        ),
                       ),
                     ),
                   ],

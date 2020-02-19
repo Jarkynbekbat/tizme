@@ -89,6 +89,23 @@ class AboutAppPage extends StatelessWidget {
                 color: Colors.white,
                 disabledBorderColor: Colors.white,
                 textColor: Colors.black,
+                onPressed: () => openUrl('http://studtime.knu.kg/'),
+                child: Text(
+                  'Посетите наш сайт',
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.body1.color,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(top: 18),
+              child: OutlineButton(
+                color: Colors.white,
+                disabledBorderColor: Colors.white,
+                textColor: Colors.black,
                 onPressed: () => openUrl('mailto:studtime@webrand.kg'),
                 child: Text(
                   'Напишите нам',
@@ -99,7 +116,7 @@ class AboutAppPage extends StatelessWidget {
                   ),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
