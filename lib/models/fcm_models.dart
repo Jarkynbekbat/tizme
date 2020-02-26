@@ -1,8 +1,6 @@
 import 'dart:convert';
-
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-
 import 'package:new_rasp_app/services/local/local_notification_service.dart';
 
 class FcmModel extends ChangeNotifier {
@@ -29,17 +27,10 @@ class FcmModel extends ChangeNotifier {
     this.allNotifications.removeWhere((el) => el['date'] == date);
   }
 
+  // for
   void configure() {
     _firebaseMessaging.configure(
-      onMessage: (Map<String, dynamic> message) async {
-        //TODO: Доделать , не сохраняет уводемнение в фоновом режиме
-        // Map<String, dynamic> object = {};
-        // object['title'] = message['notification']['title'];
-        // object['body'] = message['notification']['body'];
-        // object['date'] = DateTime.now().toString();
-        // await LocalNotificationsService.addNotification(notification: object);
-        initData();
-      },
+      onMessage: (Map<String, dynamic> message) async {},
       onResume: (Map<String, dynamic> message) async {},
       onLaunch: (Map<String, dynamic> message) async {},
     );

@@ -122,9 +122,9 @@ class RaspItemView extends StatelessWidget {
         );
       },
       child: Container(
-        height: Screen.isPortrait(context)
-            ? Screen.heigth(context) * 0.15
-            : Screen.heigth(context) * 0.25,
+        // height: Screen.isPortrait(context)
+        //     ? Screen.heigth(context) * 0.15
+        //     : Screen.heigth(context) * 0.25,
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
