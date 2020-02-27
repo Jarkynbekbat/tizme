@@ -121,6 +121,13 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
               // color: Color(0xFFF4F5F9),
             ),
           ),
+          //! DropdownButton(
+          //   items: [
+          //     DropdownMenuItem(
+          //       child: Text('test'),
+          //     )
+          //   ],
+          // ),
           // ...getOption('Уведомления', Icons.notifications,
           //     () => Navigator.pushNamed(context, '/notifications')),
           ...getOption('График сессии', Icons.insert_chart,

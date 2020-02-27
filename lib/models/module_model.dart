@@ -61,7 +61,7 @@ class ModuleModel extends ChangeNotifier {
     'ноябрь',
     'декабрь'
   ];
-  List<String> weekDaysStatic = ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ"];
+  List<String> weekDaysStatic = ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"];
 
   List<Widget> moduleViews = [];
   int selected = 0;
@@ -89,6 +89,7 @@ class ModuleModel extends ChangeNotifier {
       weekDays = moduleModels
           .map((el) => weekDaysStatic[el.dateStart.weekday - 1])
           .toList();
+
       dates = moduleModels
           .map((el) => int.parse(el.dateStart.day.toString()))
           .toList();
@@ -101,6 +102,7 @@ class ModuleModel extends ChangeNotifier {
       });
       selected = index;
     } catch (ex) {
+      ex;
       moduleViews = [];
     }
     notifyListeners();
