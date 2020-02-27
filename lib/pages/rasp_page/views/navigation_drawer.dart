@@ -88,7 +88,6 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                                       String cypher = snapshot.hasData
                                           ? snapshot.data
                                           : "шифр";
-
                                       return Text(
                                         cypher,
                                         style: TextStyle(
@@ -102,27 +101,20 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                             ],
                           ),
                         ]),
-                    ExpansionTile(
-                      title: FutureBuilder(
-                        future: LocalFioService.getFio(),
-                        builder: (BuildContext context,
-                            AsyncSnapshot<String> snapshot) {
-                          String fio = snapshot.hasData ? snapshot.data : "ФИО";
-                          return Text(
-                            fio,
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Theme.of(context).textTheme.body1.color,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          );
-                        },
-                      ),
-                      children: getOption(
-                          'Выйти',
-                          Icons.exit_to_app,
-                          () => Provider.of<AuthModel>(context, listen: false)
-                              .logOut(context)),
+                    FutureBuilder(
+                      future: LocalFioService.getFio(),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<String> snapshot) {
+                        String fio = snapshot.hasData ? snapshot.data : "ФИО";
+                        return Text(
+                          fio,
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Theme.of(context).textTheme.body1.color,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        );
+                      },
                     ),
                   ]),
             ),
@@ -136,16 +128,6 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
           //     () => Navigator.pushNamed(context, '/notifications')),
           ...getOption('График сессии', Icons.insert_chart,
               () => Navigator.pushNamed(context, '/session_graph')),
-
-          //------------------------------------
-          ...getOption('График сессии', Icons.insert_chart,
-              () => Navigator.pushNamed(context, '/session_graph')),
-          ...getOption('График сессии', Icons.insert_chart,
-              () => Navigator.pushNamed(context, '/session_graph')),
-          ...getOption('График сессии', Icons.insert_chart,
-              () => Navigator.pushNamed(context, '/session_graph')),
-          //------------------------------------
-
           ...getOption('График модуля', Icons.table_chart,
               () => Navigator.pushNamed(context, '/module_graph')),
           ...getOption('О приложении', Icons.question_answer,
