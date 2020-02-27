@@ -13,10 +13,16 @@ class RaspItemView extends StatelessWidget {
       fontFamily: "Niagara Solid");
 
   final raspTopTextStyle = new TextStyle(
-      fontSize: 18.0, fontWeight: FontWeight.bold, fontFamily: "Roboto");
+    fontSize: 18.0,
+    fontWeight: FontWeight.bold,
+    fontFamily: "Roboto",
+  );
 
   final raspBottomTextStyle = new TextStyle(
-      fontSize: 12.0, fontWeight: FontWeight.w300, fontFamily: "Roboto");
+    fontSize: 12.0,
+    fontWeight: FontWeight.w300,
+    fontFamily: "Roboto",
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -175,6 +181,7 @@ class RaspItemView extends StatelessWidget {
                         overflow: TextOverflow.fade,
                         softWrap: true,
                       ),
+                      SizedBox(height: 4),
                       Text(
                         "${raspItem.teacherName} / ${raspItem.classroomName} / ${raspItem.lestypeName}",
                         style: raspBottomTextStyle,
