@@ -102,7 +102,6 @@ class ModuleModel extends ChangeNotifier {
       });
       selected = index;
     } catch (ex) {
-      ex;
       moduleViews = [];
     }
     notifyListeners();

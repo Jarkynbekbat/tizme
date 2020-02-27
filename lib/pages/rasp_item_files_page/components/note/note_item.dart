@@ -51,7 +51,6 @@ class NoteItem extends StatelessWidget {
                   spacing: 5.0,
                   runSpacing: 5.0,
                   direction: Axis.vertical, // main axis (rows or columns)
-
                   children: [
                     Text(
                       flexing(_obj['content']),
@@ -64,9 +63,7 @@ class NoteItem extends StatelessWidget {
                       _obj['date']
                           .substring(0, 16)
                           .replaceFirst(' ', '          '),
-                      style: TextStyle(
-                        fontSize: 14,
-                      ),
+                      style: TextStyle(fontSize: 14),
                     ),
                   ],
                 ),

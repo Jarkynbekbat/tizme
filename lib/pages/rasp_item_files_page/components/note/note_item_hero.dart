@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 //components
 import 'package:new_rasp_app/components/my_app_bar.dart';
+import 'package:new_rasp_app/components/my_container.dart';
 import 'package:new_rasp_app/helpers/show_snackbar.dart';
 
 //services
@@ -44,55 +45,59 @@ class _NoteItemHeroState extends State<NoteItemHero> {
             ),
           )
         ]),
-        body: Container(
-          decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: Theme.of(context).dividerColor,
-                blurRadius: 10.0, // has the effect of softening the shadow
-                // spreadRadius: 0.0, // has the effect of extending the shadow
-                offset: Offset(
-                  0, // horizontal, move right 10
-                  0, // vertical, move down 10
-                ),
-              )
-            ],
-          ),
-          child: Card(
-            color: Theme.of(context).appBarTheme.color,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            child: TextFormField(
-              cursorColor: Theme.of(context).textTheme.body1.color,
-              style: TextStyle(
-                color: Theme.of(context).textTheme.body1.color,
+        body: MyContainer(
+          [
+            Container(
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Theme.of(context).dividerColor,
+                    blurRadius: 10.0, // has the effect of softening the shadow
+                    // spreadRadius: 0.0, // has the effect of extending the shadow
+                    offset: Offset(
+                      0, // horizontal, move right 10
+                      0, // vertical, move down 10
+                    ),
+                  )
+                ],
               ),
-              controller: null,
-              initialValue: _note['obj']['content'],
-              onChanged: (text) => _note['obj']['content'] = text,
-              textCapitalization: TextCapitalization.sentences,
-              maxLines: 25,
-              decoration: InputDecoration(
-                disabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
+              child: Card(
+                color: Theme.of(context).appBarTheme.color,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: TextFormField(
+                  cursorColor: Theme.of(context).textTheme.body1.color,
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.body1.color,
+                  ),
+                  controller: null,
+                  initialValue: _note['obj']['content'],
+                  onChanged: (text) => _note['obj']['content'] = text,
+                  textCapitalization: TextCapitalization.sentences,
+                  maxLines: 25,
+                  decoration: InputDecoration(
+                    disabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color: Theme.of(context).textTheme.body1.color,
+                          width: 3.0),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color: Theme.of(context).textTheme.body1.color,
+                          width: 0.0),
+                    ),
+                    border: const OutlineInputBorder(),
+                    labelStyle: TextStyle(
                       color: Theme.of(context).textTheme.body1.color,
-                      width: 3.0),
+                    ),
+                    labelText: 'введите текст заметки...',
+                    fillColor: Theme.of(context).textTheme.body1.color,
+                  ),
                 ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                      color: Theme.of(context).textTheme.body1.color,
-                      width: 0.0),
-                ),
-                border: const OutlineInputBorder(),
-                labelStyle: TextStyle(
-                  color: Theme.of(context).textTheme.body1.color,
-                ),
-                labelText: 'введите текст заметки...',
-                fillColor: Theme.of(context).textTheme.body1.color,
               ),
             ),
-          ),
+          ],
         ),
       ),
     );

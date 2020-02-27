@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:new_rasp_app/helpers/screen.dart';
 import 'package:new_rasp_app/models/rasp_model.dart';
 import 'package:photo_view/photo_view.dart';
 
@@ -19,7 +18,7 @@ class RaspItemView extends StatelessWidget {
   );
 
   final raspBottomTextStyle = new TextStyle(
-    fontSize: 12.0,
+    fontSize: 15.0,
     fontWeight: FontWeight.w300,
     fontFamily: "Roboto",
   );

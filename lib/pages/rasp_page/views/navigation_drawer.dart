@@ -26,9 +26,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
         ),
         onTap: onTab,
       ),
-      Divider(
-        color: Theme.of(context).iconTheme.color.withOpacity(0.5),
-      ),
+      Divider(color: Theme.of(context).iconTheme.color.withOpacity(0.5)),
     ];
   }
 
@@ -36,102 +34,118 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
-        padding: EdgeInsets.zero,
-        children: <Widget>[
+        // padding: EdgeInsets.zero,
+        children: [
           DrawerHeader(
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Image.asset(
-                          './lib/assets/student.png',
-                          width: 90,
-                          height: 80,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Row(children: [
-                              Padding(
-                                padding: EdgeInsets.only(right: 10, left: 20),
-                                child: Icon(
-                                  Icons.group,
-                                  color: Theme.of(context).iconTheme.color,
+            child: Container(
+              height: 120,
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Image.asset(
+                            './lib/assets/student.png',
+                            width: 90,
+                            height: 80,
+                          ),
+                          SizedBox(height: 100),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Row(children: [
+                                Padding(
+                                  padding: EdgeInsets.only(right: 10, left: 20),
+                                  child: Icon(
+                                    Icons.group,
+                                    color: Theme.of(context).iconTheme.color,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                Provider.of<RaspModel>(context).group,
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: Theme.of(context).iconTheme.color,
+                                Text(
+                                  Provider.of<RaspModel>(context).group,
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: Theme.of(context).iconTheme.color,
+                                  ),
                                 ),
-                              ),
-                            ]),
-                            Row(children: [
-                              Padding(
-                                padding: EdgeInsets.only(right: 10, left: 20),
-                                child: Icon(
-                                  Icons.vpn_key,
-                                  color: Theme.of(context).iconTheme.color,
+                              ]),
+                              Row(children: [
+                                Padding(
+                                  padding: EdgeInsets.only(right: 10, left: 20),
+                                  child: Icon(
+                                    Icons.vpn_key,
+                                    color: Theme.of(context).iconTheme.color,
+                                  ),
                                 ),
-                              ),
-                              FutureBuilder(
-                                  future: LocalCypherService.getCypher(),
-                                  builder: (BuildContext context,
-                                      AsyncSnapshot<String> snapshot) {
-                                    String cypher = snapshot.hasData
-                                        ? snapshot.data
-                                        : "шифр";
-                                    return Text(
-                                      cypher,
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        color:
-                                            Theme.of(context).iconTheme.color,
-                                      ),
-                                    );
-                                  }),
-                            ]),
-                          ],
-                        ),
-                      ]),
-                  FutureBuilder(
-                    future: LocalFioService.getFio(),
-                    builder:
-                        (BuildContext context, AsyncSnapshot<String> snapshot) {
-                      String fio = snapshot.hasData ? snapshot.data : "ФИО";
-                      return Text(
-                        fio,
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Theme.of(context).textTheme.body1.color,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      );
-                    },
-                  ),
-                ]),
+                                FutureBuilder(
+                                    future: LocalCypherService.getCypher(),
+                                    builder: (BuildContext context,
+                                        AsyncSnapshot<String> snapshot) {
+                                      String cypher = snapshot.hasData
+                                          ? snapshot.data
+                                          : "шифр";
+
+                                      return Text(
+                                        cypher,
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          color:
+                                              Theme.of(context).iconTheme.color,
+                                        ),
+                                      );
+                                    }),
+                              ]),
+                            ],
+                          ),
+                        ]),
+                    ExpansionTile(
+                      title: FutureBuilder(
+                        future: LocalFioService.getFio(),
+                        builder: (BuildContext context,
+                            AsyncSnapshot<String> snapshot) {
+                          String fio = snapshot.hasData ? snapshot.data : "ФИО";
+                          return Text(
+                            fio,
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Theme.of(context).textTheme.body1.color,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          );
+                        },
+                      ),
+                      children: getOption(
+                          'Выйти',
+                          Icons.exit_to_app,
+                          () => Provider.of<AuthModel>(context, listen: false)
+                              .logOut(context)),
+                    ),
+                  ]),
+            ),
             decoration: BoxDecoration(
               color: Theme.of(context).appBarTheme.color,
               // color: Color(0xFFF4F5F9),
             ),
           ),
-          //! DropdownButton(
-          //   items: [
-          //     DropdownMenuItem(
-          //       child: Text('test'),
-          //     )
-          //   ],
-          // ),
+
           // ...getOption('Уведомления', Icons.notifications,
           //     () => Navigator.pushNamed(context, '/notifications')),
           ...getOption('График сессии', Icons.insert_chart,
               () => Navigator.pushNamed(context, '/session_graph')),
+
+          //------------------------------------
+          ...getOption('График сессии', Icons.insert_chart,
+              () => Navigator.pushNamed(context, '/session_graph')),
+          ...getOption('График сессии', Icons.insert_chart,
+              () => Navigator.pushNamed(context, '/session_graph')),
+          ...getOption('График сессии', Icons.insert_chart,
+              () => Navigator.pushNamed(context, '/session_graph')),
+          //------------------------------------
+
           ...getOption('График модуля', Icons.table_chart,
               () => Navigator.pushNamed(context, '/module_graph')),
           ...getOption('О приложении', Icons.question_answer,

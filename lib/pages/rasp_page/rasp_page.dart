@@ -43,8 +43,6 @@ class _RaspPageState extends State<RaspPage>
     //   rasps: rasps,
     // );
 
-    var temp = Theme.of(context).appBarTheme.color;
-
     return Scaffold(
       key: _scaffoldKey,
       drawer: NavigationDrawer(),
