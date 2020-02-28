@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:new_rasp_app/helpers/my_simple_dialog.dart';
+import 'package:new_rasp_app/helpers/screen.dart';
 import 'package:new_rasp_app/models/auth_model.dart';
 import 'package:new_rasp_app/models/rasp_model.dart';
 import 'package:new_rasp_app/services/local/local_cypher_service.dart';
@@ -34,11 +36,13 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
-        // padding: EdgeInsets.zero,
+        padding: EdgeInsets.zero,
         children: [
-          DrawerHeader(
-            child: Container(
-              height: 120,
+          SizedBox(
+            height: Screen.heigth(context) * 0.21,
+            // height: 300,
+            child: DrawerHeader(
+              margin: EdgeInsets.only(bottom: 0),
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -52,78 +56,93 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                             width: 90,
                             height: 80,
                           ),
-                          SizedBox(height: 100),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Row(children: [
-                                Padding(
-                                  padding: EdgeInsets.only(right: 10, left: 20),
-                                  child: Icon(
-                                    Icons.group,
-                                    color: Theme.of(context).iconTheme.color,
+                          // SizedBox(height: 100),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Row(children: [
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.only(right: 10, left: 20),
+                                    child: Icon(
+                                      Icons.group,
+                                      color: Theme.of(context).iconTheme.color,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  Provider.of<RaspModel>(context).group,
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Theme.of(context).iconTheme.color,
+                                  Text(
+                                    Provider.of<RaspModel>(context).group,
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      color: Theme.of(context).iconTheme.color,
+                                    ),
                                   ),
-                                ),
-                              ]),
-                              Row(children: [
-                                Padding(
-                                  padding: EdgeInsets.only(right: 10, left: 20),
-                                  child: Icon(
-                                    Icons.vpn_key,
-                                    color: Theme.of(context).iconTheme.color,
+                                ]),
+                                Row(children: [
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.only(right: 10, left: 20),
+                                    child: Icon(
+                                      Icons.vpn_key,
+                                      color: Theme.of(context).iconTheme.color,
+                                    ),
                                   ),
-                                ),
-                                FutureBuilder(
-                                    future: LocalCypherService.getCypher(),
-                                    builder: (BuildContext context,
-                                        AsyncSnapshot<String> snapshot) {
-                                      String cypher = snapshot.hasData
-                                          ? snapshot.data
-                                          : "шифр";
-                                      return Text(
-                                        cypher,
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          color:
-                                              Theme.of(context).iconTheme.color,
-                                        ),
-                                      );
-                                    }),
-                              ]),
-                            ],
+                                  FutureBuilder(
+                                      future: LocalCypherService.getCypher(),
+                                      builder: (BuildContext context,
+                                          AsyncSnapshot<String> snapshot) {
+                                        String cypher = snapshot.hasData
+                                            ? snapshot.data
+                                            : "шифр";
+                                        return Text(
+                                          cypher,
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            color: Theme.of(context)
+                                                .iconTheme
+                                                .color,
+                                          ),
+                                        );
+                                      }),
+                                ]),
+                              ],
+                            ),
                           ),
                         ]),
-                    FutureBuilder(
-                      future: LocalFioService.getFio(),
-                      builder: (BuildContext context,
-                          AsyncSnapshot<String> snapshot) {
-                        String fio = snapshot.hasData ? snapshot.data : "ФИО";
-                        return Text(
-                          fio,
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Theme.of(context).textTheme.body1.color,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        );
-                      },
-                    ),
                   ]),
-            ),
-            decoration: BoxDecoration(
-              color: Theme.of(context).appBarTheme.color,
-              // color: Color(0xFFF4F5F9),
+              decoration: BoxDecoration(
+                color: Theme.of(context).appBarTheme.color,
+              ),
             ),
           ),
-
+          Container(
+            color: Theme.of(context).appBarTheme.color,
+            child: ExpansionTile(
+              title: FutureBuilder(
+                future: LocalFioService.getFio(),
+                builder:
+                    (BuildContext context, AsyncSnapshot<String> snapshot) {
+                  String fio = snapshot.hasData ? snapshot.data : "ФИО";
+                  return Text(
+                    fio,
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Theme.of(context).textTheme.body1.color,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  );
+                },
+              ),
+              children: [
+                getOption(
+                    'Выйти',
+                    Icons.exit_to_app,
+                    () => Provider.of<AuthModel>(context, listen: false)
+                        .logOut(context))[0],
+              ],
+            ),
+          ),
           // ...getOption('Уведомления', Icons.notifications,
           //     () => Navigator.pushNamed(context, '/notifications')),
           ...getOption('График сессии', Icons.insert_chart,
@@ -132,11 +151,6 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
               () => Navigator.pushNamed(context, '/module_graph')),
           ...getOption('О приложении', Icons.question_answer,
               () => Navigator.pushNamed(context, '/about_app')),
-          ...getOption(
-              'Выйти',
-              Icons.exit_to_app,
-              () => Provider.of<AuthModel>(context, listen: false)
-                  .logOut(context)),
         ],
       ),
     );
