@@ -69,7 +69,7 @@ class SessionModel extends ChangeNotifier {
     'ноябрь',
     'декабрь'
   ];
-  List<String> weekDaysStatic = ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ"];
+  List<String> weekDaysStatic = ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"];
 
   List<Widget> moduleViews = [];
   int selected = 0;
