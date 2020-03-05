@@ -30,7 +30,7 @@ dependencies:
   #loading
   # notifications
   flutter_local_notifications: ^1.1.5+1
-  store_updater: ^0.0.1
+  # store_updater: ^0.0.1
   # firebase cloud messaging
   firebase_core: ^0.4.0+9
   firebase_auth: ^0.14.0+5

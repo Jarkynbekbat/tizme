@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:new_rasp_app/helpers/my_simple_dialog.dart';
 import 'package:new_rasp_app/helpers/screen.dart';
 import 'package:new_rasp_app/models/auth_model.dart';
 import 'package:new_rasp_app/models/rasp_model.dart';

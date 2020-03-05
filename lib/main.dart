@@ -19,9 +19,8 @@ import 'package:new_rasp_app/services/local/local_cypher_service.dart';
 import 'package:new_rasp_app/themes/dark_week_theme.dart';
 import 'package:new_rasp_app/themes/white_week_theme.dart';
 import 'package:provider/provider.dart';
-import 'package:store_updater/store_updater.dart';
+// import 'package:store_updater/store_updater.dart';
 import 'package:theme_provider/theme_provider.dart';
-import 'helpers/check_connection_helper.dart';
 import 'helpers/check_week_type_helper.dart';
 import 'pages/login_page/intro_page/intro_page.dart';
 
@@ -29,9 +28,9 @@ void main() async {
   try {
     WidgetsFlutterBinding.ensureInitialized();
 
-    if (await checkConnection()) {
-      StoreUpdater.checkUpdate();
-    }
+    // if (await checkConnection()) {
+    //   StoreUpdater.checkUpdate();
+    // }
 
     Widget _defaultHome = await LocalCypherService.getCypher() != null
         ? ThemeConsumer(child: RaspPage())
