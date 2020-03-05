@@ -12,8 +12,8 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final cypherController = TextEditingController();
-  var maskFormatter = new MaskTextInputFormatter(
-      mask: '##/#####', filter: {"#": RegExp(r'[0-9]')});
+  // var maskFormatter = new MaskTextInputFormatter(
+  //     mask: '##/#####', filter: {"#": RegExp(r'[0-9]')});
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -128,7 +128,7 @@ class _LoginPageState extends State<LoginPage> {
                           children: [
                             Container(
                               child: TextField(
-                                inputFormatters: [maskFormatter],
+                                // inputFormatters: [maskFormatter],
                                 style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.normal,

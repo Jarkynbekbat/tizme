@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:new_rasp_app/components/my_app_bar.dart';
+import 'package:new_rasp_app/main.dart';
 import 'package:new_rasp_app/models/rasp_model.dart';
 import 'package:new_rasp_app/pages/rasp_page/views/get_skeleton.dart';
 import 'package:new_rasp_app/pages/rasp_page/views/navigation_drawer.dart';
@@ -25,6 +26,7 @@ class _RaspPageState extends State<RaspPage>
 
   @override
   void initState() {
+    main();
     super.initState();
     pageController = PageController(initialPage: DateTime.now().weekday - 1);
   }

@@ -74,28 +74,34 @@ class RaspModel extends ChangeNotifier {
   bool isLoaded = false;
 
   RaspModel() {
-    this._initRasp();
+    this.initRasp();
   }
 
-  _initRasp() async {
+  initRasp() async {
+    this.all = [];
     String stringRasp = await LocalRaspService.getRasp();
-    //is it is first time or has internet connection
-    if (stringRasp == null || await checkConnection()) {
-      cypher = await LocalCypherService.getCypher();
-      //string to json
+    cypher = await LocalCypherService.getCypher();
+    //если есть интернет или нет локального расписания
+    //если заходим в первый раз или есть интернет
+
+    if (await checkConnection() || stringRasp == null) {
+      //берем расписание из сервера
       Map<String, dynamic> jsonRasps =
           await HttpRaspService.getRaspAndGroupByCypher(cypher);
-      // getting group rasps
+      //берем расписание по группе
       jsonRasps[jsonRasps.keys.first]
+          //добавляем в расписание в this
           .forEach((el) => this.all.add(RaspItem.fromJson(el)));
-      //getting group name
+      //берем название группы
       group = jsonRasps.keys.first;
+      //сохраняем группу локально
       await LocalGroupService.setGroup(group);
+      //берем цитату из сервера
       quote = await HttpQuoteService.getQuote();
       await HttpModuleService.getModule(cypher);
       await HttpSessionService.getSession(cypher);
     }
-    //if it is not first time and has no internet connection
+    //если заходим не в первый раз и нет есть интернета
     else {
       String stringRasp = await LocalRaspService.getRasp();
       // string to json
