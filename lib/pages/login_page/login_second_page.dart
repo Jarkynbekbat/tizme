@@ -3,6 +3,7 @@ import 'package:new_rasp_app/models/auth_model.dart';
 import 'package:new_rasp_app/pages/login_page/Animation/FadeAnimation.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -11,6 +12,8 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final cypherController = TextEditingController();
+  var maskFormatter = new MaskTextInputFormatter(
+      mask: '##/#####', filter: {"#": RegExp(r'[0-9]')});
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -125,7 +128,7 @@ class _LoginPageState extends State<LoginPage> {
                           children: [
                             Container(
                               child: TextField(
-                                // inputFormatters: [maskFormatter],
+                                inputFormatters: [maskFormatter],
                                 style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.normal,
@@ -137,8 +140,7 @@ class _LoginPageState extends State<LoginPage> {
                                   focusColor: Color(0xfffefefe),
                                   fillColor: Color(0xfffefefe),
                                   filled: true,
-                                  labelText:
-                                      ' *  *  /  *  *  *  *  *  *  *  * ',
+                                  labelText: ' *  *  /  *  *  *  *  *  * ',
                                   labelStyle: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold,
