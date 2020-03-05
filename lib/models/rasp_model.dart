@@ -15,7 +15,6 @@ import 'package:new_rasp_app/services/local/local_rasp_service.dart';
 
 RaspItem raspItemFromJson(String str) => RaspItem.fromJson(json.decode(str));
 String raspItemToJson(RaspItem data) => json.encode(data.toJson());
-// добавил какой то текст
 
 class RaspItem {
   String weekName;
@@ -90,7 +89,7 @@ class RaspModel extends ChangeNotifier {
           await HttpRaspService.getRaspAndGroupByCypher(cypher);
       //берем расписание по группе
       jsonRasps[jsonRasps.keys.first]
-          //добавляем в расписание в this
+          // добавляем в расписание в this
           .forEach((el) => this.all.add(RaspItem.fromJson(el)));
       //берем название группы
       group = jsonRasps.keys.first;
@@ -115,25 +114,30 @@ class RaspModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setCurrent(dayId) {
-    this.today = dayId;
-    notifyListeners();
-  }
-
   void onRefresh(_scaffoldKey, _refreshController) async {
-    this.all.clear();
-    //refreshing rasps on pull
-    Map<String, dynamic> jsonRasps =
-        await HttpRaspService.getRaspAndGroupByCypher(cypher);
-    jsonRasps[jsonRasps.keys.first]
-        .forEach((el) => this.all.add(RaspItem.fromJson(el)));
-    //refreshing modules on pull
-    await HttpModuleService.getModule(cypher);
-    //refreshing quotes on pull
-    this.quote = await HttpQuoteService.getQuote();
+    if (await checkConnection()) {
+      this.all = [];
+      cypher = await LocalCypherService.getCypher();
+      //refreshing rasps on pull
+      Map<String, dynamic> jsonRasps =
+          await HttpRaspService.getRaspAndGroupByCypher(cypher);
+      jsonRasps[jsonRasps.keys.first]
+          .forEach((el) => this.all.add(RaspItem.fromJson(el)));
 
-    showSnackBar('Данные обновлены!', _scaffoldKey);
-    _refreshController.refreshCompleted();
+      //refreshing groupname
+      await LocalGroupService.setGroup(jsonRasps.keys.first);
+      this.group = jsonRasps.keys.first;
+      //refreshing modules on pull
+      await HttpModuleService.getModule(cypher);
+      //refreshing quotes on pull
+      this.quote = await HttpQuoteService.getQuote();
+
+      showSnackBar('Данные обновлены!', _scaffoldKey);
+      _refreshController.refreshCompleted();
+    } else {
+      _refreshController.refreshCompleted();
+      showSnackBar('нет подключения к сети...', _scaffoldKey);
+    }
     notifyListeners();
   }
 
@@ -163,5 +167,10 @@ class RaspModel extends ChangeNotifier {
       });
       return both;
     }
+  }
+
+  void setCurrent(dayId) {
+    this.today = dayId;
+    notifyListeners();
   }
 }

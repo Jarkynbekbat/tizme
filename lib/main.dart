@@ -4,7 +4,7 @@ import 'package:new_rasp_app/models/fcm_models.dart';
 import 'package:new_rasp_app/models/module_model.dart';
 import 'package:new_rasp_app/models/rasp_model.dart';
 import 'package:new_rasp_app/models/session_model.dart';
-import 'package:new_rasp_app/pages/login_page/login_second_page.dart';
+import 'package:new_rasp_app/pages/login_page/login_page.dart';
 import 'package:new_rasp_app/pages/navigation_drawer_pages/about_app_page.dart';
 import 'package:new_rasp_app/pages/navigation_drawer_pages/mudule_graph_page.dart';
 import 'package:new_rasp_app/pages/navigation_drawer_pages/notifications_page.dart';

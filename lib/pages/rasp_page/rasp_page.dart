@@ -26,7 +26,6 @@ class _RaspPageState extends State<RaspPage>
 
   @override
   void initState() {
-    main();
     super.initState();
     pageController = PageController(initialPage: DateTime.now().weekday - 1);
   }
