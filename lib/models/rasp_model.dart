@@ -15,6 +15,7 @@ import 'package:new_rasp_app/services/local/local_rasp_service.dart';
 
 RaspItem raspItemFromJson(String str) => RaspItem.fromJson(json.decode(str));
 String raspItemToJson(RaspItem data) => json.encode(data.toJson());
+// добавил какой то текст
 
 class RaspItem {
   String weekName;
