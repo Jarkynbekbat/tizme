@@ -13,6 +13,9 @@ import 'package:new_rasp_app/services/local/local_group_service.dart';
 import 'package:new_rasp_app/services/local/local_quote_service.dart';
 import 'package:new_rasp_app/services/local/local_rasp_service.dart';
 
+import '../helpers/check_connection_helper.dart';
+import '../services/local/local_user_service.dart';
+
 RaspItem raspItemFromJson(String str) => RaspItem.fromJson(json.decode(str));
 String raspItemToJson(RaspItem data) => json.encode(data.toJson());
 
@@ -43,7 +46,7 @@ class RaspItem {
         weekName: json["weekName"],
         timeFrom: json["timeFrom"],
         timeTo: json["timeTo"],
-        dayId: int.parse(json["dayId"]),
+        dayId: int.parse(json["dayId"].toString()),
         classroomName: json["classroomName"],
         teacherName: json["teacherName"],
         subjectName: json["subjectName"],
@@ -78,11 +81,12 @@ class RaspModel extends ChangeNotifier {
 
   initRasp() async {
     this.all = [];
+
     String stringRasp = await LocalRaspService.getRasp();
     cypher = await LocalCypherService.getCypher();
     //если есть интернет или нет локального расписания
-    //если заходим в первый раз или есть интернет
-
+    //если заходим в первый раз
+    //если заходим не в первый раз но есть интернет
     if (await checkConnection() || stringRasp == null) {
       //берем расписание из сервера
       Map<String, dynamic> jsonRasps =
@@ -99,9 +103,35 @@ class RaspModel extends ChangeNotifier {
       quote = await HttpQuoteService.getQuote();
       await HttpModuleService.getModule(cypher);
       await HttpSessionService.getSession(cypher);
+      String who = await LocalUserService.getUser();
+      if (who == 'преподаватель') {
+        //переименовываю названия групп в названия потоков если это лекция
+        this.all.forEach((raspItem) {
+          List<RaspItem> test = this
+              .all
+              .where((raspItem2) => (raspItem.dayId == raspItem2.dayId &&
+                  raspItem.classroomName == raspItem2.classroomName &&
+                  raspItem.timeFrom == raspItem2.timeFrom &&
+                  raspItem.timeTo == raspItem2.timeTo))
+              .toList();
+          if (test.length > 1) {
+            test.forEach((el) {
+              List<String> parts = raspItem.teacherName.split('-');
+              if (parts.length == 3) el.teacherName = parts[0] + '-' + parts[2];
+            });
+          }
+        });
+        //удаляю дубликаты из расписания препадавателей
+        List<String> raspStringArray =
+            this.all.map((el) => json.encode(el.toJson())).toList();
+        var setArray = Set.from(raspStringArray);
+        List<RaspItem> mapArray =
+            setArray.map((el) => RaspItem.fromJson(json.decode(el))).toList();
+        this.all = mapArray;
+      }
     }
-    //если заходим не в первый раз и нет есть интернета
-    else {
+    //если заходим не в первый раз и нет интернета
+    else if (!await checkConnection() && stringRasp != null) {
       String stringRasp = await LocalRaspService.getRasp();
       // string to json
       Map<String, dynamic> jsonRasps = jsonDecode(stringRasp);
@@ -118,19 +148,21 @@ class RaspModel extends ChangeNotifier {
     if (await checkConnection()) {
       this.all = [];
       cypher = await LocalCypherService.getCypher();
-      //refreshing rasps on pull
-      Map<String, dynamic> jsonRasps =
-          await HttpRaspService.getRaspAndGroupByCypher(cypher);
-      jsonRasps[jsonRasps.keys.first]
-          .forEach((el) => this.all.add(RaspItem.fromJson(el)));
 
-      //refreshing groupname
-      await LocalGroupService.setGroup(jsonRasps.keys.first);
-      this.group = jsonRasps.keys.first;
-      //refreshing modules on pull
-      await HttpModuleService.getModule(cypher);
-      //refreshing quotes on pull
-      this.quote = await HttpQuoteService.getQuote();
+      await this.initRasp();
+
+      // //refreshing rasps on pull
+      // Map<String, dynamic> jsonRasps =
+      //     await HttpRaspService.getRaspAndGroupByCypher(cypher);
+      // jsonRasps[jsonRasps.keys.first]
+      //     .forEach((el) => this.all.add(RaspItem.fromJson(el)));
+      // //refreshing groupname
+      // await LocalGroupService.setGroup(jsonRasps.keys.first);
+      // this.group = jsonRasps.keys.first;
+      // //refreshing modules on pull
+      // await HttpModuleService.getModule(cypher);
+      // //refreshing quotes on pull
+      // this.quote = await HttpQuoteService.getQuote();
 
       showSnackBar('Данные обновлены!', _scaffoldKey);
       _refreshController.refreshCompleted();

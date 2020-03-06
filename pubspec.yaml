@@ -47,6 +47,7 @@ flutter:
   uses-material-design: true
   assets:
     - ./lib/assets/student.png
+    - ./lib/assets/teacher.png
     - ./lib/assets/preview.png
     - ./lib/assets/face.png
     - ./lib/assets/insta.png

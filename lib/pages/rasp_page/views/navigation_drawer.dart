@@ -6,6 +6,8 @@ import 'package:new_rasp_app/services/local/local_cypher_service.dart';
 import 'package:new_rasp_app/services/local/local_fio_service.dart';
 import 'package:provider/provider.dart';
 
+import '../../../services/local/local_user_service.dart';
+
 class NavigationDrawer extends StatefulWidget {
   @override
   _NavigationDrawerState createState() => _NavigationDrawerState();
@@ -50,11 +52,26 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Image.asset(
-                            './lib/assets/student.png',
-                            width: 90,
-                            height: 80,
-                          ),
+                          FutureBuilder(
+                              future: LocalUserService.getUser(),
+                              builder: (BuildContext context,
+                                  AsyncSnapshot<String> snapshot) {
+                                if (snapshot.hasData &&
+                                    snapshot.data == 'преподаватель') {
+                                  return Image.asset(
+                                    './lib/assets/teacher.png',
+                                    width: 90,
+                                    height: 80,
+                                  );
+                                } else {
+                                  return Image.asset(
+                                    './lib/assets/student.png',
+                                    width: 90,
+                                    height: 80,
+                                  );
+                                }
+                              }),
+
                           // SizedBox(height: 100),
                           Expanded(
                             child: Column(

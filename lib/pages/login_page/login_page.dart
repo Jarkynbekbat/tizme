@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:new_rasp_app/helpers/screen.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:new_rasp_app/models/auth_model.dart';
 import 'package:new_rasp_app/pages/login_page/Animation/FadeAnimation.dart';
+import 'package:new_rasp_app/services/local/local_user_service.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -12,10 +13,12 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final cypherController = TextEditingController();
-  // var maskFormatter = new MaskTextInputFormatter(
-  //     mask: '##/#####', filter: {"#": RegExp(r'[0-9]')});
-  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
+  var maskFormatter = new MaskTextInputFormatter(
+      mask: '#########', filter: {"#": RegExp(r'[0-9]')});
+
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+  int groupValue = 1;
   @override
   build(BuildContext context) {
     return Scaffold(
@@ -102,24 +105,6 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                     ),
-                    // ! Positioned(
-                    //   right: Screen.width(context) / 3.3,
-                    //   height: MediaQuery.of(context).size.height / 5,
-                    //   child: ButtonBar(
-                    //     children: <Widget>[
-                    //       Radio(
-                    //           value: 1,
-                    //           groupValue: 1,
-                    //           activeColor: Colors.blue,
-                    //           onChanged: (val) => print(val)),
-                    //       Radio(
-                    //           value: 2,
-                    //           groupValue: 1,
-                    //           activeColor: Colors.blue,
-                    //           onChanged: (val) => print(val)),
-                    //     ],
-                    //   ),
-                    // )
                   ],
                 ),
               ),
@@ -173,7 +158,46 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height / 35,
+                      height: MediaQuery.of(context).size.height / 40,
+                    ),
+                    ButtonBar(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Radio(
+                                value: 1,
+                                groupValue: groupValue,
+                                activeColor: Colors.blue,
+                                onChanged: (val) async {
+                                  await LocalUserService.setUser('студент');
+                                  setState(() => groupValue = val);
+                                }),
+                            Text(
+                              'СТУДЕНТ',
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
+                            Radio(
+                                value: 2,
+                                groupValue: groupValue,
+                                activeColor: Colors.blue,
+                                onChanged: (val) async {
+                                  await LocalUserService.setUser(
+                                      'преподаватель');
+                                  setState(() => groupValue = val);
+                                }),
+                            Text(
+                              'ПРЕПОДАВАТЕЛЬ',
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height / 45,
                     ),
                     FadeAnimation(
                       2.2,

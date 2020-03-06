@@ -8,6 +8,7 @@ import '../services/local/local_group_service.dart';
 import '../services/local/local_module_service.dart';
 import '../services/local/local_quote_service.dart';
 import '../services/local/local_rasp_service.dart';
+import '../services/local/local_user_service.dart';
 
 class AuthModel extends ChangeNotifier {
   String cypher, group;
@@ -50,6 +51,7 @@ class AuthModel extends ChangeNotifier {
         futures.add(LocalRaspService.deleteRasp());
         futures.add(LocalModuleService.deleteModule());
         futures.add(LocalQuoteService.deleteQuote());
+        futures.add(LocalUserService.deleteUser());
         await Future.wait(futures);
         // возможно нужно будет добавить удаление прикрепленных фотографий и заметок
         Navigator.of(context).pushReplacementNamed('/login');
