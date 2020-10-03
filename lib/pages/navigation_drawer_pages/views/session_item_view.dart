@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:new_rasp_app/models/session_model.dart';
+
+import '../../../models/session_model.dart';
 
 class SessionItemView extends StatelessWidget {
   final SessionItem sessionItem;
@@ -13,10 +14,7 @@ class SessionItemView extends StatelessWidget {
         Text(
           "${sessionItem.timeFrom}\n${sessionItem.timeTo}",
           textAlign: TextAlign.center,
-          style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              letterSpacing: 1.5),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, letterSpacing: 1.5),
         ),
         const SizedBox(width: 20.0),
         Expanded(
@@ -29,8 +27,7 @@ class SessionItemView extends StatelessWidget {
               ),
               color: Colors.white70,
             ),
-            padding:
-                const EdgeInsets.symmetric(horizontal: 32.0, vertical: 16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 16.0),
             width: double.infinity,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,10 +35,7 @@ class SessionItemView extends StatelessWidget {
                 const SizedBox(height: 5.0),
                 Text(
                   sessionItem.subjectName,
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.deepPurple,
-                      fontSize: 16.0),
+                  style: TextStyle(fontWeight: FontWeight.bold, color: Colors.deepPurple, fontSize: 16.0),
                 ),
                 Text("аудитория   : ${sessionItem.classroomName}"),
                 Text("наблюдатель : ${sessionItem.watcher}"),

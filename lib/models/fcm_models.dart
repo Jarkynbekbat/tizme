@@ -1,7 +1,9 @@
 import 'dart:convert';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:new_rasp_app/services/local/local_notification_service.dart';
+
+import '../services/local/local_notification_service.dart';
 
 class FcmModel extends ChangeNotifier {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
@@ -14,10 +16,7 @@ class FcmModel extends ChangeNotifier {
   }
 
   void initData() async {
-    this.allNotifications =
-        (await LocalNotificationsService.getNotificattions())
-            .map((el) => json.decode(el))
-            .toList();
+    this.allNotifications = (await LocalNotificationsService.getNotificattions()).map((el) => json.decode(el)).toList();
 
     notifyListeners();
   }
@@ -38,7 +37,6 @@ class FcmModel extends ChangeNotifier {
     _firebaseMessaging.requestNotificationPermissions(
       const IosNotificationSettings(sound: true, badge: true, alert: true),
     );
-    _firebaseMessaging.onIosSettingsRegistered
-        .listen((IosNotificationSettings settings) => null);
+    _firebaseMessaging.onIosSettingsRegistered.listen((IosNotificationSettings settings) => null);
   }
 }

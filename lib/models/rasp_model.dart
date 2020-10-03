@@ -1,19 +1,18 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
-import 'package:new_rasp_app/helpers/check_connection_helper.dart';
-import 'package:new_rasp_app/helpers/check_week_type_helper.dart';
-import 'package:new_rasp_app/helpers/show_snackbar.dart';
-import 'package:new_rasp_app/services/http/http_module_service.dart';
-import 'package:new_rasp_app/services/http/http_quote_service.dart';
-import 'package:new_rasp_app/services/http/http_rasp_service.dart';
-import 'package:new_rasp_app/services/http/http_session_service.dart';
-import 'package:new_rasp_app/services/local/local_cypher_service.dart';
-import 'package:new_rasp_app/services/local/local_group_service.dart';
-import 'package:new_rasp_app/services/local/local_quote_service.dart';
-import 'package:new_rasp_app/services/local/local_rasp_service.dart';
 
 import '../helpers/check_connection_helper.dart';
+import '../helpers/check_week_type_helper.dart';
+import '../helpers/show_snackbar.dart';
+import '../services/http/http_module_service.dart';
+import '../services/http/http_quote_service.dart';
+import '../services/http/http_rasp_service.dart';
+import '../services/http/http_session_service.dart';
+import '../services/local/local_cypher_service.dart';
+import '../services/local/local_group_service.dart';
+import '../services/local/local_quote_service.dart';
+import '../services/local/local_rasp_service.dart';
 import '../services/local/local_user_service.dart';
 
 RaspItem raspItemFromJson(String str) => RaspItem.fromJson(json.decode(str));
@@ -89,8 +88,7 @@ class RaspModel extends ChangeNotifier {
     //если заходим не в первый раз но есть интернет
     if (await checkConnection() || stringRasp == null) {
       //берем расписание из сервера
-      Map<String, dynamic> jsonRasps =
-          await HttpRaspService.getRaspAndGroupByCypher(cypher);
+      Map<String, dynamic> jsonRasps = await HttpRaspService.getRaspAndGroupByCypher(cypher);
       //берем расписание по группе
       jsonRasps[jsonRasps.keys.first]
           // добавляем в расписание в this
@@ -122,11 +120,9 @@ class RaspModel extends ChangeNotifier {
           }
         });
         //удаляю дубликаты из расписания препадавателей
-        List<String> raspStringArray =
-            this.all.map((el) => json.encode(el.toJson())).toList();
+        List<String> raspStringArray = this.all.map((el) => json.encode(el.toJson())).toList();
         var setArray = Set.from(raspStringArray);
-        List<RaspItem> mapArray =
-            setArray.map((el) => RaspItem.fromJson(json.decode(el))).toList();
+        List<RaspItem> mapArray = setArray.map((el) => RaspItem.fromJson(json.decode(el))).toList();
         this.all = mapArray;
       }
     }
@@ -135,8 +131,7 @@ class RaspModel extends ChangeNotifier {
       String stringRasp = await LocalRaspService.getRasp();
       // string to json
       Map<String, dynamic> jsonRasps = jsonDecode(stringRasp);
-      jsonRasps[jsonRasps.keys.first]
-          .forEach((el) => this.all.add(RaspItem.fromJson(el)));
+      jsonRasps[jsonRasps.keys.first].forEach((el) => this.all.add(RaspItem.fromJson(el)));
       group = jsonRasps.keys.first;
       quote = await LocalQuoteService.getQuote();
     }
@@ -176,25 +171,18 @@ class RaspModel extends ChangeNotifier {
   List<RaspItem> getRaspByDayId(int dayId) {
     String weekName = checkWeekType() ? 'Числитель' : 'Знаменатель';
     if (weekName == 'Числитель') {
-      return this
-          .all
-          .where((el) => el.dayId == dayId && el.weekName == weekName)
-          .toList();
+      return this.all.where((el) => el.dayId == dayId && el.weekName == weekName).toList();
     } else {
       //все пары тек дня
       List<RaspItem> both = this.all.where((el) => el.dayId == dayId).toList();
       //только четные
-      List<RaspItem> even =
-          both.where((el) => el.weekName == 'Числитель').toList();
+      List<RaspItem> even = both.where((el) => el.weekName == 'Числитель').toList();
       //только не четные
-      List<RaspItem> notEven =
-          both.where((el) => el.weekName == 'Знаменатель').toList();
+      List<RaspItem> notEven = both.where((el) => el.weekName == 'Знаменатель').toList();
       //удаляю дубликаты из четной недели
       even.forEach((i) {
         notEven.forEach((j) {
-          if (i.timeFrom == j.timeFrom)
-            both.removeWhere((el) =>
-                el.weekName == 'Числитель' && el.timeFrom == i.timeFrom);
+          if (i.timeFrom == j.timeFrom) both.removeWhere((el) => el.weekName == 'Числитель' && el.timeFrom == i.timeFrom);
         });
       });
       return both;

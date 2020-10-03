@@ -10,18 +10,10 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return
-        // ClipRRect(
-        //   borderRadius: BorderRadius.only(
-        //     bottomLeft: Radius.circular(23),
-        //     bottomRight: Radius.circular(23),
-        //   ),
-        //   child:
-        AppBar(
+    return AppBar(
       leading: IconButton(
         icon: _icon == 'default' ? Icon(Icons.keyboard_backspace) : _icon,
-        onPressed:
-            _onTap == 'default' ? () => Navigator.of(context).pop() : _onTap,
+        onPressed: _onTap == 'default' ? () => Navigator.of(context).pop() : _onTap,
       ),
       actions: _actions == 'default' ? <Widget>[] : _actions,
       shape: RoundedRectangleBorder(

@@ -1,7 +1,9 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:new_rasp_app/components/my_item.dart';
 import 'package:path/path.dart';
+
+import '../../../../components/my_item.dart';
 
 class PhotoItem extends StatelessWidget {
   final File _photo;
@@ -53,8 +55,7 @@ class PhotoItem extends StatelessWidget {
                     children: [
                       Text(
                         flexing(basename(_photo.path)),
-                        style: TextStyle(
-                            fontSize: 19, fontWeight: FontWeight.w600),
+                        style: TextStyle(fontSize: 19, fontWeight: FontWeight.w600),
                         overflow: TextOverflow.clip,
                       ),
                     ],

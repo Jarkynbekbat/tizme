@@ -1,6 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
-import 'package:new_rasp_app/services/local/local_quote_service.dart';
+import '../local/local_quote_service.dart';
 
 class HttpQuoteService {
   static getQuote() async {

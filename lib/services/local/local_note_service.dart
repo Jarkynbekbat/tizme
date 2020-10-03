@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalNoteService {
@@ -26,8 +27,7 @@ class LocalNoteService {
     //get all list
     var list = prefs.getStringList(subject);
     //find item where date == date from params
-    var findedItem =
-        list.singleWhere((item) => json.decode(item)['date'] == date);
+    var findedItem = list.singleWhere((item) => json.decode(item)['date'] == date);
     // string to JSON
     return json.decode(findedItem);
   }

@@ -1,9 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:easy_dialog/easy_dialog.dart';
+import 'package:flutter/material.dart';
 
 showMyDialog(context, title, descreption, ok, cancel) async {
-  TextStyle ts =
-      TextStyle(fontSize: 15, color: Theme.of(context).textTheme.body1.color);
+  TextStyle ts = TextStyle(fontSize: 15, color: Theme.of(context).textTheme.body1.color);
   TextStyle tsTitle = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.bold,
@@ -21,8 +20,7 @@ showMyDialog(context, title, descreption, ok, cancel) async {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             OutlineButton(
-              shape: RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.circular(30.0)),
+              shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
               child: Text(
                 ok,
                 style: ts,
@@ -35,8 +33,7 @@ showMyDialog(context, title, descreption, ok, cancel) async {
             Container(
               margin: EdgeInsets.only(left: 5),
               child: OutlineButton(
-                shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(30.0)),
+                shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
                 child: Text(
                   cancel,
                   style: ts,

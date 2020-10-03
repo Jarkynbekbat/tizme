@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:new_rasp_app/models/rasp_model.dart';
+
+import 'rasp_model.dart';
 
 class LocalNotificationModel extends ChangeNotifier {
   FlutterLocalNotificationsPlugin plagin;
@@ -11,9 +12,8 @@ class LocalNotificationModel extends ChangeNotifier {
   LocalNotificationModel() {
     plagin = FlutterLocalNotificationsPlugin();
     androidSettings = AndroidInitializationSettings('app_icon');
-    iosSettings = IOSInitializationSettings(
-        onDidReceiveLocalNotification: (id, title, body, payload) =>
-            onSelectNotification(payload));
+    iosSettings =
+        IOSInitializationSettings(onDidReceiveLocalNotification: (id, title, body, payload) => onSelectNotification(payload));
     settings = InitializationSettings(androidSettings, iosSettings);
     plagin.initialize(settings, onSelectNotification: onSelectNotification);
   }
@@ -32,8 +32,7 @@ class LocalNotificationModel extends ChangeNotifier {
 
     if (rasps.length != 0) {
       for (RaspItem el in rasps) {
-        bigTextRasps +=
-            '<b> ${el.timeFrom}-${el.timeTo} :</b> ${el.subjectName} <br>';
+        bigTextRasps += '<b> ${el.timeFrom}-${el.timeTo} :</b> ${el.subjectName} <br>';
       }
     }
 

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:new_rasp_app/helpers/screen.dart';
-import 'package:new_rasp_app/models/rasp_model.dart';
 import 'package:provider/provider.dart';
+
+import '../../../helpers/screen.dart';
+import '../../../models/rasp_model.dart';
 
 class NoRasps extends StatelessWidget {
   @override

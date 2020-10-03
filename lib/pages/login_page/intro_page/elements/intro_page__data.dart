@@ -4,20 +4,17 @@ var pageList = [
   PageModel(
       imageUrl: "./lib/assets/intro/rasp.png",
       title: "Расписание",
-      body:
-          "Удобный просмотр расписания, приложение автоматически показывает расписание текущего дня",
+      body: "Удобный просмотр расписания, приложение автоматически показывает расписание текущего дня",
       titleGradient: gradients[3]),
   PageModel(
       imageUrl: "./lib/assets/intro/dark.png",
       title: "Тип недели",
-      body:
-          "Приложение автоматически меняет цветовую тему в зависимости от типа недели(числитель,знаменатель)",
+      body: "Приложение автоматически меняет цветовую тему в зависимости от типа недели(числитель,знаменатель)",
       titleGradient: gradients[2]),
   PageModel(
       imageUrl: "./lib/assets/intro/all.png",
       title: "Направление",
-      body:
-          "к аудитории,при нажатии на дисциплину можно посмотреть где проводитс занятие",
+      body: "к аудитории,при нажатии на дисциплину можно посмотреть где проводитс занятие",
       titleGradient: gradients[4]),
   PageModel(
       imageUrl: "./lib/assets/intro/galery.png",

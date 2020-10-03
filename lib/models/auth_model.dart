@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
-import 'package:new_rasp_app/helpers/my_simple_dialog.dart';
-import 'package:new_rasp_app/helpers/show_snackbar.dart';
-import 'package:new_rasp_app/services/http/http_fio_service.dart';
+
+import '../helpers/my_simple_dialog.dart';
+import '../helpers/show_snackbar.dart';
+import '../services/http/http_fio_service.dart';
 import '../services/local/local_cypher_service.dart';
 import '../services/local/local_fio_service.dart';
 import '../services/local/local_group_service.dart';
@@ -28,12 +29,10 @@ class AuthModel extends ChangeNotifier {
     } catch (error) {
       switch (error.runtimeType.toString()) {
         case 'SocketException':
-          showSnackBar('Для первого запуска требуется подключение к интернету.',
-              scaffoldKey);
+          showSnackBar('Для первого запуска требуется подключение к интернету.', scaffoldKey);
           break;
         case 'RangeError':
-          showSnackBar(
-              'Убедитесь в правильности введенных данных.', scaffoldKey);
+          showSnackBar('Убедитесь в правильности введенных данных.', scaffoldKey);
           break;
       }
     }
@@ -41,8 +40,7 @@ class AuthModel extends ChangeNotifier {
 
   logOut(context) async {
     try {
-      bool res = await showMyDialog(
-          context, 'Выход', 'Вы уверены что хотите выйти ?', 'Выйти', 'Отмена');
+      bool res = await showMyDialog(context, 'Выход', 'Вы уверены что хотите выйти ?', 'Выйти', 'Отмена');
       if (res == true) {
         List<Future> futures = [];
         futures.add(LocalCypherService.deleteCypher());

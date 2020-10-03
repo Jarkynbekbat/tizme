@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:new_rasp_app/components/my_app_bar.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../components/my_app_bar.dart';
+
 class AboutAppPage extends StatelessWidget {
+  static const String route = '/about_app';
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   final TextStyle titleStyle = TextStyle(
@@ -29,8 +31,7 @@ class AboutAppPage extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 8, right: 8, bottom: 10),
-              child: Text(
-                  '''\t\tПорой студентам бывает сложно организовать учебный 
+              child: Text('''\t\tПорой студентам бывает сложно организовать учебный 
           процесс,задания по дисциплинам,материалы 
     лекций,сроки сдачи лабораторных работ,приложение
               Stud Time предназначено помочь им в этом'''),
@@ -53,24 +54,21 @@ class AboutAppPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           GestureDetector(
-                            onTap: () async => await openUrl(
-                                'https://www.facebook.com/profile.php?id=100008938729370'),
+                            onTap: () async => await openUrl('https://www.facebook.com/profile.php?id=100008938729370'),
                             child: Image.asset(
                               './lib/assets/face.png',
                               width: 43,
                             ),
                           ),
                           GestureDetector(
-                            onTap: () async =>
-                                await openUrl('https://www.vk.com/omurbek9737'),
+                            onTap: () async => await openUrl('https://www.vk.com/omurbek9737'),
                             child: Image.asset(
                               './lib/assets/vk.png',
                               width: 45,
                             ),
                           ),
                           GestureDetector(
-                            onTap: () async => await openUrl(
-                                'https://www.instagram.com/studtime_x/'),
+                            onTap: () async => await openUrl('https://www.instagram.com/studtime_x/'),
                             child: Image.asset(
                               './lib/assets/insta.png',
                               width: 43,
@@ -89,7 +87,7 @@ class AboutAppPage extends StatelessWidget {
                 color: Colors.white,
                 disabledBorderColor: Colors.white,
                 textColor: Colors.black,
-                onPressed: () => openUrl('http://studtime.knu.kg/'),
+                onPressed: () => openUrl('https://stud.unitedyouth.org.kg/'),
                 child: Text(
                   'Посетите наш сайт',
                   style: TextStyle(

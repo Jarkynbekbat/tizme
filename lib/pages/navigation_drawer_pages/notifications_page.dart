@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:new_rasp_app/models/fcm_models.dart';
 import 'package:provider/provider.dart';
 
 import '../../components/my_app_bar.dart';
+import '../../models/fcm_models.dart';
 
 class NotificationsPage extends StatefulWidget {
+  static const String route = '/notifications';
   @override
   _NotificationsPageState createState() => _NotificationsPageState();
 }
@@ -32,21 +33,17 @@ class _NotificationsPageState extends State<NotificationsPage> {
                     ),
                   ),
                   onDismissed: (DismissDirection key) async {
-                    fcmModel.deleteNotification(
-                        fcmModel.allNotifications[index]['date']);
+                    fcmModel.deleteNotification(fcmModel.allNotifications[index]['date']);
                   },
                   child: ExpansionTile(
-                    leading: Icon(Icons.mail_outline,
-                        color: Theme.of(context).iconTheme.color),
+                    leading: Icon(Icons.mail_outline, color: Theme.of(context).iconTheme.color),
                     title: Text(
                       fcmModel.allNotifications[index]['title'],
-                      style:
-                          TextStyle(color: Theme.of(context).iconTheme.color),
+                      style: TextStyle(color: Theme.of(context).iconTheme.color),
                     ),
                     subtitle: Text(
                       fcmModel.allNotifications[index]['date'],
-                      style:
-                          TextStyle(color: Theme.of(context).iconTheme.color),
+                      style: TextStyle(color: Theme.of(context).iconTheme.color),
                     ),
                     children: [
                       Text(fcmModel.allNotifications[index]['body']),

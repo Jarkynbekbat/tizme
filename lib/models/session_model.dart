@@ -1,15 +1,13 @@
-import 'package:flutter/material.dart';
-
 // To parse this JSON data, do
 //     final SessionItem = sessionItemFromJson(jsonString);
 
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:new_rasp_app/pages/navigation_drawer_pages/views/session_item_view.dart';
 import 'package:new_rasp_app/services/local/local_session_service.dart';
 
-SessionItem sessionItemFromJson(String str) =>
-    SessionItem.fromJson(json.decode(str));
+SessionItem sessionItemFromJson(String str) => SessionItem.fromJson(json.decode(str));
 
 String sessionItemToJson(SessionItem data) => json.encode(data.toJson());
 
@@ -90,22 +88,14 @@ class SessionModel extends ChangeNotifier {
       String modules = await LocalSessionService.getSession();
       Map<String, dynamic> modulesJson = json.decode(modules);
 
-      List<dynamic> sessionModels = modulesJson[modulesJson.keys.first]
-          .map((el) => SessionItem.fromJson(el))
-          .toList();
+      List<dynamic> sessionModels = modulesJson[modulesJson.keys.first].map((el) => SessionItem.fromJson(el)).toList();
 
-      weekDays = sessionModels
-          .map((el) => weekDaysStatic[el.dateStart.weekday - 1])
-          .toList();
-      dates = sessionModels
-          .map((el) => int.parse(el.dateStart.day.toString()))
-          .toList();
+      weekDays = sessionModels.map((el) => weekDaysStatic[el.dateStart.weekday - 1]).toList();
+      dates = sessionModels.map((el) => int.parse(el.dateStart.day.toString())).toList();
       month = sessionModels.map((el) => months[el.dateStart.month - 1]).first;
 
       sessionModels.forEach((el) {
-        if (el.dateStart.day == dates[index])
-          moduleViews.addAll(
-              [SessionItemView(sessionItem: el), SizedBox(height: 20.0)]);
+        if (el.dateStart.day == dates[index]) moduleViews.addAll([SessionItemView(sessionItem: el), SizedBox(height: 20.0)]);
       });
       selected = index;
     } catch (ex) {

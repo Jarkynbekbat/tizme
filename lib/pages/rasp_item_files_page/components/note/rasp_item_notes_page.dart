@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:new_rasp_app/components/my_app_bar.dart';
-import 'package:new_rasp_app/pages/rasp_item_files_page/components/note/note_item.dart';
-import 'package:new_rasp_app/services/local/local_note_service.dart';
+
+import '../../../../components/my_app_bar.dart';
+import '../../../../services/local/local_note_service.dart';
+import 'note_item.dart';
 
 class RaspItemNotesPage extends StatefulWidget {
+  static const String route = '/rasp_item_notes';
   @override
   _RaspItemNoteAddState createState() => _RaspItemNoteAddState();
 }
@@ -50,8 +52,7 @@ class _RaspItemNoteAddState extends State<RaspItemNotesPage> {
             ),
             child: GestureDetector(
               onTap: () {
-                Navigator.of(context)
-                    .pushNamed('/rasp_item_note_add', arguments: '$_subject');
+                Navigator.of(context).pushNamed('/rasp_item_note_add', arguments: '$_subject');
               },
               child: Icon(Icons.add),
             ),

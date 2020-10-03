@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:new_rasp_app/helpers/screen.dart';
+
+import '../helpers/screen.dart';
 
 class MyItem extends StatelessWidget {
   final Widget _leftW;

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:new_rasp_app/models/module_model.dart';
+
+import '../../../models/module_model.dart';
 
 class ModuleItemView extends StatelessWidget {
   final ModuleItem moduleItem;
@@ -13,10 +14,7 @@ class ModuleItemView extends StatelessWidget {
         Text(
           "${moduleItem.timeFrom}\n${moduleItem.timeTo}",
           textAlign: TextAlign.center,
-          style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              letterSpacing: 1.5),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, letterSpacing: 1.5),
         ),
         const SizedBox(width: 20.0),
         Expanded(
@@ -29,8 +27,7 @@ class ModuleItemView extends StatelessWidget {
               ),
               color: Colors.white70,
             ),
-            padding:
-                const EdgeInsets.symmetric(horizontal: 32.0, vertical: 16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 16.0),
             width: double.infinity,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,10 +35,7 @@ class ModuleItemView extends StatelessWidget {
                 const SizedBox(height: 5.0),
                 Text(
                   moduleItem.subjectName,
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.deepPurple,
-                      fontSize: 16.0),
+                  style: TextStyle(fontWeight: FontWeight.bold, color: Colors.deepPurple, fontSize: 16.0),
                 ),
                 Text("аудитория : ${moduleItem.classroomName}")
               ],

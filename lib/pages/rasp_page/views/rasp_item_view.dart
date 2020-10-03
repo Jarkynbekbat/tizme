@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:new_rasp_app/models/rasp_model.dart';
 import 'package:photo_view/photo_view.dart';
+
+import '../../../models/rasp_model.dart';
 
 class RaspItemView extends StatelessWidget {
   final RaspItem raspItem;
   RaspItemView({this.raspItem});
 
-  final timeTextStyle = TextStyle(
-      fontSize: 25.0,
-      fontWeight: FontWeight.normal,
-      fontFamily: "Niagara Solid");
+  final timeTextStyle = TextStyle(fontSize: 25.0, fontWeight: FontWeight.normal, fontFamily: "Niagara Solid");
 
   final raspTopTextStyle = new TextStyle(
     fontSize: 18.0,
@@ -92,8 +90,7 @@ class RaspItemView extends StatelessWidget {
                         enabled: false,
                         subtitle: Text(
                           'в разработке',
-                          style: TextStyle(
-                              color: Theme.of(context).iconTheme.color),
+                          style: TextStyle(color: Theme.of(context).iconTheme.color),
                         ),
                         leading: Icon(
                           Icons.location_on,
@@ -156,9 +153,7 @@ class RaspItemView extends StatelessWidget {
                 Container(
                   margin: EdgeInsets.only(right: 10),
                   padding: EdgeInsets.only(right: 10, left: 8),
-                  decoration: BoxDecoration(
-                      border:
-                          Border(right: BorderSide(color: Color(0xFFECEBF3)))),
+                  decoration: BoxDecoration(border: Border(right: BorderSide(color: Color(0xFFECEBF3)))),
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,

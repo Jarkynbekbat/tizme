@@ -9,6 +9,7 @@ import 'package:new_rasp_app/pages/rasp_item_files_page/components/photo/photo_i
 import 'package:new_rasp_app/services/local/local_photo_service.dart';
 
 class RaspItemPhotosPage extends StatefulWidget {
+  static const String route = '/rasp_item_photos';
   @override
   _RaspItemNoteAddState createState() => _RaspItemNoteAddState();
 }
@@ -25,8 +26,7 @@ class _RaspItemNoteAddState extends State<RaspItemPhotosPage> {
     try {
       List<File> photos;
       var widgets = <Widget>[];
-      photos =
-          photos == null ? await LocalPhotoService.getPhotos(subject) : photos;
+      photos = photos == null ? await LocalPhotoService.getPhotos(subject) : photos;
       //for photo item
       var onDelete = (photo) async {
         await LocalPhotoService.deletePhoto(photo);
@@ -67,8 +67,7 @@ class _RaspItemNoteAddState extends State<RaspItemPhotosPage> {
                     setState(() => _loading = true);
                     value == 'camera'
                         ? _image = await LocalPhotoService.pickImageFromCamera()
-                        : _image =
-                            await LocalPhotoService.pickImageFromGallery();
+                        : _image = await LocalPhotoService.pickImageFromGallery();
 
                     await LocalPhotoService.createDirectory(_subject);
                     await LocalPhotoService.savePhoto(_subject, _image);

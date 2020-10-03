@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:new_rasp_app/models/module_model.dart';
+import '../../models/module_model.dart';
 import 'package:provider/provider.dart';
 
 class ModuleGraphPage extends StatefulWidget {
+  static const String route = '/module_graph';
   @override
   _ModuleGraphPageState createState() => _ModuleGraphPageState();
 }
@@ -50,35 +51,25 @@ class _ModuleGraphPageState extends State<ModuleGraphPage> {
                         child: Text(
                           moduleModel.month.toUpperCase(),
                           style: TextStyle(
-                              color: Colors.grey.shade700,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16.0,
-                              letterSpacing: 2.0),
+                              color: Colors.grey.shade700, fontWeight: FontWeight.bold, fontSize: 16.0, letterSpacing: 2.0),
                         ),
                       ),
                       Row(
                         children: moduleModel.weekDays.map((w) {
                           return Expanded(
                             child: GestureDetector(
-                              onTap: () => moduleModel.onSelectDate(
-                                  moduleModel.weekDays.indexOf(w)),
+                              onTap: () => moduleModel.onSelectDate(moduleModel.weekDays.indexOf(w)),
                               child: Container(
                                 alignment: Alignment.center,
                                 decoration: BoxDecoration(
-                                    color: moduleModel.weekDays.indexOf(w) ==
-                                            moduleModel.selected
+                                    color: moduleModel.weekDays.indexOf(w) == moduleModel.selected
                                         ? Colors.orange.shade100
                                         : Colors.transparent,
-                                    borderRadius: BorderRadius.vertical(
-                                        top: Radius.circular(30.0))),
-                                padding:
-                                    const EdgeInsets.only(top: 20, bottom: 8.0),
+                                    borderRadius: BorderRadius.vertical(top: Radius.circular(30.0))),
+                                padding: const EdgeInsets.only(top: 20, bottom: 8.0),
                                 child: Text(
                                   w,
-                                  style: moduleModel.weekDays.indexOf(w) ==
-                                          moduleModel.selected
-                                      ? selectedText
-                                      : daysText,
+                                  style: moduleModel.weekDays.indexOf(w) == moduleModel.selected ? selectedText : daysText,
                                 ),
                               ),
                             ),
@@ -89,24 +80,17 @@ class _ModuleGraphPageState extends State<ModuleGraphPage> {
                         children: moduleModel.dates.map((d) {
                           return Expanded(
                             child: GestureDetector(
-                              onTap: () => moduleModel
-                                  .onSelectDate(moduleModel.dates.indexOf(d)),
+                              onTap: () => moduleModel.onSelectDate(moduleModel.dates.indexOf(d)),
                               child: Container(
                                 alignment: Alignment.center,
                                 decoration: BoxDecoration(
-                                    color: moduleModel.dates.indexOf(d) ==
-                                            moduleModel.selected
+                                    color: moduleModel.dates.indexOf(d) == moduleModel.selected
                                         ? Colors.orange.shade100
                                         : Colors.transparent,
-                                    borderRadius: BorderRadius.vertical(
-                                        bottom: Radius.circular(30.0))),
-                                padding: const EdgeInsets.only(
-                                    top: 8.0, bottom: 20.0),
+                                    borderRadius: BorderRadius.vertical(bottom: Radius.circular(30.0))),
+                                padding: const EdgeInsets.only(top: 8.0, bottom: 20.0),
                                 child: Text("$d",
-                                    style: moduleModel.dates.indexOf(d) ==
-                                            moduleModel.selected
-                                        ? selectedText
-                                        : daysText),
+                                    style: moduleModel.dates.indexOf(d) == moduleModel.selected ? selectedText : daysText),
                               ),
                             ),
                           );
@@ -135,12 +119,7 @@ class HeaderWidget extends StatelessWidget {
   final Color headerColor;
   final Color backColor;
 
-  const HeaderWidget(
-      {Key key,
-      this.body,
-      this.header,
-      this.headerColor = Colors.white,
-      this.backColor = Colors.deepPurple})
+  const HeaderWidget({Key key, this.body, this.header, this.headerColor = Colors.white, this.backColor = Colors.deepPurple})
       : super(key: key);
 
   @override
@@ -157,10 +136,7 @@ class HeaderWidget extends StatelessWidget {
           width: 10,
           height: 200,
           child: DecoratedBox(
-            decoration: BoxDecoration(
-                color: backColor,
-                borderRadius:
-                    BorderRadius.only(topLeft: Radius.circular(20.0))),
+            decoration: BoxDecoration(color: backColor, borderRadius: BorderRadius.only(topLeft: Radius.circular(20.0))),
           ),
         ),
         Positioned(
@@ -180,17 +156,14 @@ class HeaderWidget extends StatelessWidget {
               Container(
                   margin: const EdgeInsets.only(right: 10.0),
                   decoration: BoxDecoration(
-                    borderRadius:
-                        BorderRadius.only(bottomRight: Radius.circular(20.0)),
+                    borderRadius: BorderRadius.only(bottomRight: Radius.circular(20.0)),
                     color: headerColor,
                   ),
                   child: header),
             if (body != null)
               Expanded(
                 child: Material(
-                    shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.only(topLeft: Radius.circular(30.0))),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(30.0))),
                     elevation: 0,
                     color: backColor,
                     child: body),

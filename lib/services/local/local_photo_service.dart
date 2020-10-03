@@ -1,7 +1,8 @@
 import 'dart:io';
+
 import 'package:image_picker/image_picker.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
 
 class LocalPhotoService {
   static Future<Directory> createDirectory(String subject) async {
@@ -22,8 +23,7 @@ class LocalPhotoService {
     Directory appDocDir = await getApplicationDocumentsDirectory();
     String appDocPath = appDocDir.path;
 
-    return await file
-        .copy('$appDocPath/$subject/${DateTime.now().toUtc().toLocal()}.jpg');
+    return await file.copy('$appDocPath/$subject/${DateTime.now().toUtc().toLocal()}.jpg');
     // '$appDocPath/$subject/${DateTime.now().toUtc().toIso8601String()}.jpg');
   }
 

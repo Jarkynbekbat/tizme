@@ -1,14 +1,15 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 //components
 import 'package:new_rasp_app/components/my_app_bar.dart';
 import 'package:new_rasp_app/components/my_container.dart';
 import 'package:new_rasp_app/helpers/show_snackbar.dart';
-
 //services
 import 'package:new_rasp_app/services/local/local_note_service.dart';
 
 class NoteItemHero extends StatefulWidget {
+  static const String route = '/note_item_hero';
   @override
   _NoteItemHeroState createState() => _NoteItemHeroState();
 }
@@ -78,14 +79,10 @@ class _NoteItemHeroState extends State<NoteItemHero> {
                   maxLines: 25,
                   decoration: InputDecoration(
                     disabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color: Theme.of(context).textTheme.body1.color,
-                          width: 3.0),
+                      borderSide: BorderSide(color: Theme.of(context).textTheme.body1.color, width: 3.0),
                     ),
                     enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color: Theme.of(context).textTheme.body1.color,
-                          width: 0.0),
+                      borderSide: BorderSide(color: Theme.of(context).textTheme.body1.color, width: 0.0),
                     ),
                     border: const OutlineInputBorder(),
                     labelStyle: TextStyle(

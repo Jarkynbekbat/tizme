@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class PageIndicator extends StatelessWidget {
+class IntroPageIndicator extends StatelessWidget {
   final int currentIndex;
   final int pageCount;
-  PageIndicator(this.currentIndex, this.pageCount);
+  IntroPageIndicator(this.currentIndex, this.pageCount);
 
   _indicator(bool isActive) {
     return Expanded(
@@ -13,12 +13,7 @@ class PageIndicator extends StatelessWidget {
           height: 4.0,
           decoration: BoxDecoration(
               color: isActive ? Colors.white : Color(0xFF3E4750),
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.black12,
-                    offset: Offset(0.0, 2.0),
-                    blurRadius: 2.0)
-              ]),
+              boxShadow: [BoxShadow(color: Colors.black12, offset: Offset(0.0, 2.0), blurRadius: 2.0)]),
         ),
       ),
     );
@@ -27,8 +22,7 @@ class PageIndicator extends StatelessWidget {
   _buildPageIndicators() {
     List<Widget> indicatorList = [];
     for (int i = 0; i < pageCount; i++) {
-      indicatorList
-          .add(i == currentIndex ? _indicator(true) : _indicator(false));
+      indicatorList.add(i == currentIndex ? _indicator(true) : _indicator(false));
     }
     return indicatorList;
   }

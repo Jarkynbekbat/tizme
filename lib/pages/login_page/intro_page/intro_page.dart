@@ -1,34 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:gradient_text/gradient_text.dart';
-import 'data.dart';
-import 'page_indicator.dart';
+
+import 'elements/intro_page__data.dart';
+import 'elements/intro_page__indicator.dart';
 
 class IntroPage extends StatefulWidget {
+  static const String route = '/intro';
+
   @override
-  _IntroPageState createState() => new _IntroPageState();
+  _IntroPageState createState() => _IntroPageState();
 }
 
 class _IntroPageState extends State<IntroPage> with TickerProviderStateMixin {
   PageController _controller;
-  int currentPage = 0;
-  bool lastPage = false;
-  AnimationController animationController;
+  int _currentPage;
+  // ignore: unused_field
+  bool _isLastPage;
+  AnimationController _animationController;
   Animation<double> _scaleAnimation;
 
   @override
   void initState() {
     super.initState();
-    _controller = PageController(
-      initialPage: currentPage,
+    _currentPage = 0;
+    _isLastPage = false;
+    _controller = PageController(initialPage: _currentPage);
+    _animationController = AnimationController(
+      duration: Duration(milliseconds: 400),
+      vsync: this,
     );
-    animationController =
-        AnimationController(duration: Duration(milliseconds: 400), vsync: this);
-    _scaleAnimation = Tween(begin: 0.6, end: 1.0).animate(animationController);
+    _scaleAnimation = Tween(begin: 0.6, end: 1.0).animate(_animationController);
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    _animationController?.dispose();
+    _controller?.dispose();
     super.dispose();
   }
 
@@ -46,24 +53,13 @@ class _IntroPageState extends State<IntroPage> with TickerProviderStateMixin {
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        body: new Stack(
+        body: Stack(
           fit: StackFit.expand,
           children: <Widget>[
             PageView.builder(
               itemCount: pageList.length,
               controller: _controller,
-              onPageChanged: (index) {
-                setState(() {
-                  currentPage = index;
-                  if (currentPage == pageList.length - 1) {
-                    lastPage = true;
-                    animationController.forward();
-                  } else {
-                    lastPage = false;
-                    animationController.reset();
-                  }
-                });
-              },
+              onPageChanged: _onPageChanged,
               itemBuilder: (context, index) {
                 return AnimatedBuilder(
                   animation: _controller,
@@ -76,13 +72,11 @@ class _IntroPageState extends State<IntroPage> with TickerProviderStateMixin {
                       y = 1 - delta.abs().clamp(0.0, 1.0);
                     }
                     return Column(
-                      // mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         Container(
-                          margin: EdgeInsets.only(
-                              top: MediaQuery.of(context).size.height / 20),
+                          margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 20),
                           child: Image.asset(page.imageUrl),
                         ),
                         Container(
@@ -108,8 +102,7 @@ class _IntroPageState extends State<IntroPage> with TickerProviderStateMixin {
                                 padding: EdgeInsets.only(top: 30.0, left: 22.0),
                                 child: GradientText(
                                   page.title,
-                                  gradient: LinearGradient(
-                                      colors: pageList[index].titleGradient),
+                                  gradient: LinearGradient(colors: pageList[index].titleGradient),
                                   style: TextStyle(
                                     fontSize: 60.0,
                                     fontFamily: "Montserrat-Black",
@@ -120,17 +113,16 @@ class _IntroPageState extends State<IntroPage> with TickerProviderStateMixin {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(
-                              left: 15.0, top: 12.0, right: 10.0),
+                          padding: const EdgeInsets.only(left: 15.0, top: 12.0, right: 10.0),
                           child: Transform(
-                            transform:
-                                Matrix4.translationValues(0, 50.0 * (1 - y), 0),
+                            transform: Matrix4.translationValues(0, 50.0 * (1 - y), 0),
                             child: Text(
                               page.body,
                               style: TextStyle(
-                                  fontSize: 20.0,
-                                  fontFamily: "Montserrat-Medium",
-                                  color: Color(0xFF9B9B9B)),
+                                fontSize: 20.0,
+                                fontFamily: "Montserrat-Medium",
+                                color: Color(0xFF9B9B9B),
+                              ),
                             ),
                           ),
                         )
@@ -143,9 +135,7 @@ class _IntroPageState extends State<IntroPage> with TickerProviderStateMixin {
             Positioned(
               left: 30.0,
               bottom: 55.0,
-              child: Container(
-                  width: 160.0,
-                  child: PageIndicator(currentPage, pageList.length)),
+              child: Container(width: 160.0, child: IntroPageIndicator(_currentPage, pageList.length)),
             ),
             Positioned(
               right: 30.0,
@@ -159,8 +149,7 @@ class _IntroPageState extends State<IntroPage> with TickerProviderStateMixin {
                     color: Colors.black,
                   ),
                   onPressed: () {
-                    Navigator.pop(context);
-                    Navigator.of(context).pushNamed('/login');
+                    Navigator.of(context).pushReplacementNamed('/login');
                   },
                 ),
               ),
@@ -169,5 +158,18 @@ class _IntroPageState extends State<IntroPage> with TickerProviderStateMixin {
         ),
       ),
     );
+  }
+
+  void _onPageChanged(int index) {
+    setState(() {
+      _currentPage = index;
+      if (_currentPage == pageList.length - 1) {
+        _isLastPage = true;
+        _animationController.forward();
+      } else {
+        _isLastPage = false;
+        _animationController.reset();
+      }
+    });
   }
 }

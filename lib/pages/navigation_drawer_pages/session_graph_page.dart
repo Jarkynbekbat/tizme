@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:new_rasp_app/models/session_model.dart';
 import 'package:provider/provider.dart';
 
+import '../../models/session_model.dart';
+
 class SessionGraphPage extends StatefulWidget {
+  static const String route = '/session_graph';
   @override
   _SessionGraphPageState createState() => _SessionGraphPageState();
 }
@@ -52,35 +54,25 @@ class _SessionGraphPageState extends State<SessionGraphPage> {
                         child: Text(
                           sessionModel.month.toUpperCase(),
                           style: TextStyle(
-                              color: Colors.grey.shade700,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16.0,
-                              letterSpacing: 2.0),
+                              color: Colors.grey.shade700, fontWeight: FontWeight.bold, fontSize: 16.0, letterSpacing: 2.0),
                         ),
                       ),
                       Row(
                         children: sessionModel.weekDays.map((w) {
                           return Expanded(
                             child: GestureDetector(
-                              onTap: () => sessionModel.onSelectDate(
-                                  sessionModel.weekDays.indexOf(w)),
+                              onTap: () => sessionModel.onSelectDate(sessionModel.weekDays.indexOf(w)),
                               child: Container(
                                 alignment: Alignment.center,
                                 decoration: BoxDecoration(
-                                    color: sessionModel.weekDays.indexOf(w) ==
-                                            sessionModel.selected
+                                    color: sessionModel.weekDays.indexOf(w) == sessionModel.selected
                                         ? Colors.orange.shade100
                                         : Colors.transparent,
-                                    borderRadius: BorderRadius.vertical(
-                                        top: Radius.circular(30.0))),
-                                padding:
-                                    const EdgeInsets.only(top: 20, bottom: 8.0),
+                                    borderRadius: BorderRadius.vertical(top: Radius.circular(30.0))),
+                                padding: const EdgeInsets.only(top: 20, bottom: 8.0),
                                 child: Text(
                                   w,
-                                  style: sessionModel.weekDays.indexOf(w) ==
-                                          sessionModel.selected
-                                      ? selectedText
-                                      : daysText,
+                                  style: sessionModel.weekDays.indexOf(w) == sessionModel.selected ? selectedText : daysText,
                                 ),
                               ),
                             ),
@@ -91,24 +83,17 @@ class _SessionGraphPageState extends State<SessionGraphPage> {
                         children: sessionModel.dates.map((d) {
                           return Expanded(
                             child: GestureDetector(
-                              onTap: () => sessionModel
-                                  .onSelectDate(sessionModel.dates.indexOf(d)),
+                              onTap: () => sessionModel.onSelectDate(sessionModel.dates.indexOf(d)),
                               child: Container(
                                 alignment: Alignment.center,
                                 decoration: BoxDecoration(
-                                    color: sessionModel.dates.indexOf(d) ==
-                                            sessionModel.selected
+                                    color: sessionModel.dates.indexOf(d) == sessionModel.selected
                                         ? Colors.orange.shade100
                                         : Colors.transparent,
-                                    borderRadius: BorderRadius.vertical(
-                                        bottom: Radius.circular(30.0))),
-                                padding: const EdgeInsets.only(
-                                    top: 8.0, bottom: 20.0),
+                                    borderRadius: BorderRadius.vertical(bottom: Radius.circular(30.0))),
+                                padding: const EdgeInsets.only(top: 8.0, bottom: 20.0),
                                 child: Text("$d",
-                                    style: sessionModel.dates.indexOf(d) ==
-                                            sessionModel.selected
-                                        ? selectedText
-                                        : daysText),
+                                    style: sessionModel.dates.indexOf(d) == sessionModel.selected ? selectedText : daysText),
                               ),
                             ),
                           );
@@ -137,12 +122,7 @@ class HeaderWidget extends StatelessWidget {
   final Color headerColor;
   final Color backColor;
 
-  const HeaderWidget(
-      {Key key,
-      this.body,
-      this.header,
-      this.headerColor = Colors.white,
-      this.backColor = Colors.deepPurple})
+  const HeaderWidget({Key key, this.body, this.header, this.headerColor = Colors.white, this.backColor = Colors.deepPurple})
       : super(key: key);
 
   @override
@@ -159,10 +139,7 @@ class HeaderWidget extends StatelessWidget {
           width: 10,
           height: 200,
           child: DecoratedBox(
-            decoration: BoxDecoration(
-                color: backColor,
-                borderRadius:
-                    BorderRadius.only(topLeft: Radius.circular(20.0))),
+            decoration: BoxDecoration(color: backColor, borderRadius: BorderRadius.only(topLeft: Radius.circular(20.0))),
           ),
         ),
         Positioned(
@@ -182,17 +159,14 @@ class HeaderWidget extends StatelessWidget {
               Container(
                   margin: const EdgeInsets.only(right: 10.0),
                   decoration: BoxDecoration(
-                    borderRadius:
-                        BorderRadius.only(bottomRight: Radius.circular(20.0)),
+                    borderRadius: BorderRadius.only(bottomRight: Radius.circular(20.0)),
                     color: headerColor,
                   ),
                   child: header),
             if (body != null)
               Expanded(
                 child: Material(
-                    shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.only(topLeft: Radius.circular(30.0))),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(30.0))),
                     elevation: 0,
                     color: backColor,
                     child: body),

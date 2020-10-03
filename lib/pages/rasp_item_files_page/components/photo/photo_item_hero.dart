@@ -5,6 +5,7 @@ import 'package:path/path.dart';
 import 'package:photo_view/photo_view.dart';
 
 class PhotoItemHero extends StatelessWidget {
+  static const String route = '/photo_item_hero';
   @override
   Widget build(BuildContext context) {
     imageCache.clear();
