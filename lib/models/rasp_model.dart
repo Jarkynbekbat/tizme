@@ -6,7 +6,6 @@ import '../helpers/check_connection_helper.dart';
 import '../helpers/check_week_type_helper.dart';
 import '../helpers/show_snackbar.dart';
 import '../services/http/http_module_service.dart';
-import '../services/http/http_quote_service.dart';
 import '../services/http/http_rasp_service.dart';
 import '../services/http/http_session_service.dart';
 import '../services/local/local_cypher_service.dart';
@@ -98,7 +97,7 @@ class RaspModel extends ChangeNotifier {
       //сохраняем группу локально
       await LocalGroupService.setGroup(group);
       //берем цитату из сервера
-      quote = await HttpQuoteService.getQuote();
+      quote = "await HttpQuoteService.getQuote();";
       await HttpModuleService.getModule(cypher);
       await HttpSessionService.getSession(cypher);
       String who = await LocalUserService.getUser();
@@ -182,7 +181,10 @@ class RaspModel extends ChangeNotifier {
       //удаляю дубликаты из четной недели
       even.forEach((i) {
         notEven.forEach((j) {
-          if (i.timeFrom == j.timeFrom) both.removeWhere((el) => el.weekName == 'Числитель' && el.timeFrom == i.timeFrom);
+          if (i.timeFrom == j.timeFrom)
+            both.removeWhere(
+              (el) => el.weekName == 'Числитель' && el.timeFrom == i.timeFrom,
+            );
         });
       });
       return both;

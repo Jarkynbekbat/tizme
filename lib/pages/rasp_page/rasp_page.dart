@@ -46,7 +46,7 @@ class _RaspPageState extends State<RaspPage> with SingleTickerProviderStateMixin
       key: _scaffoldKey,
       drawer: NavigationDrawer(),
       appBar: MyAppBar(raspModel.group, Icon(Icons.menu), () => _scaffoldKey.currentState.openDrawer(), 'default'
-          //TODO: добавить потом
+          // TODO: добавить потом
           // [
           //   IconButton(
           //     icon: Icon(Icons.notifications),

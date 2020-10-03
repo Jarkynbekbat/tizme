@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../../../helpers/screen.dart';
-import '../../../models/rasp_model.dart';
 
 class NoRasps extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    String quote = Provider.of<RaspModel>(context).quote;
+    // String quote = Provider.of<RaspModel>(context).quote;
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -16,7 +14,7 @@ class NoRasps extends StatelessWidget {
             ? [
                 Image.asset('./lib/assets/norasps.png'),
                 Text(
-                  quote.split('/')[1],
+                  'quote.split()[1]',
                   style: TextStyle(
                       fontSize: 18.0,
                       color: Theme.of(context).textTheme.body1.color,
@@ -24,7 +22,7 @@ class NoRasps extends StatelessWidget {
                       fontFamily: "Roboto"),
                 ),
                 Text(
-                  quote.split('/')[0],
+                  'quote.split()[0]',
                   style: TextStyle(
                       fontSize: 18.0,
                       color: Theme.of(context).textTheme.body1.color,
@@ -34,7 +32,7 @@ class NoRasps extends StatelessWidget {
               ]
             : [
                 Text(
-                  quote.split('/')[1],
+                  'quote.split()[1]',
                   style: TextStyle(
                       fontSize: 18.0,
                       color: Theme.of(context).textTheme.body1.color,
@@ -42,7 +40,7 @@ class NoRasps extends StatelessWidget {
                       fontFamily: "Roboto"),
                 ),
                 Text(
-                  quote.split('/')[0],
+                  'quote.split()[0]',
                   style: TextStyle(
                       fontSize: 18.0,
                       color: Theme.of(context).textTheme.body1.color,
