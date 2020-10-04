@@ -16,7 +16,10 @@ class LoadingSkeleton extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
-              decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10.0)), color: Colors.white70),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                color: Theme.of(context).appBarTheme.color,
+              ),
               child: Container(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -25,10 +28,18 @@ class LoadingSkeleton extends StatelessWidget {
                   children: <Widget>[
                     SkeletonAnimation(
                       child: Container(
-                        width: 70.0,
-                        height: 70.0,
                         decoration: BoxDecoration(
-                          color: Colors.grey[300],
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                          color: Theme.of(context).appBarTheme.color,
+                        ),
+                        child: Container(
+                          width: 70.0,
+                          height: 70.0,
+                          margin: EdgeInsets.all(2.0),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                            color: Theme.of(context).scaffoldBackgroundColor,
+                          ),
                         ),
                       ),
                     ),
@@ -43,7 +54,10 @@ class LoadingSkeleton extends StatelessWidget {
                             child: Container(
                               height: 15,
                               width: MediaQuery.of(context).size.width * 0.6,
-                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.0), color: Colors.grey[300]),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                                color: Theme.of(context).scaffoldBackgroundColor,
+                              ),
                             ),
                           ),
                         ),
@@ -55,7 +69,10 @@ class LoadingSkeleton extends StatelessWidget {
                               child: Container(
                                 width: 60,
                                 height: 13,
-                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.0), color: Colors.grey[300]),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  color: Theme.of(context).scaffoldBackgroundColor,
+                                ),
                               ),
                             ),
                           ),

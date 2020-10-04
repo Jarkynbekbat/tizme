@@ -39,15 +39,19 @@ void main() async {
     return runApp(ThemeProvider(
       saveThemesOnChange: true,
       loadThemeOnInit: true,
-      themes: checkWeekType()
-          ? [
-              whiteWeekTheme(),
-              darkWeekTheme(),
-            ]
-          : [
-              darkWeekTheme(),
-              whiteWeekTheme(),
-            ],
+      themes: [
+        darkWeekTheme(),
+        whiteWeekTheme(),
+      ],
+      // checkWeekType()
+      //     ? [
+      //         whiteWeekTheme(),
+      //         darkWeekTheme(),
+      //       ]
+      //     : [
+      // darkWeekTheme(),
+      // whiteWeekTheme(),
+      //       ],
       child: MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => RaspModel()),

@@ -14,7 +14,7 @@ class NoRasps extends StatelessWidget {
             ? [
                 Image.asset('./lib/assets/norasps.png'),
                 Text(
-                  'quote.split()[1]',
+                  'Выходной ...',
                   style: TextStyle(
                       fontSize: 18.0,
                       color: Theme.of(context).textTheme.body1.color,
@@ -22,7 +22,7 @@ class NoRasps extends StatelessWidget {
                       fontFamily: "Roboto"),
                 ),
                 Text(
-                  'quote.split()[0]',
+                  '',
                   style: TextStyle(
                       fontSize: 18.0,
                       color: Theme.of(context).textTheme.body1.color,
@@ -32,7 +32,7 @@ class NoRasps extends StatelessWidget {
               ]
             : [
                 Text(
-                  'quote.split()[1]',
+                  'Выходной ...',
                   style: TextStyle(
                       fontSize: 18.0,
                       color: Theme.of(context).textTheme.body1.color,
@@ -40,7 +40,7 @@ class NoRasps extends StatelessWidget {
                       fontFamily: "Roboto"),
                 ),
                 Text(
-                  'quote.split()[0]',
+                  '',
                   style: TextStyle(
                       fontSize: 18.0,
                       color: Theme.of(context).textTheme.body1.color,
