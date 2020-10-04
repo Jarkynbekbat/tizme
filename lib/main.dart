@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-// import 'package:store_updater/store_updater.dart';
 import 'package:theme_provider/theme_provider.dart';
 
 import 'helpers/check_week_type_helper.dart';
@@ -9,6 +8,7 @@ import 'models/fcm_models.dart';
 import 'models/module_model.dart';
 import 'models/rasp_model.dart';
 import 'models/session_model.dart';
+import 'pages/chat_page/chat_page.dart';
 import 'pages/login_page/intro_page/intro_page.dart';
 import 'pages/login_page/login_page.dart';
 import 'pages/navigation_drawer_pages/about_app_page.dart';
@@ -71,6 +71,7 @@ void main() async {
             NoteItemHero.route: (_) => ThemeConsumer(child: NoteItemHero()),
             RaspItemPhotosPage.route: (_) => ThemeConsumer(child: RaspItemPhotosPage()),
             PhotoItemHero.route: (_) => ThemeConsumer(child: PhotoItemHero()),
+            ChatPage.route: (_) => ThemeConsumer(child: ChatPage()),
           },
         ),
       ),

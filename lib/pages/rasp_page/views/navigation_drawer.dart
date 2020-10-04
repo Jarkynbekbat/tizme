@@ -9,6 +9,7 @@ import '../../../services/local/local_fio_service.dart';
 import '../../../services/local/local_user_service.dart';
 
 class NavigationDrawer extends StatefulWidget {
+  const NavigationDrawer();
   @override
   _NavigationDrawerState createState() => _NavigationDrawerState();
 }
@@ -144,6 +145,8 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
           ),
           // ...getOption('Уведомления', Icons.notifications,
           //     () => Navigator.pushNamed(context, '/notifications')),
+
+          ...getOption('Сообщения', Icons.chat, () => Navigator.pushNamed(context, 'chat_page')),
           ...getOption('График сессии', Icons.insert_chart, () => Navigator.pushNamed(context, '/session_graph')),
           ...getOption('График модуля', Icons.table_chart, () => Navigator.pushNamed(context, '/module_graph')),
           ...getOption('О приложении', Icons.question_answer, () => Navigator.pushNamed(context, '/about_app')),

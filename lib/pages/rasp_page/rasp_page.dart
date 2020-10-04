@@ -4,7 +4,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../components/my_app_bar.dart';
 import '../../models/rasp_model.dart';
-import 'views/get_skeleton.dart';
+import 'views/loading_skeleton.dart';
 import 'views/navigation_drawer.dart';
 import 'views/no_rasps.dart';
 import 'views/rasp_item_view.dart';
@@ -17,7 +17,6 @@ class RaspPage extends StatefulWidget {
 }
 
 class _RaspPageState extends State<RaspPage> with SingleTickerProviderStateMixin {
-  //глобальный ключ scaffold a
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   PageController pageController;
   RefreshController _refreshController = RefreshController(initialRefresh: false);
@@ -32,31 +31,18 @@ class _RaspPageState extends State<RaspPage> with SingleTickerProviderStateMixin
   Widget build(BuildContext context) {
     final raspModel = Provider.of<RaspModel>(context);
 
-    // TODO: доделать работает не корректно
-    // final localNotifications = LocalNotificationModel();
-    // localNotifications.setDailyNotification(
-    //   id: 1,
-    //   title: 'Расписание текущего дня',
-    //   body: '',
-    //   time: Time(7, 30, 0),
-    //   rasps: rasps,
-    // );
-
     return Scaffold(
       key: _scaffoldKey,
-      drawer: NavigationDrawer(),
-      appBar: MyAppBar(raspModel.group, Icon(Icons.menu), () => _scaffoldKey.currentState.openDrawer(), 'default'
-          // TODO: добавить потом
-          // [
-          //   IconButton(
-          //     icon: Icon(Icons.notifications),
-          //     onPressed: () {},
-          //   )
-          // ],
-          ),
+      drawer: const NavigationDrawer(),
+      appBar: MyAppBar(
+        raspModel.group,
+        Icon(Icons.menu),
+        () => _scaffoldKey.currentState.openDrawer(),
+        'default',
+      ),
       body: Consumer<RaspModel>(builder: (context, raspModel, _) {
         return !raspModel.isLoaded
-            ? getSkeleton()
+            ? const LoadingSkeleton()
             : SmartRefresher(
                 controller: _refreshController,
                 enablePullDown: true,
