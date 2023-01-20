@@ -1,0 +1,67 @@
+name: new_rasp_app
+description: A new Flutter project.
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.2.2 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  provider: ^4.0.2
+  theme_provider:
+  titled_navigation_bar: ^3.5.0
+  shared_preferences: ^0.5.6
+  http: ^0.12.0
+  skeleton_text:
+  path_provider: ^1.5.1
+  image_picker: ^0.6.2
+  photo_view: ^0.9.0
+  cupertino_icons: ^0.1.2
+  easy_dialog:
+  # store_updater:
+  url_launcher:
+  pull_to_refresh: ^1.5.7
+  # intro page
+  rect_getter: ^0.0.1
+  gradient_text: ^1.0.2
+  simple_animations: ^1.3.3
+  #loading
+  # notifications
+  flutter_local_notifications: ^1.1.5+1
+  # store_updater: ^0.0.1
+  # firebase cloud messaging
+  firebase_core: ^0.4.0+9
+  firebase_auth: ^0.14.0+5
+  cloud_firestore: ^0.12.9+5
+  firebase_messaging: ^6.0.9
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - ./lib/assets/images/
+    - ./lib/assets/student.png
+    - ./lib/assets/teacher.png
+    - ./lib/assets/preview.png
+    - ./lib/assets/face.png
+    - ./lib/assets/insta.png
+    - ./lib/assets/vk.png
+    # - ./lib/assets/no-img.png
+    - ./lib/assets/norasps.png
+    - ./lib/assets/intro/all.png
+    - ./lib/assets/intro/audit.png
+    - ./lib/assets/intro/dark.png
+    - ./lib/assets/intro/galery.png
+    - ./lib/assets/intro/menu.png
+    - ./lib/assets/intro/notes.png
+    - ./lib/assets/intro/rasp.png
+    #login page
+    - ./lib/assets/login/background.png
+    - ./lib/assets/login/clock.png
+    - ./lib/assets/login/light-1.png
+    - ./lib/assets/login/light-2.png
