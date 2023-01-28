@@ -1,5 +1,6 @@
 # studtime
 
+
 /// генерация роутов
 /// генерация ресурсов
 fvm flutter packages pub run build_runner build --delete-conflicting-outputs
@@ -12,3 +13,6 @@ fvm flutter pub run flutter_launcher_icons:main
 
 /// генерация сплеша
 fvm flutter pub run flutter_native_splash:create
+
+
+
