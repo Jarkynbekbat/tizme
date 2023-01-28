@@ -70,7 +70,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '396986104003',
     projectId: 'studtime-e721c',
     storageBucket: 'studtime-e721c.appspot.com',
-    iosClientId: '396986104003-crm55ol5f4guto7boqd5c87kckolcis2.apps.googleusercontent.com',
+    iosClientId:
+        '396986104003-crm55ol5f4guto7boqd5c87kckolcis2.apps.googleusercontent.com',
     iosBundleId: 'com.example.studtime',
   );
 }
