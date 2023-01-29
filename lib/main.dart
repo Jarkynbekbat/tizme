@@ -5,7 +5,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:studtime/app.dart';
+import 'package:studtime/data/repos/app_cache_repo.dart';
 import 'package:studtime/firebase_options.dart';
 
 void main() {
@@ -35,7 +37,14 @@ void main() {
         );
       }).sendPort);
 
-      runApp(const App());
+      runApp(
+        MultiRepositoryProvider(
+          providers: [
+            RepositoryProvider(create: (_) => AppCacheRepo()),
+          ],
+          child: const App(),
+        ),
+      );
     },
 
     /// Перехватываем ошибки в Dart
