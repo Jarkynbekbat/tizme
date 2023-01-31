@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:studtime/src/features/splash/ui/splash_navigator.dart';
+import 'package:studtime/src/features/splash/splash_navigator.dart';
 
 class App extends StatelessWidget {
   const App({super.key});

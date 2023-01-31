@@ -2,23 +2,23 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 /// Абстрактный класс для работы с кэшем через SharedPreferences
 abstract class AppCache<T> {
-  final SharedPreferences _prefs;
-  final String _key;
+  final SharedPreferences prefs;
+  final String key;
 
-  AppCache(this._prefs, this._key);
+  AppCache(this.prefs, this.key);
 
   Future<void> set(T value) {
     switch (T) {
       case String:
-        return _prefs.setString(_key, value as String);
+        return prefs.setString(key, value as String);
       case int:
-        return _prefs.setInt(_key, value as int);
+        return prefs.setInt(key, value as int);
       case double:
-        return _prefs.setDouble(_key, value as double);
+        return prefs.setDouble(key, value as double);
       case bool:
-        return _prefs.setBool(_key, value as bool);
+        return prefs.setBool(key, value as bool);
       case List<String>:
-        return _prefs.setStringList(_key, value as List<String>);
+        return prefs.setStringList(key, value as List<String>);
       default:
         throw Exception('Unsupported type');
     }
@@ -27,21 +27,21 @@ abstract class AppCache<T> {
   T? get() {
     switch (T) {
       case String:
-        return _prefs.getString(_key) as T?;
+        return prefs.getString(key) as T?;
       case int:
-        return _prefs.getInt(_key) as T?;
+        return prefs.getInt(key) as T?;
       case double:
-        return _prefs.getDouble(_key) as T?;
+        return prefs.getDouble(key) as T?;
       case bool:
-        return _prefs.getBool(_key) as T?;
+        return prefs.getBool(key) as T?;
       case List<String>:
-        return _prefs.getStringList(_key) as T?;
+        return prefs.getStringList(key) as T?;
       default:
         throw Exception('Unsupported type');
     }
   }
 
   Future<void> remove() {
-    return _prefs.remove(_key);
+    return prefs.remove(key);
   }
 }

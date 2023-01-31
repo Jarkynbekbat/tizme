@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:studtime/src/features/home/ui/pages/home_page/home_page.dart';
+import 'package:studtime/src/features/home/pages/home_page/home_page.dart';
 import 'package:studtime/src/shared/extensions/on_widget.dart';
 
 class HomeNavigator extends StatelessWidget {
