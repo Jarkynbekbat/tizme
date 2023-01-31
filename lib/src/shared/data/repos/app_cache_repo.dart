@@ -1,14 +1,13 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:studtime/data/cache/is_first_time_cache.dart';
+import 'package:studtime/src/shared/data/cache/is_intro_shown_cache.dart';
 
 /// Репозиторий для работы с кэшем
 class AppCacheRepo {
-  late final IsFirstTimeCache isFirstTimeCache;
+  late final IsIntroShownCache isIntroShownCache;
 
   /// Инициализируем все кэши
   Future<void> init() async {
     final prefs = await SharedPreferences.getInstance();
-
-    isFirstTimeCache = IsFirstTimeCache(prefs, 'isFirstTime');
+    isIntroShownCache = IsIntroShownCache(prefs, 'is_intro_shown');
   }
 }
