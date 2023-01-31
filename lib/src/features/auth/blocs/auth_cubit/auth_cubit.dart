@@ -40,8 +40,7 @@ class AuthCubit extends Cubit<AuthState> {
         return;
       }
 
-      final studentData = student.docs.first.data();
-      final studentModel = Student.fromJson(studentData);
+      final studentModel = Student.fromDoc(student.docs.first);
 
       /// сохраняем данные пользователя в кэше
       _userCache.set(studentModel);

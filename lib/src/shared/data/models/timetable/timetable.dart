@@ -1,13 +1,3 @@
-// classroom_ref : /classrooms/raZxQQEDChRhZmg7L0il
-// day_ref: /days/hFmLhmGpFaTZl6VRGIZf
-// group_ref: /groups/FiZbzHxEr2dQgmLKK4Dd
-// lesson_type_ref: /lesson_types/CNu2i90yv8kdsogXgp5P
-// semester_ref: /semesters/3O6Nfz5qF5rMNbPdtmyv
-// subject_ref: /subjects/jmPryMCImN1XqwMgUBcY
-// teacher_ref: /teachers/wrT41SHBb8wqPDwvutKS
-// time_ref: /times/55G2r6yV8r5FTLqw4pIJ
-// week_ref: /weeks/Ihcsi7iIUCTdA6Lc6sKt
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Timetable {
@@ -35,7 +25,7 @@ class Timetable {
     required this.weekRef,
   });
 
-  factory Timetable.fromDocument(DocumentSnapshot doc) {
+  factory Timetable.fromDoc(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
     return Timetable(
       id: doc.id,

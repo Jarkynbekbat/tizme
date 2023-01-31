@@ -456,8 +456,6 @@ abstract class _$$_LoadedCopyWith<$Res> {
       __$$_LoadedCopyWithImpl<$Res>;
   @useResult
   $Res call({Student student});
-
-  $StudentCopyWith<$Res> get student;
 }
 
 /// @nodoc
@@ -478,14 +476,6 @@ class __$$_LoadedCopyWithImpl<$Res>
           : student // ignore: cast_nullable_to_non_nullable
               as Student,
     ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $StudentCopyWith<$Res> get student {
-    return $StudentCopyWith<$Res>(_value.student, (value) {
-      return _then(_value.copyWith(student: value));
-    });
   }
 }
 
