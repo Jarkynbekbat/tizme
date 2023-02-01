@@ -14,10 +14,9 @@ class SplashPage extends StatelessWidget {
         state.maybeMap(
           loaded: (_) async {
             final cacheRepo = context.read<AppCacheRepo>();
-
             final isIntroShown = cacheRepo.isIntroShownCache.get();
 
-            if (!isIntroShown) {
+            if (isIntroShown) {
               context.pushReplacementNamed('/intro');
               return;
             }
