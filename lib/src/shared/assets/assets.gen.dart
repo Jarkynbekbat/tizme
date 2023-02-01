@@ -11,6 +11,16 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/services.dart';
 
+class $AssetsAuthGen {
+  const $AssetsAuthGen();
+
+  /// File path: assets/auth/auth.svg
+  SvgGenImage get auth => const SvgGenImage('assets/auth/auth.svg');
+
+  /// List of all assets
+  List<SvgGenImage> get values => [auth];
+}
+
 class $AssetsIntroGen {
   const $AssetsIntroGen();
 
@@ -30,6 +40,7 @@ class $AssetsIntroGen {
 class Assets {
   Assets._();
 
+  static const $AssetsAuthGen auth = $AssetsAuthGen();
   static const $AssetsIntroGen intro = $AssetsIntroGen();
 }
 

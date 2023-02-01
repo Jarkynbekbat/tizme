@@ -8,6 +8,31 @@ class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            BlocBuilder<AuthCubit, AuthState>(
+              builder: (context, state) {
+                return state.map(
+                  loggedOut: (_) => const Text('LoggedOut'),
+                  initialization: (_) => const Text('Initialization'),
+                  loading: (_) => const CircularProgressIndicator(),
+                  loggedIn: (state) => Text('userId:  ${state.student.id}'),
+                  error: (_) => const Text('Error'),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton.small(
+        onPressed: () => context.read<AuthCubit>().logout(),
+        child: const Icon(Icons.logout),
+      ),
+    );
+
     return DefaultTabController(
       length: 5,
       initialIndex: (DateTime.now().weekday - 1).clamp(0, 5),
