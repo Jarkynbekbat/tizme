@@ -41,3 +41,47 @@ class Timetable {
     );
   }
 }
+
+class ScheduleItem {
+  final String id;
+  final String classroom;
+  final String day;
+  final String group;
+  final String lessonType;
+  final String semester;
+  final String subject;
+  final String teacher;
+  final String timeFrom;
+  final String timeTo;
+  final String week;
+
+  const ScheduleItem({
+    required this.id,
+    required this.classroom,
+    required this.day,
+    required this.group,
+    required this.lessonType,
+    required this.semester,
+    required this.subject,
+    required this.teacher,
+    required this.timeFrom,
+    required this.timeTo,
+    required this.week,
+  });
+
+  factory ScheduleItem.mock() {
+    return const ScheduleItem(
+      id: '1',
+      classroom: '103',
+      day: '1',
+      group: 'пи-19-1',
+      lessonType: 'лекция',
+      semester: '1',
+      subject: 'Введение в программирование на языке Python',
+      teacher: 'Иванов И.И.',
+      timeFrom: '13:00',
+      timeTo: '14:20',
+      week: '1',
+    );
+  }
+}

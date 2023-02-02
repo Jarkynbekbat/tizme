@@ -1,92 +1,106 @@
+import 'package:calendar_view/calendar_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:studtime/src/features/auth/blocs/auth_cubit/auth_cubit.dart';
-import 'package:studtime/src/features/home/blocs/timetable_cubit/timetable_cubit.dart';
-import 'package:studtime/src/shared/extensions/on_doc_ref.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:studtime/src/features/home/pages/home_page/elements/date_text.dart';
+import 'package:studtime/src/features/home/pages/home_page/elements/home_app_bar.dart';
+import 'package:studtime/src/features/home/pages/home_page/elements/home_drawer.dart';
+import 'package:studtime/src/features/home/pages/home_page/elements/timetable_list.dart';
+import 'package:studtime/src/shared/styles/app_colors.dart';
+import 'package:titled_navigation_bar/titled_navigation_bar.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends HookWidget {
   const HomePage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            BlocBuilder<AuthCubit, AuthState>(
-              builder: (context, state) {
-                return state.map(
-                  loggedOut: (_) => const Text('LoggedOut'),
-                  initialization: (_) => const Text('Initialization'),
-                  loading: (_) => const CircularProgressIndicator(),
-                  loggedIn: (state) => Text('userId:  ${state.student.id}'),
-                  error: (_) => const Text('Error'),
-                );
-              },
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton.small(
-        onPressed: () => context.read<AuthCubit>().logout(),
-        child: const Icon(Icons.logout),
-      ),
-    );
+    final pageController = useMemoized(() => PageController(initialPage: 0));
+    final navigationIndex = useState(pageController.initialPage);
 
-    return DefaultTabController(
-      length: 5,
-      initialIndex: (DateTime.now().weekday - 1).clamp(0, 5),
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('HomePage'),
-        ),
-        body: TabBarView(
-          children: [
-            BlocBuilder<TimetableCubit, TimetableState>(
-              builder: (context, state) {
-                return state.map(
-                  loading: (_) => const Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                  loaded: (state) => ListView.builder(
-                    itemCount: state.items.length,
-                    itemBuilder: (context, index) {
-                      final lesson = state.items[index];
-                      return ListTile(
-                        title: Text(lesson.id),
-                        subtitle: lesson.timeRef
-                            .getStreamBuilder<Map<String, dynamic>>(
-                          mapper: (doc) => doc.data() as Map<String, dynamic>,
-                          builder: (context, data) => Text(
-                            '${data['from']} - ${data['to']}',
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                  error: (_) => const Center(child: Text('Error')),
-                );
-              },
-            ),
-            const Center(child: Text('ВТ')),
-            const Center(child: Text('СР')),
-            const Center(child: Text('ЧТ')),
-            const Center(child: Text('ПТ')),
-          ],
-        ),
-        floatingActionButton: FloatingActionButton.small(
-          onPressed: () => context.read<AuthCubit>().logout(),
-          child: const Icon(Icons.logout),
-        ),
-        bottomNavigationBar: const TabBar(
-          tabs: [
-            Tab(text: 'ПН'),
-            Tab(text: 'ВТ'),
-            Tab(text: 'СР'),
-            Tab(text: 'ЧТ'),
-            Tab(text: 'ПТ'),
-          ],
-        ),
+    final now = DateTime.now();
+
+    return Scaffold(
+      appBar: const HomeAppBar(),
+      drawer: const HomeDrawer(),
+      body: PageView(
+        controller: pageController,
+        onPageChanged: (index) {
+          navigationIndex.value = index;
+        },
+        children: [
+          DayView(
+            controller: EventController<String>()
+              ..addAll([
+                CalendarEventData(
+                  date: DateTime.now(),
+                  event: "Введение в программирование",
+                  title: "Project meeting",
+                  description: "Today is project meeting.",
+                  startTime: DateTime(now.year, now.month, now.day, 13, 00),
+                  endTime: DateTime(now.year, now.month, now.day, 14, 20),
+                ),
+              ]),
+            dayTitleBuilder: (date) {
+              return Container();
+            },
+            eventTileBuilder: (date, events, boundry, start, end) {
+              return Container(
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: Text(
+                  events.first.event.toString(),
+                  style: const TextStyle(color: Colors.white),
+                ),
+              );
+            },
+            fullDayEventBuilder: (events, date) {
+              return Container();
+            },
+            showVerticalLine: true,
+            showLiveTimeLineInAllDays: true,
+            minDay: DateTime(1990),
+            maxDay: DateTime(2050),
+            initialDay: DateTime.now(),
+            heightPerMinute: 1,
+            eventArranger: const SideEventArranger(),
+          ),
+          const TimetableList(weekdayIndex: 1),
+          const TimetableList(weekdayIndex: 2),
+          const TimetableList(weekdayIndex: 3),
+          const TimetableList(weekdayIndex: 4),
+        ],
+      ),
+      bottomNavigationBar: TitledBottomNavigationBar(
+        height: 60,
+        indicatorHeight: 2.0,
+        onTap: pageController.jumpToPage,
+        reverse: false,
+        curve: Curves.fastOutSlowIn,
+        currentIndex: navigationIndex.value,
+        items: [
+          TitledNavigationBarItem(
+            title: const Text('ПН'),
+            icon: const DateText(0),
+          ),
+          TitledNavigationBarItem(
+            title: const Text('ВТ'),
+            icon: const DateText(1),
+          ),
+          TitledNavigationBarItem(
+            title: const Text('СР'),
+            icon: const DateText(2),
+          ),
+          TitledNavigationBarItem(
+            title: const Text('ЧТ'),
+            icon: const DateText(3),
+          ),
+          TitledNavigationBarItem(
+            title: const Text('ПТ'),
+            icon: const DateText(4),
+          ),
+        ],
+        activeColor: AppColors.primaryColor,
+        inactiveColor: Colors.blueGrey,
       ),
     );
   }

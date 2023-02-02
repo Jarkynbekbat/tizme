@@ -24,6 +24,10 @@ dependencies:
   introduction_screen: ^3.1.4
   flutter_svg: ^1.1.6
   flutter_easyloading: ^3.0.5
+  flutter_date_picker_timeline: ^0.3.3
+  titled_navigation_bar: ^5.0.0-nullsafety.0
+  calendar_view: ^1.0.2
+  mask_text_input_formatter: ^2.4.0
 
 dev_dependencies:
   flutter_test:

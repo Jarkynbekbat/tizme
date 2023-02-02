@@ -129,6 +129,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "8.4.3"
+  calendar_view:
+    dependency: "direct main"
+    description:
+      name: calendar_view
+      sha256: "7f2c460d38cda782e0852ca7706086c24f6e9407a9f0cfcdef034fb81e6d9f3e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.2"
   characters:
     dependency: transitive
     description:
@@ -342,6 +350,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "8.1.1"
+  flutter_date_picker_timeline:
+    dependency: "direct main"
+    description:
+      name: flutter_date_picker_timeline
+      sha256: a7984b6e31f42f830ec0a37758ad487c1ed78ceb7adfa25f67e6cc3e36d2c55a
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.3"
   flutter_easyloading:
     dependency: "direct main"
     description:
@@ -488,6 +504,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.3.0"
+  intl:
+    dependency: transitive
+    description:
+      name: intl
+      sha256: "910f85bce16fb5c6f614e117efa303e85a1731bb0081edf3604a2ae6e9a3cc91"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.17.0"
   introduction_screen:
     dependency: "direct main"
     description:
@@ -544,6 +568,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.1"
+  mask_text_input_formatter:
+    dependency: "direct main"
+    description:
+      name: mask_text_input_formatter
+      sha256: "19bb7809c3c2559277e95521b3ee421e1409eb2cc85efd2feb191696c92490f4"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.4.0"
   matcher:
     dependency: transitive
     description:
@@ -712,6 +744,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.1"
+  scroll_to_index:
+    dependency: transitive
+    description:
+      name: scroll_to_index
+      sha256: "5df1597b5bfa1703c02962a7478a187a8c9dedaeb871aedbf7874ee0d58a0bba"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.1"
+  shamsi_date:
+    dependency: transitive
+    description:
+      name: shamsi_date
+      sha256: "938bd68e6f99fab7f93c04a0fc4248a09355f67eca90510f0ee7579f6014b56c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
   shared_preferences:
     dependency: "direct main"
     description:
@@ -877,6 +925,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.1"
+  titled_navigation_bar:
+    dependency: "direct main"
+    description:
+      name: titled_navigation_bar
+      sha256: "3e3d42c77bc84132865190d0b53e6fd8890ee9603036c036138c5699e02822dc"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.0.0-nullsafety.0"
   typed_data:
     dependency: transitive
     description:

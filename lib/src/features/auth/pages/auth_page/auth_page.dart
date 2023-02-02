@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:studtime/src/features/auth/blocs/auth_cubit/auth_cubit.dart';
 import 'package:studtime/src/shared/assets/assets.gen.dart';
 import 'package:studtime/src/shared/extensions/on_widget.dart';
@@ -15,6 +17,17 @@ class AuthPage extends HookWidget {
   Widget build(BuildContext context) {
     final cypherController = useTextEditingController();
     final authCubit = context.read<AuthCubit>();
+
+    void onLogin() async {
+      EasyLoading.show();
+      await authCubit.loginWithCypher(cypherController.text);
+      final state = authCubit.state;
+
+      state.maybeWhen(
+        error: EasyLoading.showError,
+        orElse: EasyLoading.dismiss,
+      );
+    }
 
     return Scaffold(
       body: Padding(
@@ -32,9 +45,16 @@ class AuthPage extends HookWidget {
                   TextField(
                     controller: cypherController,
                     autofocus: true,
+                    onSubmitted: (_) => onLogin(),
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                      LengthLimitingTextInputFormatter(7),
+                      MaskTextInputFormatter(
+                          mask: '##/#####', filter: {"#": RegExp(r'[0-9]')}),
+                    ],
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
-                      hintText: 'Введите логин',
+                      hintText: '12/34567',
                       hintStyle: TextStyle(
                         color: AppColors.primaryColor.withOpacity(0.33),
                       ),
@@ -51,16 +71,7 @@ class AuthPage extends HookWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () async {
-          EasyLoading.show();
-          await authCubit.loginWithCypher(cypherController.text);
-          final state = authCubit.state;
-
-          state.maybeWhen(
-            error: EasyLoading.showError,
-            orElse: EasyLoading.dismiss,
-          );
-        },
+        onPressed: onLogin,
         label: const Text('Войти'),
       ),
     );
