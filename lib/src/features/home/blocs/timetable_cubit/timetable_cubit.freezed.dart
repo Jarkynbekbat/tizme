@@ -19,21 +19,21 @@ mixin _$TimetableState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<Timetable> items) loaded,
+    required TResult Function(List<Schedule> items) loaded,
     required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(List<Timetable> items)? loaded,
+    TResult? Function(List<Schedule> items)? loaded,
     TResult? Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<Timetable> items)? loaded,
+    TResult Function(List<Schedule> items)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
@@ -118,7 +118,7 @@ class _$_Loading implements _Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<Timetable> items) loaded,
+    required TResult Function(List<Schedule> items) loaded,
     required TResult Function(String message) error,
   }) {
     return loading();
@@ -128,7 +128,7 @@ class _$_Loading implements _Loading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(List<Timetable> items)? loaded,
+    TResult? Function(List<Schedule> items)? loaded,
     TResult? Function(String message)? error,
   }) {
     return loading?.call();
@@ -138,7 +138,7 @@ class _$_Loading implements _Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<Timetable> items)? loaded,
+    TResult Function(List<Schedule> items)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -192,7 +192,7 @@ abstract class _$$_LoadedCopyWith<$Res> {
   factory _$$_LoadedCopyWith(_$_Loaded value, $Res Function(_$_Loaded) then) =
       __$$_LoadedCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<Timetable> items});
+  $Res call({List<Schedule> items});
 }
 
 /// @nodoc
@@ -211,7 +211,7 @@ class __$$_LoadedCopyWithImpl<$Res>
       null == items
           ? _value._items
           : items // ignore: cast_nullable_to_non_nullable
-              as List<Timetable>,
+              as List<Schedule>,
     ));
   }
 }
@@ -219,11 +219,11 @@ class __$$_LoadedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Loaded implements _Loaded {
-  const _$_Loaded(final List<Timetable> items) : _items = items;
+  const _$_Loaded(final List<Schedule> items) : _items = items;
 
-  final List<Timetable> _items;
+  final List<Schedule> _items;
   @override
-  List<Timetable> get items {
+  List<Schedule> get items {
     if (_items is EqualUnmodifiableListView) return _items;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_items);
@@ -256,7 +256,7 @@ class _$_Loaded implements _Loaded {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<Timetable> items) loaded,
+    required TResult Function(List<Schedule> items) loaded,
     required TResult Function(String message) error,
   }) {
     return loaded(items);
@@ -266,7 +266,7 @@ class _$_Loaded implements _Loaded {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(List<Timetable> items)? loaded,
+    TResult? Function(List<Schedule> items)? loaded,
     TResult? Function(String message)? error,
   }) {
     return loaded?.call(items);
@@ -276,7 +276,7 @@ class _$_Loaded implements _Loaded {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<Timetable> items)? loaded,
+    TResult Function(List<Schedule> items)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -322,9 +322,9 @@ class _$_Loaded implements _Loaded {
 }
 
 abstract class _Loaded implements TimetableState {
-  const factory _Loaded(final List<Timetable> items) = _$_Loaded;
+  const factory _Loaded(final List<Schedule> items) = _$_Loaded;
 
-  List<Timetable> get items;
+  List<Schedule> get items;
   @JsonKey(ignore: true)
   _$$_LoadedCopyWith<_$_Loaded> get copyWith =>
       throw _privateConstructorUsedError;
@@ -393,7 +393,7 @@ class _$_Error implements _Error {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<Timetable> items) loaded,
+    required TResult Function(List<Schedule> items) loaded,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -403,7 +403,7 @@ class _$_Error implements _Error {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(List<Timetable> items)? loaded,
+    TResult? Function(List<Schedule> items)? loaded,
     TResult? Function(String message)? error,
   }) {
     return error?.call(message);
@@ -413,7 +413,7 @@ class _$_Error implements _Error {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<Timetable> items)? loaded,
+    TResult Function(List<Schedule> items)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
