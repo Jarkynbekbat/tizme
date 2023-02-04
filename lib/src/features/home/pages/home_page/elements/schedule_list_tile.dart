@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:studtime/src/shared/data/models/name/name.dart';
 import 'package:studtime/src/shared/data/models/schedule/schedule.dart';
-import 'package:studtime/src/shared/data/models/time/time.dart';
-import 'package:studtime/src/shared/extensions/on_doc_ref.dart';
 
 class ScheduleListTile extends StatelessWidget {
   final Schedule schedule;
@@ -28,39 +25,16 @@ class ScheduleListTile extends StatelessWidget {
                 ),
               ),
             ),
-            child: schedule.timeRef.mapToWidget(
-              mapper: Time.fromJson,
-              builder: (time) {
-                return Text(
-                  '${time.from}\n${time.to}',
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 18.0),
-                );
-              },
+            child: Text(
+              '${schedule.time.from}\n${schedule.time.to}',
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 18.0),
             ),
           ),
         ),
-        title: schedule.subjectRef.mapToWidget<Name>(
-          mapper: Name.fromJson,
-          builder: (name) => Text(name.name),
-        ),
-        subtitle: Row(
-          children: [
-            schedule.teacherRef.mapToWidget<Name>(
-              mapper: Name.fromJson,
-              builder: (name) => Text(name.name),
-            ),
-            const Text(' • '),
-            schedule.classroomRef.mapToWidget<Name>(
-              mapper: Name.fromJson,
-              builder: (value) => Text(value.name),
-            ),
-            const Text(' • '),
-            schedule.lessonTypeRef.mapToWidget<Name>(
-              mapper: Name.fromJson,
-              builder: (value) => Text(value.name),
-            ),
-          ],
+        title: Text(schedule.subject),
+        subtitle: Text(
+          '${schedule.teacher} • ${schedule.classroom} • ${schedule.lessonType}',
         ),
       ),
     );

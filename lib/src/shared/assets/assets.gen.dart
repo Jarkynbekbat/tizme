@@ -37,11 +37,22 @@ class $AssetsIntroGen {
   List<SvgGenImage> get values => [intro0, intro1, intro2];
 }
 
+class $AssetsSharedGen {
+  const $AssetsSharedGen();
+
+  /// File path: assets/shared/no_data.svg
+  SvgGenImage get noData => const SvgGenImage('assets/shared/no_data.svg');
+
+  /// List of all assets
+  List<SvgGenImage> get values => [noData];
+}
+
 class Assets {
   Assets._();
 
   static const $AssetsAuthGen auth = $AssetsAuthGen();
   static const $AssetsIntroGen intro = $AssetsIntroGen();
+  static const $AssetsSharedGen shared = $AssetsSharedGen();
 }
 
 class AssetGenImage {

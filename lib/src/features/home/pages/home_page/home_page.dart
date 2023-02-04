@@ -4,6 +4,7 @@ import 'package:studtime/src/features/home/pages/home_page/elements/date_text.da
 import 'package:studtime/src/features/home/pages/home_page/elements/home_app_bar.dart';
 import 'package:studtime/src/features/home/pages/home_page/elements/home_drawer.dart';
 import 'package:studtime/src/features/home/pages/home_page/elements/timetable_list.dart';
+import 'package:studtime/src/shared/data/models/schedule/schedule.dart';
 import 'package:studtime/src/shared/styles/app_colors.dart';
 import 'package:titled_navigation_bar/titled_navigation_bar.dart';
 
@@ -23,11 +24,11 @@ class HomePage extends HookWidget {
           navigationIndex.value = index;
         },
         children: const [
-          TimetableList(weekdayIndex: 0),
-          TimetableList(weekdayIndex: 1),
-          TimetableList(weekdayIndex: 2),
-          TimetableList(weekdayIndex: 3),
-          TimetableList(weekdayIndex: 4),
+          TimetableList(weekday: Weekday.monday),
+          TimetableList(weekday: Weekday.tuesday),
+          TimetableList(weekday: Weekday.wednesday),
+          TimetableList(weekday: Weekday.thursday),
+          TimetableList(weekday: Weekday.friday),
         ],
       ),
       bottomNavigationBar: TitledBottomNavigationBar(
@@ -35,7 +36,13 @@ class HomePage extends HookWidget {
         indicatorHeight: 2.0,
         reverse: false,
         curve: Curves.fastOutSlowIn,
-        onTap: pageController.jumpToPage,
+        onTap: (index) {
+          pageController.animateToPage(
+            index,
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeIn,
+          );
+        },
         currentIndex: navigationIndex.value,
         items: [
           TitledNavigationBarItem(

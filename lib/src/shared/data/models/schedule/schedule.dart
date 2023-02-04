@@ -1,43 +1,93 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:studtime/src/shared/data/models/schedule/schedule_ref.dart';
+import 'package:studtime/src/shared/data/models/time/time.dart';
+import 'package:studtime/src/shared/extensions/on_doc_ref.dart';
 
 class Schedule {
   final String id;
-  final DocumentReference classroomRef;
-  final DocumentReference dayRef;
-  final DocumentReference groupRef;
-  final DocumentReference lessonTypeRef;
-  final DocumentReference semesterRef;
-  final DocumentReference subjectRef;
-  final DocumentReference teacherRef;
-  final DocumentReference timeRef;
-  final DocumentReference weekRef;
+  final String classroom;
+  final Weekday day;
+  final String group;
+  final String lessonType;
+  final Semester semester;
+  final String subject;
+  final String teacher;
+  final Time time;
+  final WeekType week;
 
   const Schedule({
     required this.id,
-    required this.classroomRef,
-    required this.dayRef,
-    required this.groupRef,
-    required this.lessonTypeRef,
-    required this.semesterRef,
-    required this.subjectRef,
-    required this.teacherRef,
-    required this.timeRef,
-    required this.weekRef,
+    required this.classroom,
+    required this.day,
+    required this.group,
+    required this.lessonType,
+    required this.semester,
+    required this.subject,
+    required this.teacher,
+    required this.time,
+    required this.week,
   });
 
-  factory Schedule.fromDoc(DocumentSnapshot doc) {
-    final data = doc.data() as Map<String, dynamic>;
+  static Future<Schedule> fromRef(ScheduleRef scheduleRef) async {
+    final futures = [
+      scheduleRef.classroomRef.flyweightFetch(),
+      scheduleRef.dayRef.flyweightFetch(),
+      scheduleRef.groupRef.flyweightFetch(),
+      scheduleRef.lessonTypeRef.flyweightFetch(),
+      scheduleRef.semesterRef.flyweightFetch(),
+      scheduleRef.subjectRef.flyweightFetch(),
+      scheduleRef.teacherRef.flyweightFetch(),
+      scheduleRef.timeRef.flyweightFetch(),
+      scheduleRef.weekRef.flyweightFetch()
+    ];
+
+    final results = await Future.wait(futures);
+
+    final classroomMap = results[0].data() as Map<String, dynamic>;
+    final classroom = classroomMap['name'] as String;
+
+    final weekdayMap = results[1].data() as Map<String, dynamic>;
+    final weekdayIndex = weekdayMap['index'] as int;
+    final weekday = Weekday.values[weekdayIndex];
+
+    final groupMap = results[2].data() as Map<String, dynamic>;
+    final group = groupMap['name'] as String;
+
+    final lessonTypeMap = results[3].data() as Map<String, dynamic>;
+    final lessonType = lessonTypeMap['name'] as String;
+
+    final semesterMap = results[4].data() as Map<String, dynamic>;
+    final semesterIndex = semesterMap['index'] as int;
+    final semester = Semester.values[semesterIndex];
+
+    final subjectMap = results[5].data() as Map<String, dynamic>;
+    final subject = subjectMap['name'] as String;
+
+    final teacherMap = results[6].data() as Map<String, dynamic>;
+    final teacher = teacherMap['name'] as String;
+
+    final timeMap = results[7].data() as Map<String, dynamic>;
+    final time = Time.fromJson(timeMap);
+
+    final weekMap = results[8].data() as Map<String, dynamic>;
+    final weekIndex = weekMap['index'] as int;
+    final week = WeekType.values[weekIndex];
     return Schedule(
-      id: doc.id,
-      classroomRef: data['classroom_ref'] as DocumentReference,
-      dayRef: data['day_ref'] as DocumentReference,
-      groupRef: data['group_ref'] as DocumentReference,
-      lessonTypeRef: data['lesson_type_ref'] as DocumentReference,
-      semesterRef: data['semester_ref'] as DocumentReference,
-      subjectRef: data['subject_ref'] as DocumentReference,
-      teacherRef: data['teacher_ref'] as DocumentReference,
-      timeRef: data['time_ref'] as DocumentReference,
-      weekRef: data['week_ref'] as DocumentReference,
+      id: scheduleRef.id,
+      classroom: classroom,
+      day: weekday,
+      group: group,
+      lessonType: lessonType,
+      semester: semester,
+      subject: subject,
+      teacher: teacher,
+      time: time,
+      week: week,
     );
   }
 }
+
+enum Weekday { monday, tuesday, wednesday, thursday, friday }
+
+enum Semester { first, second }
+
+enum WeekType { even, odd }

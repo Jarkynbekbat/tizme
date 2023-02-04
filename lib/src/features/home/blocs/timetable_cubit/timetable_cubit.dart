@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:studtime/src/features/auth/blocs/auth_cubit/auth_cubit.dart';
 import 'package:studtime/src/shared/data/models/schedule/schedule.dart';
+import 'package:studtime/src/shared/data/models/schedule/schedule_ref.dart';
 
 part 'timetable_state.dart';
 part 'timetable_cubit.freezed.dart';
@@ -41,9 +42,12 @@ class TimetableCubit extends Cubit<TimetableState> {
               .get();
 
           final timetables = timetablesSnap.docs;
-          final items = timetables.map((e) => Schedule.fromDoc(e)).toList();
+          final items = timetables.map((e) => ScheduleRef.fromDoc(e)).toList();
 
-          emit(TimetableState.loaded(items));
+          final schedules =
+              await Future.wait(items.map((e) => Schedule.fromRef(e)));
+
+          emit(TimetableState.loaded(schedules));
         } on Exception catch (e) {
           emit(TimetableState.error(e.toString()));
         }

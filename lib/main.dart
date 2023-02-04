@@ -11,7 +11,34 @@ import 'package:studtime/app.dart';
 import 'package:studtime/src/shared/data/repos/app_cache_repo.dart';
 import 'package:studtime/src/shared/configs/firebase_options.dart';
 
-void main() {
+void main() async {
+  if (kIsWeb) {
+    WidgetsFlutterBinding.ensureInitialized();
+
+    ///  Инициализация firebase
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+
+    /// Перехватываем ошибки в Flutter
+    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+
+    /// Ограничиваем ориентацию экрана только в портретный режим
+    await SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown],
+    );
+
+    runApp(
+      MultiRepositoryProvider(
+        providers: [
+          RepositoryProvider(create: (_) => AppCacheRepo()),
+        ],
+        child: const App(),
+      ),
+    );
+    return;
+  }
+
   runZonedGuarded(
     () async {
       WidgetsFlutterBinding.ensureInitialized();

@@ -58,3 +58,4 @@ flutter:
   assets:
     - assets/intro/
     - assets/auth/
+    - assets/shared/

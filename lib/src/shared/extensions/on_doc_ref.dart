@@ -3,10 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:studtime/src/shared/widgets/app_error_text.dart';
 
 extension OnDocRef on DocumentReference {
-  Future<DocumentSnapshot> getByCache() async {
-    final snapshot = await get(const GetOptions(source: Source.cache));
-    if (snapshot.exists) {
-      return snapshot;
+  Future<DocumentSnapshot> flyweightFetch() async {
+    try {
+      final snapshot = await get(const GetOptions(source: Source.cache));
+      if (snapshot.exists) {
+        return snapshot;
+      }
+    } catch (e) {
+      return get();
     }
     return get();
   }
@@ -18,7 +22,7 @@ extension OnDocRef on DocumentReference {
     Widget Function(String?)? error,
   }) {
     return FutureBuilder(
-      future: getByCache(),
+      future: flyweightFetch(),
       builder: (context, snapshot) {
         return AnimatedSwitcher(
           duration: const Duration(milliseconds: 300),
