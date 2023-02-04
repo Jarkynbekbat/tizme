@@ -12,32 +12,7 @@ import 'package:studtime/src/shared/data/repos/app_cache_repo.dart';
 import 'package:studtime/src/shared/configs/firebase_options.dart';
 
 void main() async {
-  if (kIsWeb) {
-    WidgetsFlutterBinding.ensureInitialized();
-
-    ///  Инициализация firebase
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
-
-    /// Перехватываем ошибки в Flutter
-    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
-
-    /// Ограничиваем ориентацию экрана только в портретный режим
-    await SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown],
-    );
-
-    runApp(
-      MultiRepositoryProvider(
-        providers: [
-          RepositoryProvider(create: (_) => AppCacheRepo()),
-        ],
-        child: const App(),
-      ),
-    );
-    return;
-  }
+  if (kIsWeb) return await _webRunApp();
 
   runZonedGuarded(
     () async {
@@ -82,5 +57,31 @@ void main() async {
 
     /// Перехватываем ошибки в Dart
     (error, stack) => FirebaseCrashlytics.instance.recordError(error, stack),
+  );
+}
+
+Future<void> _webRunApp() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  ///  Инициализация firebase
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  /// Перехватываем ошибки в Flutter
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+
+  /// Ограничиваем ориентацию экрана только в портретный режим
+  await SystemChrome.setPreferredOrientations(
+    [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown],
+  );
+
+  runApp(
+    MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider(create: (_) => AppCacheRepo()),
+      ],
+      child: const App(),
+    ),
   );
 }
