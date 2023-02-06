@@ -14,8 +14,8 @@ class IntroPage extends StatelessWidget {
     final isIntroShownCache = cacheRepo.isIntroShownCache;
     isIntroShownCache.set(true);
 
-    /// переходим на страницу авторизации
-    context.pushReplacementNamed('/auth');
+    /// переходим на страницу настройки
+    context.pushReplacementNamed('/setup');
   }
 
   @override

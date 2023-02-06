@@ -69,8 +69,10 @@ class Schedule {
     final time = Time.fromJson(timeMap);
 
     final weekMap = results[8].data() as Map<String, dynamic>;
+
     final weekIndex = weekMap['index'] as int;
     final week = WeekType.values[weekIndex];
+
     return Schedule(
       id: scheduleRef.id,
       classroom: classroom,

@@ -11,16 +11,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/services.dart';
 
-class $AssetsAuthGen {
-  const $AssetsAuthGen();
-
-  /// File path: assets/auth/auth.svg
-  SvgGenImage get auth => const SvgGenImage('assets/auth/auth.svg');
-
-  /// List of all assets
-  List<SvgGenImage> get values => [auth];
-}
-
 class $AssetsIntroGen {
   const $AssetsIntroGen();
 
@@ -37,6 +27,16 @@ class $AssetsIntroGen {
   List<SvgGenImage> get values => [intro0, intro1, intro2];
 }
 
+class $AssetsSetupGen {
+  const $AssetsSetupGen();
+
+  /// File path: assets/setup/setup.svg
+  SvgGenImage get setup => const SvgGenImage('assets/setup/setup.svg');
+
+  /// List of all assets
+  List<SvgGenImage> get values => [setup];
+}
+
 class $AssetsSharedGen {
   const $AssetsSharedGen();
 
@@ -50,8 +50,8 @@ class $AssetsSharedGen {
 class Assets {
   Assets._();
 
-  static const $AssetsAuthGen auth = $AssetsAuthGen();
   static const $AssetsIntroGen intro = $AssetsIntroGen();
+  static const $AssetsSetupGen setup = $AssetsSetupGen();
   static const $AssetsSharedGen shared = $AssetsSharedGen();
 }
 

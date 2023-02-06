@@ -15,46 +15,49 @@ class TimetableList extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => DayTimetableCubit(context.read<TimetableCubit>(), weekday),
-      child: Builder(builder: (context) {
-        return BlocBuilder<DayTimetableCubit, TimetableState>(
-          builder: (context, state) {
-            return state.when(
-              loading: () => const Center(child: CircularProgressIndicator()),
-              loaded: (list) {
-                if (list.isEmpty) {
-                  return Center(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Assets.shared.noData.svg(
-                          width: 80.0,
-                          height: 80.0,
-                        ),
-                        const SizedBox(height: 16.0),
-                        Text(
-                          "Нет занятий",
-                          style: TextStyle(
-                            color: AppColors.primaryColor.withOpacity(0.66),
+      child: Builder(
+        builder: (context) {
+          return BlocBuilder<DayTimetableCubit, TimetableState>(
+            builder: (context, state) {
+              return state.when(
+                loading: () => const Center(child: CircularProgressIndicator()),
+                loaded: (list) {
+                  if (list.isEmpty) {
+                    return Center(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Assets.shared.noData.svg(
+                            width: 80.0,
+                            height: 80.0,
                           ),
-                        ),
-                      ],
+                          const SizedBox(height: 16.0),
+                          Text(
+                            "Нет занятий",
+                            style: TextStyle(
+                              color: AppColors.primaryColor.withOpacity(0.66),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+
+                  return ListView.builder(
+                    itemCount: list.length,
+                    padding: const EdgeInsets.all(16.0),
+                    itemBuilder: (context, index) => ScheduleListTile(
+                      key: ValueKey('ScheduleListTile__${list[index].id}'),
+                      schedule: list[index],
                     ),
                   );
-                }
-
-                return ListView.builder(
-                  itemCount: list.length,
-                  padding: const EdgeInsets.all(16.0),
-                  itemBuilder: (context, index) => ScheduleListTile(
-                    schedule: list[index],
-                  ),
-                );
-              },
-              error: (error) => Center(child: Text(error)),
-            );
-          },
-        );
-      }),
+                },
+                error: (error) => Center(child: Text(error)),
+              );
+            },
+          );
+        },
+      ),
     );
   }
 }
