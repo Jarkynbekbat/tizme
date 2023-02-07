@@ -11,8 +11,8 @@ class IntroPage extends StatelessWidget {
   Future<void> _onDone(BuildContext context) async {
     /// отмечаем, что интро показано
     final cacheRepo = context.read<AppCacheRepo>();
-    final isIntroShownCache = cacheRepo.isIntroShownCache;
-    isIntroShownCache.set(true);
+    final isFirstLaunchCache = cacheRepo.isFirstLaunchCache;
+    isFirstLaunchCache.set(true);
 
     /// переходим на страницу настройки
     context.pushReplacementNamed('/setup');

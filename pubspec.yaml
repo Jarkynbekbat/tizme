@@ -25,7 +25,7 @@ dependencies:
   flutter_svg: ^1.1.6
   flutter_easyloading: ^3.0.5
   titled_navigation_bar: ^5.0.0-nullsafety.0
-  calendar_view: ^1.0.2
+  flutter_intro: ^3.0.2
 
 dev_dependencies:
   flutter_test:

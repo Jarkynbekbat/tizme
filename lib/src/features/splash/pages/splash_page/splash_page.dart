@@ -17,9 +17,9 @@ class SplashPage extends StatelessWidget {
             context.read<SetupCubit>().load();
 
             final cacheRepo = context.read<AppCacheRepo>();
-            final isIntroShown = cacheRepo.isIntroShownCache.get();
+            final isFirstLaunch = cacheRepo.isFirstLaunchCache.get();
 
-            if (!isIntroShown) {
+            if (isFirstLaunch) {
               context.pushReplacementNamed('/intro');
               return;
             }
