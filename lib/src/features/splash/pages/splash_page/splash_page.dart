@@ -14,6 +14,8 @@ class SplashPage extends StatelessWidget {
       listener: (context, state) {
         state.maybeMap(
           loaded: (_) async {
+            context.read<SetupCubit>().load();
+
             final cacheRepo = context.read<AppCacheRepo>();
             final isIntroShown = cacheRepo.isIntroShownCache.get();
 
@@ -22,7 +24,6 @@ class SplashPage extends StatelessWidget {
               return;
             }
 
-            context.read<SetupCubit>().load();
             final settings = cacheRepo.settingsCache.get();
             if (settings == null) {
               context.pushReplacementNamed('/setup');

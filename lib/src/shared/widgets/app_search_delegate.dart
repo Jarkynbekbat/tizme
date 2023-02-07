@@ -38,9 +38,12 @@ class AppSearchDelegate extends SearchDelegate<SuggestionItem?> {
 
   @override
   Widget buildResults(BuildContext context) {
-    final results = items.where(
-      (el) => el.name.toLowerCase().startsWith(_query),
-    );
+    final results = items.where((el) {
+      final name = el.name.toLowerCase();
+
+      return name.startsWith(_query) ||
+          (_query.length > 1 && name.contains(_query));
+    });
 
     return ListView.builder(
       itemCount: results.length,
@@ -61,8 +64,14 @@ class AppSearchDelegate extends SearchDelegate<SuggestionItem?> {
   @override
   Widget buildSuggestions(BuildContext context) {
     final results = items.where(
-      (el) => el.name.toLowerCase().startsWith(_query),
+      (el) {
+        final name = el.name.toLowerCase();
+        return name.startsWith(_query) ||
+            (_query.length > 1 && name.contains(_query));
+      },
     );
+
+    if (results.isEmpty) {}
 
     return ListView.builder(
       itemCount: results.length,

@@ -23,66 +23,77 @@ class SetupPage extends StatelessWidget {
         padding: const EdgeInsets.all(
           AppPadding.defaultPaddingDouble,
         ),
-        child: Assets.setup.setup.svg(),
+        child: Column(
+          children: [
+            Expanded(
+              flex: 2,
+              child: Assets.setup.setup.svg(),
+            ),
+            Expanded(
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: ElevatedButton.icon(
+                  onPressed: () {
+                    final setupCubit = context.read<SetupCubit>();
+
+                    setupCubit.state.maybeMap(
+                      loaded: (loaded) async {
+                        final selected = await showSearch<SuggestionItem?>(
+                          context: context,
+                          delegate: AppSearchDelegate(loaded.items),
+                        );
+                        if (selected == null) return;
+
+                        await cacheRepo.settingsCache.set(
+                          UserSettings(
+                            id: selected.id,
+                            name: selected.name,
+                            type: selected is Teacher
+                                ? UserSettingsType.teacher
+                                : UserSettingsType.student,
+                          ),
+                        );
+
+                        // ignore: use_build_context_synchronously
+                        context.pushReplacementNamed('/home');
+                      },
+                      orElse: () {},
+                    );
+                  },
+                  icon: const Icon(Icons.search),
+                  label: BlocBuilder<SetupCubit, SetupState>(
+                    builder: (context, state) {
+                      return state.map(
+                        loading: (_) => Theme(
+                          data: Theme.of(context).copyWith(
+                            progressIndicatorTheme:
+                                const ProgressIndicatorThemeData(
+                              color: Colors.white,
+                            ),
+                          ),
+                          child: const SizedBox.square(
+                            dimension: 20,
+                            child: AppLoading(),
+                          ),
+                        ),
+                        error: (error) => AppErrorText(
+                          message: error.message,
+                        ),
+                        loaded: (loaded) {
+                          return const Text(
+                            "Выберите группу или преподавателя",
+                            textAlign: TextAlign.center,
+                          );
+                        },
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
-      floatingActionButton: Builder(builder: (context) {
-        return FloatingActionButton.extended(
-          onPressed: () {
-            final setupCubit = context.read<SetupCubit>();
-
-            setupCubit.state.maybeMap(
-              loaded: (loaded) async {
-                final selected = await showSearch<SuggestionItem?>(
-                  context: context,
-                  delegate: AppSearchDelegate(loaded.items),
-                );
-                if (selected == null) return;
-
-                await cacheRepo.settingsCache.set(
-                  UserSettings(
-                    id: selected.id,
-                    name: selected.name,
-                    type: selected is Teacher
-                        ? UserSettingsType.teacher
-                        : UserSettingsType.student,
-                  ),
-                );
-
-                // ignore: use_build_context_synchronously
-                context.pushReplacementNamed('/home');
-              },
-              orElse: () {},
-            );
-          },
-          icon: const Icon(Icons.search),
-          label: BlocBuilder<SetupCubit, SetupState>(
-            builder: (context, state) {
-              return state.map(
-                loading: (_) => Theme(
-                  data: Theme.of(context).copyWith(
-                    progressIndicatorTheme: const ProgressIndicatorThemeData(
-                      color: Colors.white,
-                    ),
-                  ),
-                  child: const SizedBox.square(
-                    dimension: 20,
-                    child: AppLoading(),
-                  ),
-                ),
-                error: (error) => AppErrorText(
-                  message: error.message,
-                ),
-                loaded: (loaded) {
-                  return const Text(
-                    "Выберите группу или преподавателя",
-                    textAlign: TextAlign.center,
-                  );
-                },
-              );
-            },
-          ),
-        );
-      }),
     );
   }
 }
