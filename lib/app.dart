@@ -14,9 +14,7 @@ class App extends StatelessWidget {
     setupEasyLoading();
 
     return Intro(
-      buttonTextBuilder: (order) {
-        return "Готово";
-      },
+      buttonTextBuilder: (_) => "Готово",
       child: MaterialApp(
         theme: AppThemes.lightTheme,
         darkTheme: AppThemes.darkTheme,
