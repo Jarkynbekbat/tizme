@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:studtime/src/shared/data/models/schedule/schedule.dart';
+import 'package:studtime/src/shared/extensions/on_context.dart';
 
 class ScheduleListTile extends StatelessWidget {
   final Schedule schedule;
@@ -18,46 +20,54 @@ class ScheduleListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 0.0,
-      child: Opacity(
-        opacity: isDisabled ? 0.33 : 1.0,
-        child: ListTile(
-          leading: FittedBox(
-            child: Container(
-              padding: const EdgeInsets.only(right: 16.0),
-              decoration: BoxDecoration(
-                border: Border(
-                  right: BorderSide(
-                    color: Theme.of(context).dividerColor.withOpacity(0.33),
-                    width: 1.0,
+    return CupertinoButton(
+      onPressed: () {
+        context.pushNamed('/schedule', arguments: schedule);
+      },
+      padding: EdgeInsets.zero,
+      child: Card(
+        elevation: 0.0,
+        child: Opacity(
+          opacity: isDisabled ? 0.33 : 1.0,
+          child: ListTile(
+            leading: FittedBox(
+              child: Container(
+                padding: const EdgeInsets.only(right: 16.0),
+                decoration: BoxDecoration(
+                  border: Border(
+                    right: BorderSide(
+                      color: Theme.of(context).dividerColor.withOpacity(0.33),
+                      width: 1.0,
+                    ),
                   ),
                 ),
-              ),
-              child: Text(
-                '${schedule.time.from}\n${schedule.time.to}',
-                textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 18.0),
+                child: Text(
+                  '${schedule.time.from}\n${schedule.time.to}',
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(fontSize: 18.0),
+                ),
               ),
             ),
-          ),
-          title: Text(schedule.subject),
-          subtitle: Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Expanded(
-                child: Text(
-                  '${isTeacher ? schedule.group : schedule.teacher} • ${schedule.classroom} • ${schedule.lessonType}',
-                ),
-              ),
-              if (showWeekType)
-                Text(
-                  schedule.week == WeekType.even ? 'Числитель' : 'Знаменатель',
-                  style: TextStyle(
-                    color: Theme.of(context).primaryColor.withOpacity(0.66),
+            title: Text(schedule.subject),
+            subtitle: Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Expanded(
+                  child: Text(
+                    '${isTeacher ? schedule.group : schedule.teacher} • ${schedule.classroom} • ${schedule.lessonType}',
                   ),
-                )
-            ],
+                ),
+                if (showWeekType)
+                  Text(
+                    schedule.week == WeekType.even
+                        ? 'Числитель'
+                        : 'Знаменатель',
+                    style: TextStyle(
+                      color: Theme.of(context).primaryColor.withOpacity(0.66),
+                    ),
+                  )
+              ],
+            ),
           ),
         ),
       ),
