@@ -16,8 +16,8 @@ class TimetableList extends StatelessWidget {
       builder: (context, state) {
         return state.when(
           loading: () => const Center(child: CircularProgressIndicator()),
-          loaded: (list) {
-            final filtered = list.where((el) => el.day == weekday).toList()
+          loaded: (items, isTeacher) {
+            final filtered = items.where((el) => el.day == weekday).toList()
               ..sort((a, b) => a.time.order - b.time.order);
 
             if (filtered.isEmpty) {
@@ -61,6 +61,7 @@ class TimetableList extends StatelessWidget {
                   schedule: schedule,
                   isDisabled: isDisabled,
                   showWeekType: hasReplacement || isDisabled,
+                  isTeacher: isTeacher,
                 );
               },
             );

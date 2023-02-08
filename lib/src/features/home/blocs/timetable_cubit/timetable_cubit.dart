@@ -40,7 +40,7 @@ class TimetableCubit extends Cubit<TimetableState> {
           ? await _getTimetableByTeacher(settings.id)
           : await _getTimetableByGroup(settings.id);
 
-      emit(TimetableState.loaded(timetable));
+      emit(TimetableState.loaded(items: timetable, isTeacher: isTeacher));
     } on Exception catch (e) {
       emit(TimetableState.error(e.toString()));
     }

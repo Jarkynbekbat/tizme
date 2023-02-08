@@ -19,21 +19,21 @@ mixin _$TimetableState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<Schedule> items) loaded,
+    required TResult Function(List<Schedule> items, bool isTeacher) loaded,
     required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(List<Schedule> items)? loaded,
+    TResult? Function(List<Schedule> items, bool isTeacher)? loaded,
     TResult? Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<Schedule> items)? loaded,
+    TResult Function(List<Schedule> items, bool isTeacher)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
@@ -118,7 +118,7 @@ class _$_Loading implements _Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<Schedule> items) loaded,
+    required TResult Function(List<Schedule> items, bool isTeacher) loaded,
     required TResult Function(String message) error,
   }) {
     return loading();
@@ -128,7 +128,7 @@ class _$_Loading implements _Loading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(List<Schedule> items)? loaded,
+    TResult? Function(List<Schedule> items, bool isTeacher)? loaded,
     TResult? Function(String message)? error,
   }) {
     return loading?.call();
@@ -138,7 +138,7 @@ class _$_Loading implements _Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<Schedule> items)? loaded,
+    TResult Function(List<Schedule> items, bool isTeacher)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -192,7 +192,7 @@ abstract class _$$_LoadedCopyWith<$Res> {
   factory _$$_LoadedCopyWith(_$_Loaded value, $Res Function(_$_Loaded) then) =
       __$$_LoadedCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<Schedule> items});
+  $Res call({List<Schedule> items, bool isTeacher});
 }
 
 /// @nodoc
@@ -206,12 +206,17 @@ class __$$_LoadedCopyWithImpl<$Res>
   @override
   $Res call({
     Object? items = null,
+    Object? isTeacher = null,
   }) {
     return _then(_$_Loaded(
-      null == items
+      items: null == items
           ? _value._items
           : items // ignore: cast_nullable_to_non_nullable
               as List<Schedule>,
+      isTeacher: null == isTeacher
+          ? _value.isTeacher
+          : isTeacher // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -219,7 +224,9 @@ class __$$_LoadedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Loaded implements _Loaded {
-  const _$_Loaded(final List<Schedule> items) : _items = items;
+  const _$_Loaded(
+      {required final List<Schedule> items, required this.isTeacher})
+      : _items = items;
 
   final List<Schedule> _items;
   @override
@@ -230,8 +237,11 @@ class _$_Loaded implements _Loaded {
   }
 
   @override
+  final bool isTeacher;
+
+  @override
   String toString() {
-    return 'TimetableState.loaded(items: $items)';
+    return 'TimetableState.loaded(items: $items, isTeacher: $isTeacher)';
   }
 
   @override
@@ -239,12 +249,14 @@ class _$_Loaded implements _Loaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Loaded &&
-            const DeepCollectionEquality().equals(other._items, _items));
+            const DeepCollectionEquality().equals(other._items, _items) &&
+            (identical(other.isTeacher, isTeacher) ||
+                other.isTeacher == isTeacher));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_items));
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_items), isTeacher);
 
   @JsonKey(ignore: true)
   @override
@@ -256,32 +268,32 @@ class _$_Loaded implements _Loaded {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<Schedule> items) loaded,
+    required TResult Function(List<Schedule> items, bool isTeacher) loaded,
     required TResult Function(String message) error,
   }) {
-    return loaded(items);
+    return loaded(items, isTeacher);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(List<Schedule> items)? loaded,
+    TResult? Function(List<Schedule> items, bool isTeacher)? loaded,
     TResult? Function(String message)? error,
   }) {
-    return loaded?.call(items);
+    return loaded?.call(items, isTeacher);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<Schedule> items)? loaded,
+    TResult Function(List<Schedule> items, bool isTeacher)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(items);
+      return loaded(items, isTeacher);
     }
     return orElse();
   }
@@ -322,9 +334,12 @@ class _$_Loaded implements _Loaded {
 }
 
 abstract class _Loaded implements TimetableState {
-  const factory _Loaded(final List<Schedule> items) = _$_Loaded;
+  const factory _Loaded(
+      {required final List<Schedule> items,
+      required final bool isTeacher}) = _$_Loaded;
 
   List<Schedule> get items;
+  bool get isTeacher;
   @JsonKey(ignore: true)
   _$$_LoadedCopyWith<_$_Loaded> get copyWith =>
       throw _privateConstructorUsedError;
@@ -393,7 +408,7 @@ class _$_Error implements _Error {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<Schedule> items) loaded,
+    required TResult Function(List<Schedule> items, bool isTeacher) loaded,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -403,7 +418,7 @@ class _$_Error implements _Error {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(List<Schedule> items)? loaded,
+    TResult? Function(List<Schedule> items, bool isTeacher)? loaded,
     TResult? Function(String message)? error,
   }) {
     return error?.call(message);
@@ -413,7 +428,7 @@ class _$_Error implements _Error {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<Schedule> items)? loaded,
+    TResult Function(List<Schedule> items, bool isTeacher)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {

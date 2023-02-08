@@ -6,12 +6,14 @@ class ScheduleListTile extends StatelessWidget {
   final bool isDisabled;
 
   final bool showWeekType;
+  final bool isTeacher;
 
   const ScheduleListTile({
     super.key,
     required this.schedule,
-    this.isDisabled = false,
-    this.showWeekType = true,
+    required this.isDisabled,
+    required this.showWeekType,
+    required this.isTeacher,
   });
 
   @override
@@ -45,7 +47,7 @@ class ScheduleListTile extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  '${schedule.teacher} • ${schedule.classroom} • ${schedule.lessonType}',
+                  '${isTeacher ? schedule.group : schedule.teacher} • ${schedule.classroom} • ${schedule.lessonType}',
                 ),
               ),
               if (showWeekType)
