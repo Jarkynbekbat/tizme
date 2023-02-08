@@ -66,6 +66,7 @@ class AppSearchDelegate extends SearchDelegate<SuggestionItem?> {
     final results = items.where(
       (el) {
         final name = el.name.toLowerCase();
+
         return name.startsWith(_query) ||
             (_query.length > 1 && name.contains(_query));
       },
