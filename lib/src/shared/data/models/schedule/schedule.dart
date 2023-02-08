@@ -1,8 +1,10 @@
+import 'package:equatable/equatable.dart';
 import 'package:studtime/src/shared/data/models/schedule/schedule_ref.dart';
 import 'package:studtime/src/shared/data/models/time/time.dart';
+import 'package:studtime/src/shared/extensions/on_datetime.dart';
 import 'package:studtime/src/shared/extensions/on_doc_ref.dart';
 
-class Schedule {
+class Schedule extends Equatable {
   final String id;
   final String classroom;
   final Weekday day;
@@ -86,10 +88,35 @@ class Schedule {
       week: week,
     );
   }
+
+  @override
+  List<Object?> get props => [
+        id,
+        classroom,
+        day,
+        group,
+        lessonType,
+        semester,
+        subject,
+        teacher,
+        time,
+        week,
+      ];
+
+  bool get isCurrentWeek {
+    final currentWeekType = DateTime.now().getWeekType();
+    return week == currentWeekType;
+  }
 }
 
 enum Weekday { monday, tuesday, wednesday, thursday, friday }
 
 enum Semester { first, second }
 
-enum WeekType { even, odd }
+enum WeekType {
+  /// Числитель
+  even,
+
+  /// Знаменатель
+  odd,
+}

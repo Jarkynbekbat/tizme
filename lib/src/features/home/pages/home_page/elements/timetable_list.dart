@@ -17,8 +17,8 @@ class TimetableList extends StatelessWidget {
         return state.when(
           loading: () => const Center(child: CircularProgressIndicator()),
           loaded: (list) {
-            final filtered =
-                list.where((element) => element.day == weekday).toList();
+            final filtered = list.where((el) => el.day == weekday).toList()
+              ..sort((a, b) => a.time.order - b.time.order);
 
             if (filtered.isEmpty) {
               return Center(
@@ -44,10 +44,25 @@ class TimetableList extends StatelessWidget {
             return ListView.builder(
               itemCount: filtered.length,
               padding: const EdgeInsets.all(16.0),
-              itemBuilder: (context, index) => ScheduleListTile(
-                key: ValueKey('ScheduleListTile__${filtered[index].id}'),
-                schedule: filtered[index],
-              ),
+              itemBuilder: (context, index) {
+                final schedule = filtered[index];
+                final isCurrentWeek = schedule.isCurrentWeek;
+                final isEven = schedule.week == WeekType.even;
+                final isOdd = schedule.week == WeekType.odd;
+
+                final hasReplacement = filtered
+                    .any((el) => el.time == schedule.time && el != schedule);
+
+                final isDisabled = (isOdd && !isCurrentWeek) ||
+                    (isEven && !isCurrentWeek && hasReplacement);
+
+                return ScheduleListTile(
+                  key: ValueKey('ScheduleListTile__${schedule.id}'),
+                  schedule: schedule,
+                  isDisabled: isDisabled,
+                  showWeekType: hasReplacement || isDisabled,
+                );
+              },
             );
           },
           error: (error) => Center(child: Text(error)),

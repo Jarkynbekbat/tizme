@@ -16,10 +16,12 @@ class RaspPage extends StatefulWidget {
   _RaspPageState createState() => _RaspPageState();
 }
 
-class _RaspPageState extends State<RaspPage> with SingleTickerProviderStateMixin {
+class _RaspPageState extends State<RaspPage>
+    with SingleTickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   PageController pageController;
-  RefreshController _refreshController = RefreshController(initialRefresh: false);
+  RefreshController _refreshController =
+      RefreshController(initialRefresh: false);
 
   @override
   void initState() {
@@ -40,35 +42,43 @@ class _RaspPageState extends State<RaspPage> with SingleTickerProviderStateMixin
         () => _scaffoldKey.currentState.openDrawer(),
         'default',
       ),
-      body: Consumer<RaspModel>(builder: (context, raspModel, _) {
-        return !raspModel.isLoaded
-            ? const LoadingSkeleton()
-            : SmartRefresher(
-                controller: _refreshController,
-                enablePullDown: true,
-                onRefresh: () => raspModel.onRefresh(_scaffoldKey, _refreshController),
-                child: PageView(
-                  controller: pageController,
-                  onPageChanged: (index) => raspModel.setCurrent(index + 1),
-                  children: List.generate(7, (index) {
-                    List<RaspItem> raspsList = raspModel.getRaspByDayId(index + 1);
-                    return SingleChildScrollView(
-                      child: Container(
-                        margin: EdgeInsets.only(right: 8, left: 8, top: 8),
-                        child: Column(
-                          children: raspsList.length == 0
-                              ? [NoRasps()]
-                              : List.generate(
-                                  raspsList.length,
-                                  (index2) => RaspItemView(raspItem: raspsList[index2]),
-                                ),
-                        ),
-                      ),
-                    );
-                  }),
-                ),
-              );
-      }),
+      body: Consumer<RaspModel>(
+        builder: (context, raspModel, _) {
+          return !raspModel.isLoaded
+              ? const LoadingSkeleton()
+              : SmartRefresher(
+                  controller: _refreshController,
+                  enablePullDown: true,
+                  onRefresh: () =>
+                      raspModel.onRefresh(_scaffoldKey, _refreshController),
+                  child: PageView(
+                    controller: pageController,
+                    onPageChanged: (index) => raspModel.setCurrent(index + 1),
+                    children: List.generate(
+                      7,
+                      (index) {
+                        List<RaspItem> raspsList =
+                            raspModel.getRaspByDayId(index + 1);
+                        return SingleChildScrollView(
+                          child: Container(
+                            margin: EdgeInsets.only(right: 8, left: 8, top: 8),
+                            child: Column(
+                              children: raspsList.length == 0
+                                  ? [NoRasps()]
+                                  : List.generate(
+                                      raspsList.length,
+                                      (index2) => RaspItemView(
+                                          raspItem: raspsList[index2]),
+                                    ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                );
+        },
+      ),
       bottomNavigationBar: RaspTitledBottomNavigationBar(
         selectedDay: raspModel.today - 1,
         jumpTo: (index) => pageController.jumpToPage(index),

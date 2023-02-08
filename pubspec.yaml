@@ -26,6 +26,7 @@ dependencies:
   flutter_easyloading: ^3.0.5
   titled_navigation_bar: ^5.0.0-nullsafety.0
   flutter_intro: ^3.0.2
+  equatable: ^2.0.5
 
 dev_dependencies:
   flutter_test:
