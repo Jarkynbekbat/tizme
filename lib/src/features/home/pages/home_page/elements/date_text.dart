@@ -5,10 +5,19 @@ class DateText extends StatelessWidget {
   final int weekdayIndex;
   const DateText(this.weekdayIndex, {super.key});
 
+  String getDateByWeekday(int weekday) {
+    final now = DateTime.now();
+    final daysUntilTarget = weekday - now.weekday;
+    final targetDate = now.add(Duration(days: daysUntilTarget));
+    final day = targetDate.day.toString().padLeft(2, "0");
+    final month = targetDate.month.toString().padLeft(2, "0");
+    return '$day.$month';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Text(
-      '03.12', // TODO: nur вынести правильную дату в таком формате, в зависимости от weekdayIndex
+      getDateByWeekday(weekdayIndex),
       style: TextStyle(
         fontSize: 15.0,
         color: AppColors.primaryColor,

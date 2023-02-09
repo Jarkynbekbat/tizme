@@ -56,23 +56,23 @@ class HomePage extends HookWidget {
           items: [
             TitledNavigationBarItem(
               title: const Text('ПН'),
-              icon: const DateText(0),
-            ),
-            TitledNavigationBarItem(
-              title: const Text('ВТ'),
               icon: const DateText(1),
             ),
             TitledNavigationBarItem(
-              title: const Text('СР'),
+              title: const Text('ВТ'),
               icon: const DateText(2),
             ),
             TitledNavigationBarItem(
-              title: const Text('ЧТ'),
+              title: const Text('СР'),
               icon: const DateText(3),
             ),
             TitledNavigationBarItem(
-              title: const Text('ПТ'),
+              title: const Text('ЧТ'),
               icon: const DateText(4),
+            ),
+            TitledNavigationBarItem(
+              title: const Text('ПТ'),
+              icon: const DateText(5),
             ),
           ],
           activeColor: AppColors.primaryColor,
