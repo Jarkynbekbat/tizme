@@ -55,12 +55,16 @@ class NoteItem extends StatelessWidget {
                   children: [
                     Text(
                       flexing(_obj['content']),
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                       overflow: TextOverflow.clip,
+
                       // softWrap: true,
                     ),
                     Text(
-                      _obj['date'].substring(0, 16).replaceFirst(' ', '          '),
+                      _obj['date']
+                          .substring(0, 16)
+                          .replaceFirst(' ', '          '),
                       style: TextStyle(fontSize: 14),
                     ),
                   ],

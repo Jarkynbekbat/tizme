@@ -33,8 +33,9 @@ void main() async {
     //   StoreUpdater.checkUpdate();
     // }
 
-    Widget _defaultHome =
-        await LocalCypherService.getCypher() != null ? ThemeConsumer(child: RaspPage()) : ThemeConsumer(child: IntroPage());
+    Widget _defaultHome = await LocalCypherService.getCypher() != null
+        ? ThemeConsumer(child: RaspPage())
+        : ThemeConsumer(child: IntroPage());
 
     return runApp(ThemeProvider(
       saveThemesOnChange: true,
@@ -66,14 +67,20 @@ void main() async {
             IntroPage.route: (_) => ThemeConsumer(child: IntroPage()),
             RaspPage.route: (_) => ThemeConsumer(child: RaspPage()),
             LoginPage.route: (_) => ThemeConsumer(child: LoginPage()),
-            NotificationsPage.route: (_) => ThemeConsumer(child: NotificationsPage()),
+            NotificationsPage.route: (_) =>
+                ThemeConsumer(child: NotificationsPage()),
             AboutAppPage.route: (_) => ThemeConsumer(child: AboutAppPage()),
-            ModuleGraphPage.route: (_) => ThemeConsumer(child: ModuleGraphPage()),
-            SessionGraphPage.route: (_) => ThemeConsumer(child: SessionGraphPage()),
-            RaspItemNotesPage.route: (_) => ThemeConsumer(child: RaspItemNotesPage()),
-            RaspItemNoteAddPage.route: (_) => ThemeConsumer(child: RaspItemNoteAddPage()),
+            ModuleGraphPage.route: (_) =>
+                ThemeConsumer(child: ModuleGraphPage()),
+            SessionGraphPage.route: (_) =>
+                ThemeConsumer(child: SessionGraphPage()),
+            RaspItemNotesPage.route: (_) =>
+                ThemeConsumer(child: RaspItemNotesPage()),
+            RaspItemNoteAddPage.route: (_) =>
+                ThemeConsumer(child: RaspItemNoteAddPage()),
             NoteItemHero.route: (_) => ThemeConsumer(child: NoteItemHero()),
-            RaspItemPhotosPage.route: (_) => ThemeConsumer(child: RaspItemPhotosPage()),
+            RaspItemPhotosPage.route: (_) =>
+                ThemeConsumer(child: RaspItemPhotosPage()),
             PhotoItemHero.route: (_) => ThemeConsumer(child: PhotoItemHero()),
             ChatPage.route: (_) => ThemeConsumer(child: ChatPage()),
           },

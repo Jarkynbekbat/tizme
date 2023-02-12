@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:studtime/src/features/splash/pages/setup_page/blocs/setup_cubit/setup_cubit.dart';
 import 'package:studtime/src/shared/assets/assets.gen.dart';
-import 'package:studtime/src/shared/data/models/abstracts/suggestion_item.dart';
+import 'package:studtime/src/shared/data/models/suggestion_item.dart';
 import 'package:studtime/src/shared/data/models/settings/user_settings.dart';
 import 'package:studtime/src/shared/data/models/teacher/teacher.dart';
 import 'package:studtime/src/shared/data/repos/app_cache_repo.dart';

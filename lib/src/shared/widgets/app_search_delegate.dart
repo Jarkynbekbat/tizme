@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:studtime/src/shared/data/models/abstracts/suggestion_item.dart';
+import 'package:studtime/src/shared/data/models/suggestion_item.dart';
 import 'package:studtime/src/shared/data/models/group/group.dart';
 import 'package:studtime/src/shared/styles/app_colors.dart';
 

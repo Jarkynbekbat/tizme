@@ -4,16 +4,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:studtime/src/features/home/blocs/settings_cubit.dart';
 import 'package:studtime/src/features/home/blocs/timetable_cubit/timetable_cubit.dart';
-import 'package:studtime/src/features/home/pages/home_page/elements/date_text.dart';
-import 'package:studtime/src/features/home/pages/home_page/elements/home_app_bar.dart';
-import 'package:studtime/src/features/home/pages/home_page/elements/home_drawer.dart';
-import 'package:studtime/src/features/home/pages/home_page/elements/timetable_list.dart';
+import 'package:studtime/src/features/home/pages/timetable_page/elements/date_text.dart';
+import 'package:studtime/src/features/home/pages/timetable_page/elements/home_app_bar.dart';
+import 'package:studtime/src/features/home/pages/timetable_page/elements/home_drawer.dart';
+import 'package:studtime/src/features/home/pages/timetable_page/elements/timetable_list.dart';
 import 'package:studtime/src/shared/data/models/schedule/schedule.dart';
 import 'package:studtime/src/shared/styles/app_colors.dart';
 import 'package:titled_navigation_bar/titled_navigation_bar.dart';
 
-class HomePage extends HookWidget {
-  const HomePage({Key? key}) : super(key: key);
+class TimetablePage extends HookWidget {
+  const TimetablePage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final pageController = useMemoized(() => PageController(initialPage: 0));

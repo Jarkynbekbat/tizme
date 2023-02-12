@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:studtime/src/shared/data/models/abstracts/suggestion_item.dart';
+import 'package:studtime/src/shared/data/models/suggestion_item.dart';
 import 'package:studtime/src/shared/data/models/group/group.dart';
 import 'package:studtime/src/shared/data/models/teacher/teacher.dart';
 

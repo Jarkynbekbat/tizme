@@ -7,6 +7,6 @@ class IsFirstLaunchCache extends AppCache<bool> {
   @override
   bool get() {
     /// если значение не было сохранено, то возвращаем true
-    return super.get() ?? false;
+    return super.get() ?? true;
   }
 }

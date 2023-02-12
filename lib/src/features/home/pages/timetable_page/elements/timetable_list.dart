@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:studtime/src/features/home/blocs/timetable_cubit/timetable_cubit.dart';
-import 'package:studtime/src/features/home/pages/home_page/elements/schedule_list_tile.dart';
+import 'package:studtime/src/features/home/pages/timetable_page/elements/schedule_list_tile.dart';
 import 'package:studtime/src/shared/assets/assets.gen.dart';
 import 'package:studtime/src/shared/data/models/schedule/schedule.dart';
 import 'package:studtime/src/shared/styles/app_colors.dart';

@@ -12,6 +12,7 @@ class Schedule extends Equatable {
   final String lessonType;
   final Semester semester;
   final String subject;
+  final String subjectId;
   final String teacher;
   final Time time;
   final WeekType week;
@@ -24,6 +25,7 @@ class Schedule extends Equatable {
     required this.lessonType,
     required this.semester,
     required this.subject,
+    required this.subjectId,
     required this.teacher,
     required this.time,
     required this.week,
@@ -63,6 +65,7 @@ class Schedule extends Equatable {
 
     final subjectMap = results[5].data() as Map<String, dynamic>;
     final subject = subjectMap['name'] as String;
+    final subjectId = scheduleRef.subjectRef.id;
 
     final teacherMap = results[6].data() as Map<String, dynamic>;
     final teacher = teacherMap['name'] as String;
@@ -83,6 +86,7 @@ class Schedule extends Equatable {
       lessonType: lessonType,
       semester: semester,
       subject: subject,
+      subjectId: subjectId,
       teacher: teacher,
       time: time,
       week: week,
