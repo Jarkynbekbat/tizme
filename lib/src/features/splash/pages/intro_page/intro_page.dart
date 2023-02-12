@@ -12,7 +12,7 @@ class IntroPage extends StatelessWidget {
     /// отмечаем, что интро показано
     final cacheRepo = context.read<AppCacheRepo>();
     final isFirstLaunchCache = cacheRepo.isFirstLaunchCache;
-    isFirstLaunchCache.set(true);
+    isFirstLaunchCache.set(false);
 
     /// переходим на страницу настройки
     context.pushReplacementNamed('/setup');
