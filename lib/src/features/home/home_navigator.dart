@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:studtime/src/features/home/blocs/settings_cubit.dart';
+import 'package:studtime/src/features/home/pages/about_page/about_page.dart';
 import 'package:studtime/src/features/home/pages/timetable_page/timetable_page.dart';
 import 'package:studtime/src/features/home/pages/cache_chat_page/cache_chat_page.dart';
 import 'package:studtime/src/shared/data/models/schedule/schedule.dart';
@@ -38,6 +39,9 @@ class _HomeNavigatorState extends State<HomeNavigator> {
                 final schedule = settings.arguments as Schedule;
                 return CacheChatPage(schedule: schedule).toMatRoute();
               }
+
+            case '/about':
+              return const AboutPage().toMatRoute();
 
             default:
               return null;

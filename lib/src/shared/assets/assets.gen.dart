@@ -11,6 +11,20 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/services.dart';
 
+class $AssetsAboutGen {
+  const $AssetsAboutGen();
+
+  /// File path: assets/about/about_us.svg
+  SvgGenImage get aboutUs => const SvgGenImage('assets/about/about_us.svg');
+
+  /// File path: assets/about/ic_launcher.png
+  AssetGenImage get icLauncher =>
+      const AssetGenImage('assets/about/ic_launcher.png');
+
+  /// List of all assets
+  List<dynamic> get values => [aboutUs, icLauncher];
+}
+
 class $AssetsIntroGen {
   const $AssetsIntroGen();
 
@@ -40,20 +54,17 @@ class $AssetsSetupGen {
 class $AssetsSharedGen {
   const $AssetsSharedGen();
 
-  /// File path: assets/shared/center_arn.svg
-  SvgGenImage get centerArn =>
-      const SvgGenImage('assets/shared/center_arn.svg');
-
   /// File path: assets/shared/no_data.svg
   SvgGenImage get noData => const SvgGenImage('assets/shared/no_data.svg');
 
   /// List of all assets
-  List<SvgGenImage> get values => [centerArn, noData];
+  List<SvgGenImage> get values => [noData];
 }
 
 class Assets {
   Assets._();
 
+  static const $AssetsAboutGen about = $AssetsAboutGen();
   static const $AssetsIntroGen intro = $AssetsIntroGen();
   static const $AssetsSetupGen setup = $AssetsSetupGen();
   static const $AssetsSharedGen shared = $AssetsSharedGen();

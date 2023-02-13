@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:flutter_intro/flutter_intro.dart';
 import 'package:studtime/src/features/splash/splash_navigator.dart';
 import 'package:studtime/src/shared/styles/app_themes.dart';
 
@@ -13,15 +12,12 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     setupEasyLoading();
 
-    return Intro(
-      buttonTextBuilder: (_) => "Готово",
-      child: MaterialApp(
-        theme: AppThemes.lightTheme,
-        darkTheme: AppThemes.darkTheme,
-        themeMode: ThemeMode.light,
-        builder: EasyLoading.init(),
-        home: const SplashNavigator(),
-      ),
+    return MaterialApp(
+      theme: AppThemes.lightTheme,
+      darkTheme: AppThemes.darkTheme,
+      themeMode: ThemeMode.light,
+      builder: EasyLoading.init(),
+      home: const SplashNavigator(),
     );
   }
 }

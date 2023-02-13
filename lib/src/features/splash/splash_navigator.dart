@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_intro/flutter_intro.dart';
 import 'package:studtime/src/features/home/home_navigator.dart';
 import 'package:studtime/src/features/splash/blocs/init_cubit/init_cubit.dart';
 import 'package:studtime/src/features/splash/pages/intro_page/intro_page.dart';
@@ -39,24 +40,27 @@ class SplashNavigator extends StatelessWidget {
           final isConfirmed = await confirmCloseApp(context);
           return isConfirmed ?? false;
         },
-        child: Navigator(
-          key: SplashNavigator.navKey,
-          initialRoute: '/',
-          onGenerateRoute: (settings) {
-            switch (settings.name) {
-              case '/':
-                return const SplashPage().toMatRoute();
-              case '/intro':
-                return const IntroPage().toMatRoute();
-              case '/setup':
-                return const SetupPage().toMatRoute();
-              case '/home':
-                return const HomeNavigator().toMatRoute();
-              default:
-                return null;
-            }
-          },
-          onPopPage: (route, result) => route.didPop(result),
+        child: Intro(
+          buttonTextBuilder: (_) => "Готово",
+          child: Navigator(
+            key: SplashNavigator.navKey,
+            initialRoute: '/',
+            onGenerateRoute: (settings) {
+              switch (settings.name) {
+                case '/':
+                  return const SplashPage().toMatRoute();
+                case '/intro':
+                  return const IntroPage().toMatRoute();
+                case '/setup':
+                  return const SetupPage().toMatRoute();
+                case '/home':
+                  return const HomeNavigator().toMatRoute();
+                default:
+                  return null;
+              }
+            },
+            onPopPage: (route, result) => route.didPop(result),
+          ),
         ),
       ),
     );

@@ -7,6 +7,20 @@ class HomeDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Drawer();
+    return Drawer(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ListTile(
+            onTap: () {
+              Scaffold.of(context).openEndDrawer();
+              Navigator.of(context).pushNamed('/about');
+            },
+            leading: const Icon(Icons.info_outline),
+            title: const Text('О приложении'),
+          ),
+        ],
+      ),
+    );
   }
 }
