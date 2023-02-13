@@ -81,10 +81,16 @@ class AppSearchDelegate extends SearchDelegate<SuggestionItem?> {
         return ListTile(
           onTap: () => close(context, item),
           leading: Icon(
-            item is Group ? Icons.group : Icons.person,
+            item is Group ? Icons.groups_rounded : Icons.person,
             color: AppColors.primaryColor,
           ),
-          title: Text(item.name),
+          title: Text(
+            item.name,
+            style: const TextStyle(
+              fontSize: 16.0,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
         );
       },
     );

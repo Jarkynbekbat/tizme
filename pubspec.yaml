@@ -63,6 +63,7 @@ flutter_icons:
 flutter:
   uses-material-design: true
   assets:
+    - assets/ic_launcher.png
     - assets/intro/
     - assets/setup/
     - assets/shared/

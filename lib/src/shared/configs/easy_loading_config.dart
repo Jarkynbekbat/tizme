@@ -10,8 +10,8 @@ void setupEasyLoading() {
 
     ///
     ..maskColor = Colors.transparent
-    ..backgroundColor = AppColors.primaryColor.withOpacity(0.22)
-    ..textColor = AppColors.primaryColor.withOpacity(0.88)
+    ..backgroundColor = AppColors.primaryColor.withOpacity(0.66)
+    ..textColor = Colors.white
     ..maskType = EasyLoadingMaskType.custom
     ..loadingStyle = EasyLoadingStyle.custom
     ..boxShadow = []

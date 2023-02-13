@@ -17,12 +17,8 @@ class $AssetsAboutGen {
   /// File path: assets/about/about_us.svg
   SvgGenImage get aboutUs => const SvgGenImage('assets/about/about_us.svg');
 
-  /// File path: assets/about/ic_launcher.png
-  AssetGenImage get icLauncher =>
-      const AssetGenImage('assets/about/ic_launcher.png');
-
   /// List of all assets
-  List<dynamic> get values => [aboutUs, icLauncher];
+  List<SvgGenImage> get values => [aboutUs];
 }
 
 class $AssetsIntroGen {
@@ -65,9 +61,14 @@ class Assets {
   Assets._();
 
   static const $AssetsAboutGen about = $AssetsAboutGen();
+  static const AssetGenImage icLauncher =
+      AssetGenImage('assets/ic_launcher.png');
   static const $AssetsIntroGen intro = $AssetsIntroGen();
   static const $AssetsSetupGen setup = $AssetsSetupGen();
   static const $AssetsSharedGen shared = $AssetsSharedGen();
+
+  /// List of all assets
+  List<AssetGenImage> get values => [icLauncher];
 }
 
 class AssetGenImage {

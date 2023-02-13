@@ -8,7 +8,9 @@ extension OnWidget on Widget {
   Widget dev() {
     return CupertinoButton(
       onPressed: () {
-        EasyLoading.showToast("Данный функционал находится в разработке");
+        EasyLoading.showToast(
+          "Данный функционал находится в разработке",
+        );
       },
       padding: EdgeInsets.zero,
       child: Opacity(

@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:studtime/src/shared/assets/assets.gen.dart';
+import 'package:studtime/src/shared/extensions/on_widget.dart';
+import 'package:studtime/src/shared/styles/app_colors.dart';
+import 'package:studtime/src/shared/widgets/app_drawer_menu_item.dart';
 
 class HomeDrawer extends StatelessWidget {
   const HomeDrawer({
@@ -11,13 +15,35 @@ class HomeDrawer extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          ListTile(
+          AppDrawerMenuItem(
+            onTap: () {},
+            leading: const Icon(
+              Icons.school_outlined,
+              color: AppColors.primaryColor,
+            ),
+            title: 'График сессий',
+          ).dev(),
+          AppDrawerMenuItem(
+            onTap: () {},
+            leading: const Icon(
+              Icons.school_outlined,
+              color: AppColors.primaryColor,
+            ),
+            title: 'График модулей',
+            isLast: true,
+          ).dev(),
+          const SizedBox(height: 40.0),
+          AppDrawerMenuItem(
             onTap: () {
               Scaffold.of(context).openEndDrawer();
               Navigator.of(context).pushNamed('/about');
             },
-            leading: const Icon(Icons.info_outline),
-            title: const Text('О приложении'),
+            leading: Assets.icLauncher.image(
+              width: 32.0,
+              height: 32.0,
+            ),
+            title: 'О приложении',
+            isLast: true,
           ),
         ],
       ),
