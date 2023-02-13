@@ -45,7 +45,7 @@ class ChatTextItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(12.0),
             ),
             child: const Icon(
-              Icons.delete,
+              Icons.delete_outlined,
               color: Colors.red,
             ),
           ),
@@ -64,7 +64,7 @@ class ChatTextItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(12.0),
             ),
             child: const Icon(
-              Icons.edit,
+              Icons.edit_outlined,
               color: Colors.orange,
             ),
           ),

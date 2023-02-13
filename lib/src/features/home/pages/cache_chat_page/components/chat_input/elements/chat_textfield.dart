@@ -18,7 +18,6 @@ class ChatTextfield extends StatelessWidget {
       keyboardType: TextInputType.multiline,
       maxLines: 5,
       minLines: 1,
-      autofocus: true,
       decoration: const InputDecoration(
         hintText: 'Введите заметку',
         border: InputBorder.none,
