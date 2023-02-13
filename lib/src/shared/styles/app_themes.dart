@@ -11,7 +11,7 @@ abstract class AppThemes {
       ),
     ),
     primaryColor: AppColors.primaryColor,
-    colorScheme: ColorScheme.light(
+    colorScheme: const ColorScheme.light(
       primary: AppColors.primaryColor,
       secondary: AppColors.secondaryColor,
     ),

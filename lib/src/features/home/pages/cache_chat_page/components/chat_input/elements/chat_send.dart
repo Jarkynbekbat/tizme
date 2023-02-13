@@ -16,7 +16,7 @@ class ChatSend extends StatelessWidget {
       opacity: onPressed == null ? 0.33 : 1,
       child: IconButton(
         onPressed: onPressed,
-        icon: Icon(
+        icon: const Icon(
           Icons.send,
           color: AppColors.primaryColor,
         ),

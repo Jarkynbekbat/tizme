@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:studtime/src/shared/styles/app_colors.dart';
 
@@ -19,7 +18,7 @@ class DateText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       getDateByWeekday(weekdayIndex),
-      style: TextStyle(
+      style: const TextStyle(
         fontSize: 15.0,
         color: AppColors.primaryColor,
       ),

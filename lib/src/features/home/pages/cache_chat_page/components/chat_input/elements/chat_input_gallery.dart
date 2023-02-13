@@ -22,7 +22,7 @@ class ChatInputGallery extends StatelessWidget {
           contentCubit.addChatImage(photo.path);
         }
       },
-      icon: Icon(
+      icon: const Icon(
         Icons.image_outlined,
         color: AppColors.primaryColor,
       ),

@@ -32,13 +32,13 @@ class AboutPage extends StatelessWidget {
             const SizedBox(height: 8.0),
             RichText(
               textAlign: TextAlign.center,
-              text: TextSpan(
+              text: const TextSpan(
                 style: TextStyle(
                   color: AppColors.secondaryColor,
                   fontSize: 14.0,
                 ),
                 children: <TextSpan>[
-                  const TextSpan(text: 'Наше приложение, '),
+                  TextSpan(text: 'Наше приложение, '),
                   TextSpan(
                     text: 'Tizme',
                     style: TextStyle(
@@ -46,7 +46,7 @@ class AboutPage extends StatelessWidget {
                       color: AppColors.primaryColor,
                     ),
                   ),
-                  const TextSpan(
+                  TextSpan(
                       text:
                           ', является неотъемлемым инструментом для студентов, чтобы всегда оставаться в курсе своего расписания. С '),
                   TextSpan(
@@ -56,7 +56,7 @@ class AboutPage extends StatelessWidget {
                       color: AppColors.primaryColor,
                     ),
                   ),
-                  const TextSpan(
+                  TextSpan(
                       text:
                           ' студенты могут легко получить доступ к своему расписанию, где бы они ни находились. Все ваши занятия, дедлайны и другие важные материалы всегда под рукой. Оставайтесь на высоте своих обязательств с '),
                   TextSpan(
@@ -66,7 +66,7 @@ class AboutPage extends StatelessWidget {
                       color: AppColors.primaryColor,
                     ),
                   ),
-                  const TextSpan(text: '.'),
+                  TextSpan(text: '.'),
                 ],
               ),
             ),
