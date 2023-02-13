@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:studtime/src/shared/data/cache/chat_cache.dart';
+import 'package:studtime/src/shared/data/models/chat/chat_image.dart';
 import 'package:studtime/src/shared/data/models/chat/chat_message.dart';
 import 'package:studtime/src/shared/data/models/chat/chat_text.dart';
 
@@ -31,6 +32,21 @@ class ChatContentCubit extends Cubit<ChatContentState> {
       await chatCache.add(
         ChatText(
           text,
+          subjectId: subjectId,
+          createdAt: DateTime.now(),
+        ),
+      );
+      loadMessages();
+    } on Exception catch (e) {
+      Future.error(e);
+    }
+  }
+
+  Future<void> addChatImage(String path) async {
+    try {
+      await chatCache.add(
+        ChatImage(
+          path,
           subjectId: subjectId,
           createdAt: DateTime.now(),
         ),

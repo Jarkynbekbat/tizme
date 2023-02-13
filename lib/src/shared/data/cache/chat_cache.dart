@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'dart:io';
 
+import 'package:path_provider/path_provider.dart';
 import 'package:studtime/src/shared/data/cache/app_cache.dart';
 import 'package:studtime/src/shared/data/models/chat/chat_message.dart';
 
@@ -23,9 +25,35 @@ class ChatCache extends AppCache<List<ChatMessage>> {
 
   Future<bool> add(ChatMessage message) async {
     try {
-      final messages = get();
-      messages.add(message);
-      await set(messages);
+      await message.map(
+        text: (textMessage) async {
+          final messages = get();
+          messages.add(message);
+          await set(messages);
+        },
+
+        /// если сообщение хранит файл, то копируем его в папку для файлов приложения
+        image: (imageMessage) async {
+          /// получаем путь к файлу и его имя
+          final tempFile = File(imageMessage.path);
+          final imageName = imageMessage.path.split('/').last;
+
+          /// копируем файл в папку приложения
+          final directory = await getApplicationDocumentsDirectory();
+          final path = directory.path;
+          final newFilePath = '$path/$imageName';
+          await tempFile.copy(newFilePath);
+
+          /// создаем новое сообщение с новым путем к файлу
+          final messages = get();
+          messages.add(imageMessage.copyWith(path: newFilePath));
+          await set(messages);
+
+          /// удаляем старый файл из временного хранилища
+          await tempFile.delete();
+        },
+      );
+
       return true;
     } on Exception {
       return false;
@@ -34,6 +62,17 @@ class ChatCache extends AppCache<List<ChatMessage>> {
 
   Future<bool> removeOne(ChatMessage message) async {
     try {
+      await message.map(
+        text: (textMessage) {},
+
+        /// если сообщение хранит файл, то удаляем и файл
+        image: (imageMessage) async {
+          final path = imageMessage.path;
+          final file = File(path);
+          await file.delete();
+        },
+      );
+
       final messages = get();
       messages.remove(message);
       await set(messages);

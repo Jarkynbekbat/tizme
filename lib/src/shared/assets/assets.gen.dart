@@ -40,11 +40,15 @@ class $AssetsSetupGen {
 class $AssetsSharedGen {
   const $AssetsSharedGen();
 
+  /// File path: assets/shared/center_arn.svg
+  SvgGenImage get centerArn =>
+      const SvgGenImage('assets/shared/center_arn.svg');
+
   /// File path: assets/shared/no_data.svg
   SvgGenImage get noData => const SvgGenImage('assets/shared/no_data.svg');
 
   /// List of all assets
-  List<SvgGenImage> get values => [noData];
+  List<SvgGenImage> get values => [centerArn, noData];
 }
 
 class Assets {

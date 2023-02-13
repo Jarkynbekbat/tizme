@@ -10,7 +10,6 @@ import 'package:studtime/src/features/home/pages/cache_chat_page/components/chat
 import 'package:studtime/src/features/home/pages/cache_chat_page/components/chat_input/elements/chat_input_gallery.dart';
 import 'package:studtime/src/features/home/pages/cache_chat_page/components/chat_input/elements/chat_send.dart';
 import 'package:studtime/src/features/home/pages/cache_chat_page/components/chat_input/elements/chat_textfield.dart';
-import 'package:studtime/src/shared/extensions/on_widget.dart';
 
 class ChatInput extends HookWidget {
   const ChatInput({
@@ -61,9 +60,9 @@ class ChatInput extends HookWidget {
                     },
                     attachActions: (_) {
                       return Row(
-                        children: [
-                          const ChatInputCamera().dev(),
-                          const ChatInputGallery().dev(),
+                        children: const [
+                          ChatInputCamera(),
+                          ChatInputGallery(),
                         ],
                       );
                     },
