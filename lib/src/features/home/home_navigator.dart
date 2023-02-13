@@ -7,9 +7,16 @@ import 'package:studtime/src/shared/data/models/schedule/schedule.dart';
 import 'package:studtime/src/shared/data/repos/app_cache_repo.dart';
 import 'package:studtime/src/shared/extensions/on_widget.dart';
 
-class HomeNavigator extends StatelessWidget {
+class HomeNavigator extends StatefulWidget {
+  static final navKey = GlobalKey<NavigatorState>();
+
   const HomeNavigator({super.key});
 
+  @override
+  State<HomeNavigator> createState() => _HomeNavigatorState();
+}
+
+class _HomeNavigatorState extends State<HomeNavigator> {
   @override
   Widget build(BuildContext context) {
     final settingsCache = context.read<AppCacheRepo>().settingsCache;
@@ -18,30 +25,27 @@ class HomeNavigator extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => SettingsCubit(settingsCache)),
       ],
-      child: Builder(
-        builder: (context) {
-          return Navigator(
-            initialRoute: '/',
-            onGenerateRoute: (settings) {
-              switch (settings.name) {
-                case '/':
-                  return const TimetablePage().toMatRoute();
+      child: Navigator(
+        initialRoute: '/',
+        key: HomeNavigator.navKey,
+        onGenerateRoute: (settings) {
+          switch (settings.name) {
+            case '/':
+              return const TimetablePage().toMatRoute();
 
-                case '/schedule':
-                  {
-                    final schedule = settings.arguments as Schedule;
-                    return CacheChatPage(schedule: schedule).toMatRoute();
-                  }
-
-                default:
-                  return null;
+            case '/schedule':
+              {
+                final schedule = settings.arguments as Schedule;
+                return CacheChatPage(schedule: schedule).toMatRoute();
               }
-            },
-            onPopPage: (route, result) {
-              if (!route.didPop(result)) return false;
-              return true;
-            },
-          );
+
+            default:
+              return null;
+          }
+        },
+        onPopPage: (route, result) {
+          if (!route.didPop(result)) return false;
+          return true;
         },
       ),
     );

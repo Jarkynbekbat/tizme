@@ -9,8 +9,11 @@ import 'package:studtime/src/features/splash/pages/setup_page/setup_page.dart';
 import 'package:studtime/src/features/splash/pages/splash_page/splash_page.dart';
 import 'package:studtime/src/shared/data/repos/app_cache_repo.dart';
 import 'package:studtime/src/shared/extensions/on_widget.dart';
+import 'package:studtime/src/shared/widgets/dialogs/confirm_close_app.dart';
 
 class SplashNavigator extends StatelessWidget {
+  static final navKey = GlobalKey<NavigatorState>();
+
   const SplashNavigator({super.key});
 
   @override
@@ -22,26 +25,39 @@ class SplashNavigator extends StatelessWidget {
         BlocProvider(create: (_) => InitCubit(cacheRepo)..initApp()),
         BlocProvider(create: (_) => SetupCubit(FirebaseFirestore.instance)),
       ],
-      child: Navigator(
-        initialRoute: '/',
-        onGenerateRoute: (settings) {
-          switch (settings.name) {
-            case '/':
-              return const SplashPage().toMatRoute();
-            case '/intro':
-              return const IntroPage().toMatRoute();
-            case '/setup':
-              return const SetupPage().toMatRoute();
-            case '/home':
-              return const HomeNavigator().toMatRoute();
-            default:
-              return null;
+      child: WillPopScope(
+        onWillPop: () async {
+          /// на случай, если активен HomeNavigator
+          final homeNavState = HomeNavigator.navKey.currentState;
+          final canHomePop = homeNavState?.canPop() ?? false;
+          if (canHomePop) {
+            homeNavState!.pop();
+            return false;
           }
+
+          /// на случай, если активен корневой Navigator
+          final isConfirmed = await confirmCloseApp(context);
+          return isConfirmed ?? false;
         },
-        onPopPage: (route, result) {
-          if (!route.didPop(result)) return false;
-          return true;
-        },
+        child: Navigator(
+          key: SplashNavigator.navKey,
+          initialRoute: '/',
+          onGenerateRoute: (settings) {
+            switch (settings.name) {
+              case '/':
+                return const SplashPage().toMatRoute();
+              case '/intro':
+                return const IntroPage().toMatRoute();
+              case '/setup':
+                return const SetupPage().toMatRoute();
+              case '/home':
+                return const HomeNavigator().toMatRoute();
+              default:
+                return null;
+            }
+          },
+          onPopPage: (route, result) => route.didPop(result),
+        ),
       ),
     );
   }
