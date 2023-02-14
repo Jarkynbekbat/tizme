@@ -16,7 +16,8 @@ class TimetablePage extends HookWidget {
   const TimetablePage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final pageController = useMemoized(() => PageController(initialPage: 0));
+    final pageController = useMemoized(
+        () => PageController(initialPage: DateTime.now().weekday - 1));
     final navigationIndex = useState(pageController.initialPage);
 
     return BlocProvider(
@@ -56,23 +57,23 @@ class TimetablePage extends HookWidget {
           items: [
             TitledNavigationBarItem(
               title: const Text('ПН'),
-              icon: const DateText(1),
+              icon: const DateText(0),
             ),
             TitledNavigationBarItem(
               title: const Text('ВТ'),
-              icon: const DateText(2),
+              icon: const DateText(1),
             ),
             TitledNavigationBarItem(
               title: const Text('СР'),
-              icon: const DateText(3),
+              icon: const DateText(2),
             ),
             TitledNavigationBarItem(
               title: const Text('ЧТ'),
-              icon: const DateText(4),
+              icon: const DateText(3),
             ),
             TitledNavigationBarItem(
               title: const Text('ПТ'),
-              icon: const DateText(5),
+              icon: const DateText(4),
             ),
           ],
           activeColor: AppColors.primaryColor,

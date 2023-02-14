@@ -17,7 +17,7 @@ class DateText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      getDateByWeekday(weekdayIndex),
+      getDateByWeekday(weekdayIndex + 1),
       style: const TextStyle(
         fontSize: 15.0,
         color: AppColors.primaryColor,
