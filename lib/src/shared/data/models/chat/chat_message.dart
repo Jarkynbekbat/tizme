@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:studtime/src/shared/data/models/chat/chat_file.dart';
 import 'package:studtime/src/shared/data/models/chat/chat_image.dart';
 import 'package:studtime/src/shared/data/models/chat/chat_text.dart';
 
@@ -27,6 +28,8 @@ abstract class ChatMessage extends Equatable {
         return ChatText.fromJson(json);
       case 'image':
         return ChatImage.fromJson(json);
+      case 'file':
+        return ChatFile.fromJson(json);
       default:
         throw Exception('Unknown message type: $type');
     }
@@ -37,6 +40,7 @@ extension ChatMessageX on ChatMessage {
   T map<T>({
     required T Function(ChatText) text,
     required T Function(ChatImage) image,
+    required T Function(ChatFile) file,
   }) {
     if (this is ChatText) {
       return text(this as ChatText);
@@ -44,8 +48,11 @@ extension ChatMessageX on ChatMessage {
 
     if (this is ChatImage) {
       return image(this as ChatImage);
-    } else {
-      throw Exception('Unknown message type: $this');
     }
+
+    if (this is ChatFile) {
+      return file(this as ChatFile);
+    }
+    throw Exception('Unknown message type: $this');
   }
 }

@@ -52,6 +52,22 @@ class ChatCache extends AppCache<List<ChatMessage>> {
           /// удаляем старый файл из временного хранилища
           await tempFile.delete();
         },
+        file: (fileMessage) async {
+          /// получаем путь к файлу и его имя
+          final tempFile = File(fileMessage.path);
+          final imageName = fileMessage.path.split('/').last;
+
+          /// копируем файл в папку приложения
+          final directory = await getApplicationDocumentsDirectory();
+          final path = directory.path;
+          final newFilePath = '$path/$imageName';
+          await tempFile.copy(newFilePath);
+
+          /// создаем новое сообщение с новым путем к файлу
+          final messages = get();
+          messages.add(fileMessage.copyWith(path: newFilePath));
+          await set(messages);
+        },
       );
 
       return true;
@@ -68,6 +84,11 @@ class ChatCache extends AppCache<List<ChatMessage>> {
         /// если сообщение хранит файл, то удаляем и файл
         image: (imageMessage) async {
           final path = imageMessage.path;
+          final file = File(path);
+          await file.delete();
+        },
+        file: (fileMessage) async {
+          final path = fileMessage.path;
           final file = File(path);
           await file.delete();
         },

@@ -4,6 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_keyboard_size/flutter_keyboard_size.dart';
 import 'package:studtime/src/features/home/pages/cache_chat_page/blocs/chat_content/chat_content_cubit.dart';
 import 'package:studtime/src/features/home/pages/cache_chat_page/components/chat_content/elements/chat_content_empty_state.dart';
+import 'package:studtime/src/features/home/pages/cache_chat_page/components/chat_content/elements/chat_file_item.dart';
 import 'package:studtime/src/features/home/pages/cache_chat_page/components/chat_content/elements/chat_image_item.dart';
 import 'package:studtime/src/features/home/pages/cache_chat_page/components/chat_content/elements/chat_text_item.dart';
 import 'package:studtime/src/shared/data/models/chat/chat_message.dart';
@@ -92,6 +93,9 @@ class ChatContent extends HookWidget {
                         },
                         image: (chatImage) {
                           return ChatImageItem(chatImage: chatImage);
+                        },
+                        file: (chatFile) {
+                          return ChatFileItem(chatFile: chatFile);
                         },
                       );
                     },
