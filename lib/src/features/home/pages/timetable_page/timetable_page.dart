@@ -56,23 +56,23 @@ class TimetablePage extends HookWidget {
           items: [
             TitledNavigationBarItem(
               title: const Text('ПН'),
-              icon: const DateText(1),
+              icon: const DateText(0),
             ),
             TitledNavigationBarItem(
               title: const Text('ВТ'),
-              icon: const DateText(2),
+              icon: const DateText(1),
             ),
             TitledNavigationBarItem(
               title: const Text('СР'),
-              icon: const DateText(3),
+              icon: const DateText(2),
             ),
             TitledNavigationBarItem(
               title: const Text('ЧТ'),
-              icon: const DateText(4),
+              icon: const DateText(3),
             ),
             TitledNavigationBarItem(
               title: const Text('ПТ'),
-              icon: const DateText(5),
+              icon: const DateText(4),
             ),
           ],
           activeColor: AppColors.primaryColor,
