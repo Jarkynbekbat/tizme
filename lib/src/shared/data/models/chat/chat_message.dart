@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:equatable/equatable.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:studtime/src/shared/data/models/chat/chat_file.dart';
 import 'package:studtime/src/shared/data/models/chat/chat_image.dart';
 import 'package:studtime/src/shared/data/models/chat/chat_text.dart';
+import 'package:studtime/src/shared/extensions/on_int.dart';
 
 /// базовый класс для сообщений в экране элемента расписания
 abstract class ChatMessage extends Equatable {
@@ -33,6 +37,32 @@ abstract class ChatMessage extends Equatable {
       default:
         throw Exception('Unknown message type: $type');
     }
+  }
+
+  Future<void> logSelf() async {
+    await FirebaseAnalytics.instance.logEvent(
+      name: "save_message",
+      parameters: {
+        "message_type": runtimeType.toString(),
+        "message_size": fileSize(),
+      },
+    );
+  }
+
+  String fileSize() {
+    return map(
+      text: (text) => text.text.length.formatBytes(),
+      image: (image) {
+        final file = File(image.path);
+        final size = file.lengthSync();
+        return size.formatBytes();
+      },
+      file: (fileMessage) {
+        final file = File(fileMessage.path);
+        final size = file.lengthSync();
+        return size.formatBytes();
+      },
+    );
   }
 }
 

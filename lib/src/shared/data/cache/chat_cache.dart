@@ -6,7 +6,10 @@ import 'package:studtime/src/shared/data/cache/app_cache.dart';
 import 'package:studtime/src/shared/data/models/chat/chat_message.dart';
 
 class ChatCache extends AppCache<List<ChatMessage>> {
-  ChatCache(super.prefs, super.key);
+  ChatCache(
+    super.prefs,
+    super.key,
+  );
 
   @override
   Future<void> set(List<ChatMessage> value) async {
@@ -25,6 +28,8 @@ class ChatCache extends AppCache<List<ChatMessage>> {
 
   Future<bool> add(ChatMessage message) async {
     try {
+      await message.logSelf();
+
       await message.map(
         text: (textMessage) async {
           final messages = get();
