@@ -20,7 +20,7 @@ class CacheChatPage extends StatelessWidget {
 
     final chatContentCubit = ChatContentCubit(
       cacheRepo.chatCache,
-      schedule.subject,
+      schedule.subjectId,
     )..loadMessages();
 
     final editMessageCubit = EditMessageCubit();
