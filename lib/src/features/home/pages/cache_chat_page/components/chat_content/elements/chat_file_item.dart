@@ -10,6 +10,7 @@ import 'package:studtime/src/shared/data/models/chat/chat_file.dart';
 import 'package:studtime/src/shared/extensions/on_datetime.dart';
 import 'package:studtime/src/shared/styles/app_paddings.dart';
 import 'package:studtime/src/shared/widgets/app_file_size.dart';
+import 'package:studtime/src/shared/widgets/dialogs/confirm_delete.dart';
 
 class ChatFileItem extends StatelessWidget {
   const ChatFileItem({
@@ -21,6 +22,8 @@ class ChatFileItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final chatContentCubit = context.read<ChatContentCubit>();
+
     return CupertinoButton(
       padding: const EdgeInsets.all(0.0),
       onPressed: () => OpenFilex.open(chatFile.path),
@@ -28,9 +31,11 @@ class ChatFileItem extends StatelessWidget {
         key: ObjectKey(chatFile),
         trailingActions: <SwipeAction>[
           SwipeAction(
-            onTap: (CompletionHandler handler) {
-              context
-                  .read<ChatContentCubit>()
+            onTap: (CompletionHandler handler) async {
+              final isConfirmed = await confirmDelete(context);
+              if (isConfirmed != true) return;
+
+              chatContentCubit
                   .deleteMessage(chatFile)
                   .then((value) => handler(true))
                   .onError(

@@ -7,6 +7,7 @@ import 'package:studtime/src/features/home/pages/cache_chat_page/blocs/edit_mess
 import 'package:studtime/src/shared/data/models/chat/chat_text.dart';
 import 'package:studtime/src/shared/extensions/on_datetime.dart';
 import 'package:studtime/src/shared/styles/app_paddings.dart';
+import 'package:studtime/src/shared/widgets/dialogs/confirm_delete.dart';
 
 class ChatTextItem extends StatelessWidget {
   const ChatTextItem({
@@ -18,13 +19,17 @@ class ChatTextItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final chatContentCubit = context.read<ChatContentCubit>();
+
     return SwipeActionCell(
       key: ObjectKey(message),
       trailingActions: <SwipeAction>[
         SwipeAction(
-          onTap: (CompletionHandler handler) {
-            context
-                .read<ChatContentCubit>()
+          onTap: (CompletionHandler handler) async {
+            final isConfirmed = await confirmDelete(context);
+            if (isConfirmed != true) return;
+
+            chatContentCubit
                 .deleteMessage(message)
                 .then((value) => handler(true))
                 .onError(
