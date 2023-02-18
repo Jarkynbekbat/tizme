@@ -1,126 +1,117 @@
-import 'package:equatable/equatable.dart';
-import 'package:studtime/src/shared/data/models/schedule/schedule_ref.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:studtime/src/shared/data/models/classroom/classroom.dart';
+import 'package:studtime/src/shared/data/models/group/group.dart';
+import 'package:studtime/src/shared/data/models/subject/subject.dart';
+import 'package:studtime/src/shared/data/models/teacher/teacher.dart';
 import 'package:studtime/src/shared/data/models/time/time.dart';
-import 'package:studtime/src/shared/extensions/on_datetime.dart';
 import 'package:studtime/src/shared/extensions/on_doc_ref.dart';
 
-class Schedule extends Equatable {
-  final String id;
-  final String classroom;
-  final Weekday day;
-  final String group;
-  final String lessonType;
-  final Semester semester;
-  final String subject;
-  final String subjectId;
-  final String teacher;
-  final Time time;
-  final WeekType week;
+part 'schedule.freezed.dart';
+part 'schedule.g.dart';
 
-  const Schedule({
-    required this.id,
-    required this.classroom,
-    required this.day,
-    required this.group,
-    required this.lessonType,
-    required this.semester,
-    required this.subject,
-    required this.subjectId,
-    required this.teacher,
-    required this.time,
-    required this.week,
-  });
+typedef MapDocRef = DocumentReference<Map<String, dynamic>>;
+typedef MapDocSnap = DocumentSnapshot<Map<String, dynamic>>;
+typedef MapQDocSnap = QueryDocumentSnapshot<Map<String, dynamic>>;
 
-  static Future<Schedule> fromRef(ScheduleRef scheduleRef) async {
-    final futures = [
-      scheduleRef.classroomRef.flyweightFetch(),
-      scheduleRef.dayRef.flyweightFetch(),
-      scheduleRef.groupRef.flyweightFetch(),
-      scheduleRef.lessonTypeRef.flyweightFetch(),
-      scheduleRef.semesterRef.flyweightFetch(),
-      scheduleRef.subjectRef.flyweightFetch(),
-      scheduleRef.teacherRef.flyweightFetch(),
-      scheduleRef.timeRef.flyweightFetch(),
-      scheduleRef.weekRef.flyweightFetch()
-    ];
+/// Модель элемента расписания
+@freezed
+class Schedule with _$Schedule {
+  factory Schedule({
+    required String id,
 
-    final results = await Future.wait(futures);
+    /// doc refs
+    required Classroom classroom,
+    required Group group,
+    required Subject subject,
+    required Teacher teacher,
+    required Time time,
 
-    final classroomMap = results[0].data() as Map<String, dynamic>;
-    final classroom = classroomMap['name'] as String;
+    /// enums,
+    required Weekday weekday,
+    required WeekType weekType,
+    required LessonType lessonType,
+    required Semester semester,
+  }) = _Schedule;
 
-    final weekdayMap = results[1].data() as Map<String, dynamic>;
-    final weekdayIndex = weekdayMap['index'] as int;
-    final weekday = Weekday.values[weekdayIndex];
+  factory Schedule.fromJson(Map<String, dynamic> json) =>
+      _$ScheduleFromJson(json);
 
-    final groupMap = results[2].data() as Map<String, dynamic>;
-    final group = groupMap['name'] as String;
+  static Future<Schedule> fromDoc(MapQDocSnap doc) async {
+    final data = doc.data();
 
-    final lessonTypeMap = results[3].data() as Map<String, dynamic>;
-    final lessonType = lessonTypeMap['name'] as String;
+    final classroomRef = data['classroom_ref'] as MapDocRef;
+    final groupRef = data['group_ref'] as MapDocRef;
+    final subjectRef = data['subject_ref'] as MapDocRef;
+    final teacherRef = data['teacher_ref'] as MapDocRef;
+    final timeRef = data['time_ref'] as MapDocRef;
 
-    final semesterMap = results[4].data() as Map<String, dynamic>;
-    final semesterIndex = semesterMap['index'] as int;
-    final semester = Semester.values[semesterIndex];
+    final results = await Future.wait([
+      classroomRef.flyweightFetch(),
+      groupRef.flyweightFetch(),
+      subjectRef.flyweightFetch(),
+      teacherRef.flyweightFetch(),
+      timeRef.flyweightFetch(),
+    ]);
 
-    final subjectMap = results[5].data() as Map<String, dynamic>;
-    final subject = subjectMap['name'] as String;
-    final subjectId = scheduleRef.subjectRef.id;
-
-    final teacherMap = results[6].data() as Map<String, dynamic>;
-    final teacher = teacherMap['name'] as String;
-
-    final timeMap = results[7].data() as Map<String, dynamic>;
-    final time = Time.fromJson(timeMap);
-
-    final weekMap = results[8].data() as Map<String, dynamic>;
-
-    final weekIndex = weekMap['index'] as int;
-    final week = WeekType.values[weekIndex];
-
-    return Schedule(
-      id: scheduleRef.id,
-      classroom: classroom,
-      day: weekday,
-      group: group,
-      lessonType: lessonType,
-      semester: semester,
-      subject: subject,
-      subjectId: subjectId,
-      teacher: teacher,
-      time: time,
-      week: week,
-    );
-  }
-
-  @override
-  List<Object?> get props => [
-        id,
-        classroom,
-        day,
-        group,
-        lessonType,
-        semester,
-        subject,
-        teacher,
-        time,
-        week,
-      ];
-
-  bool get isCurrentWeek {
-    final currentWeekType = DateTime.now().getWeekType();
-    return week == currentWeekType;
+    return Schedule.fromJson({
+      "id": doc.id,
+      "classroom": {'id': classroomRef.id, ...results[0].data()!},
+      "group": {'id': groupRef.id, ...results[1].data()!},
+      "subject": {'id': subjectRef.id, ...results[2].data()!},
+      "teacher": {'id': teacherRef.id, ...results[3].data()!},
+      "time": {'id': timeRef.id, ...results[4].data()!},
+      "weekday": data['weekday'],
+      "weekType": data['week_type'],
+      "lessonType": data['lesson_type'],
+      "semester": data['semester'],
+    });
   }
 }
 
-enum Weekday { monday, tuesday, wednesday, thursday, friday }
+enum Weekday {
+  @JsonValue("monday")
+  monday,
 
-enum Semester { first, second }
+  @JsonValue("tuesday")
+  tuesday,
+
+  @JsonValue("wednesday")
+  wednesday,
+
+  @JsonValue("thursday")
+  thursday,
+
+  @JsonValue("friday")
+  friday,
+}
+
+enum Semester {
+  @JsonValue("first")
+  first,
+
+  @JsonValue("second")
+  second,
+}
 
 enum WeekType {
-  /// Числитель
+  @JsonValue("even")
   even,
 
-  /// Знаменатель
+  @JsonValue("odd")
   odd,
+}
+
+enum LessonType {
+  @JsonValue("lecture")
+  lecture,
+
+  @JsonValue("practice")
+  practice,
+
+  @JsonValue("lab")
+  lab,
+
+  @JsonValue("exam")
+  exam,
 }

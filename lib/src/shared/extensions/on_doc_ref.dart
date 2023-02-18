@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:studtime/src/shared/widgets/app_error_text.dart';
 
-extension OnDocRef on DocumentReference {
-  Future<DocumentSnapshot> flyweightFetch() async {
+extension OnDocRef on DocumentReference<Map<String, dynamic>> {
+  Future<DocumentSnapshot<Map<String, dynamic>>> flyweightFetch() async {
     try {
       final snapshot = await get(const GetOptions(source: Source.cache));
       if (snapshot.exists) {

@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:studtime/src/features/home/blocs/settings_cubit.dart';
+import 'package:studtime/src/features/home/blocs/setup_cubit.dart';
 import 'package:studtime/src/features/home/blocs/timetable_cubit/timetable_cubit.dart';
 import 'package:studtime/src/features/home/pages/timetable_page/elements/date_text.dart';
 import 'package:studtime/src/features/home/pages/timetable_page/elements/home_app_bar.dart';
@@ -23,7 +23,7 @@ class TimetablePage extends HookWidget {
     return BlocProvider(
       create: (_) => TimetableCubit(
         FirebaseFirestore.instance,
-        context.read<SettingsCubit>(),
+        context.read<SetupCubit>(),
       ),
       child: Scaffold(
         appBar: const HomeAppBar(),

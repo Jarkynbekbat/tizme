@@ -5,17 +5,17 @@ import 'package:studtime/src/shared/data/models/suggestion_item.dart';
 import 'package:studtime/src/shared/data/models/group/group.dart';
 import 'package:studtime/src/shared/data/models/teacher/teacher.dart';
 
-part 'setup_state.dart';
-part 'setup_cubit.freezed.dart';
+part 'setup_list_state.dart';
+part 'setup_list_cubit.freezed.dart';
 
 /// кубит для загрузки данных для страницы настройки
-class SetupCubit extends Cubit<SetupState> {
+class SetupListCubit extends Cubit<SetupListState> {
   final FirebaseFirestore _firestore;
 
-  SetupCubit(this._firestore) : super(const SetupState.loading());
+  SetupListCubit(this._firestore) : super(const SetupListState.loading());
 
   Future<void> load() async {
-    emit(const SetupState.loading());
+    emit(const SetupListState.loading());
     try {
       final results = await Future.wait([
         _firestore.collection('teachers').get(),
@@ -29,9 +29,9 @@ class SetupCubit extends Cubit<SetupState> {
       final groups = groupMaps.map((e) => Group.fromJson(e)).toList();
 
       final suggestions = [...teachers, ...groups];
-      emit(SetupState.loaded(suggestions));
+      emit(SetupListState.loaded(suggestions));
     } catch (e) {
-      emit(SetupState.error(e.toString()));
+      emit(SetupListState.error(e.toString()));
     }
   }
 }

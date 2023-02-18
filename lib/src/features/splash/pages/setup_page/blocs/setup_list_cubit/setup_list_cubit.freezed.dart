@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'setup_cubit.dart';
+part of 'setup_list_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$SetupState {
+mixin _$SetupListState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
@@ -63,16 +63,16 @@ mixin _$SetupState {
 }
 
 /// @nodoc
-abstract class $SetupStateCopyWith<$Res> {
-  factory $SetupStateCopyWith(
-          SetupState value, $Res Function(SetupState) then) =
-      _$SetupStateCopyWithImpl<$Res, SetupState>;
+abstract class $SetupListStateCopyWith<$Res> {
+  factory $SetupListStateCopyWith(
+          SetupListState value, $Res Function(SetupListState) then) =
+      _$SetupListStateCopyWithImpl<$Res, SetupListState>;
 }
 
 /// @nodoc
-class _$SetupStateCopyWithImpl<$Res, $Val extends SetupState>
-    implements $SetupStateCopyWith<$Res> {
-  _$SetupStateCopyWithImpl(this._value, this._then);
+class _$SetupListStateCopyWithImpl<$Res, $Val extends SetupListState>
+    implements $SetupListStateCopyWith<$Res> {
+  _$SetupListStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -89,7 +89,7 @@ abstract class _$$_LoadingCopyWith<$Res> {
 
 /// @nodoc
 class __$$_LoadingCopyWithImpl<$Res>
-    extends _$SetupStateCopyWithImpl<$Res, _$_Loading>
+    extends _$SetupListStateCopyWithImpl<$Res, _$_Loading>
     implements _$$_LoadingCopyWith<$Res> {
   __$$_LoadingCopyWithImpl(_$_Loading _value, $Res Function(_$_Loading) _then)
       : super(_value, _then);
@@ -102,7 +102,7 @@ class _$_Loading implements _Loading {
 
   @override
   String toString() {
-    return 'SetupState.loading()';
+    return 'SetupListState.loading()';
   }
 
   @override
@@ -183,7 +183,7 @@ class _$_Loading implements _Loading {
   }
 }
 
-abstract class _Loading implements SetupState {
+abstract class _Loading implements SetupListState {
   const factory _Loading() = _$_Loading;
 }
 
@@ -197,7 +197,7 @@ abstract class _$$_LoadedCopyWith<$Res> {
 
 /// @nodoc
 class __$$_LoadedCopyWithImpl<$Res>
-    extends _$SetupStateCopyWithImpl<$Res, _$_Loaded>
+    extends _$SetupListStateCopyWithImpl<$Res, _$_Loaded>
     implements _$$_LoadedCopyWith<$Res> {
   __$$_LoadedCopyWithImpl(_$_Loaded _value, $Res Function(_$_Loaded) _then)
       : super(_value, _then);
@@ -231,7 +231,7 @@ class _$_Loaded implements _Loaded {
 
   @override
   String toString() {
-    return 'SetupState.loaded(items: $items)';
+    return 'SetupListState.loaded(items: $items)';
   }
 
   @override
@@ -321,7 +321,7 @@ class _$_Loaded implements _Loaded {
   }
 }
 
-abstract class _Loaded implements SetupState {
+abstract class _Loaded implements SetupListState {
   const factory _Loaded(final List<SuggestionItem> items) = _$_Loaded;
 
   List<SuggestionItem> get items;
@@ -340,7 +340,7 @@ abstract class _$$_ErrorCopyWith<$Res> {
 
 /// @nodoc
 class __$$_ErrorCopyWithImpl<$Res>
-    extends _$SetupStateCopyWithImpl<$Res, _$_Error>
+    extends _$SetupListStateCopyWithImpl<$Res, _$_Error>
     implements _$$_ErrorCopyWith<$Res> {
   __$$_ErrorCopyWithImpl(_$_Error _value, $Res Function(_$_Error) _then)
       : super(_value, _then);
@@ -369,7 +369,7 @@ class _$_Error implements _Error {
 
   @override
   String toString() {
-    return 'SetupState.error(message: $message)';
+    return 'SetupListState.error(message: $message)';
   }
 
   @override
@@ -458,7 +458,7 @@ class _$_Error implements _Error {
   }
 }
 
-abstract class _Error implements SetupState {
+abstract class _Error implements SetupListState {
   const factory _Error(final String message) = _$_Error;
 
   String get message;

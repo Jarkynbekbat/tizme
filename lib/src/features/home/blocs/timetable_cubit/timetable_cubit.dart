@@ -3,10 +3,9 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:studtime/src/features/home/blocs/settings_cubit.dart';
+import 'package:studtime/src/features/home/blocs/setup_cubit.dart';
 import 'package:studtime/src/shared/data/models/schedule/schedule.dart';
-import 'package:studtime/src/shared/data/models/schedule/schedule_ref.dart';
-import 'package:studtime/src/shared/data/models/settings/user_settings.dart';
+import 'package:studtime/src/shared/data/models/setup/setup.dart';
 
 part 'timetable_state.dart';
 part 'timetable_cubit.freezed.dart';
@@ -14,7 +13,7 @@ part 'timetable_cubit.freezed.dart';
 /// Кубит для работы с расписанием
 class TimetableCubit extends Cubit<TimetableState> {
   final FirebaseFirestore _firestore;
-  final SettingsCubit _settingsCubit;
+  final SetupCubit _settingsCubit;
 
   late final StreamSubscription _settingsSub;
 
@@ -31,11 +30,11 @@ class TimetableCubit extends Cubit<TimetableState> {
   }
 
   /// Обработать изменение настроек пользователя
-  void _onSettingsChanged(UserSettings settings) async {
+  void _onSettingsChanged(Setup settings) async {
     emit(const TimetableState.loading());
 
     try {
-      final isTeacher = settings.type == UserSettingsType.teacher;
+      final isTeacher = settings.type == SetupType.teacher;
       final timetable = isTeacher
           ? await _getTimetableByTeacher(settings.id)
           : await _getTimetableByGroup(settings.id);
@@ -55,9 +54,10 @@ class TimetableCubit extends Cubit<TimetableState> {
         .get();
 
     final timetables = timetablesSnap.docs;
-    final items = timetables.map((e) => ScheduleRef.fromDoc(e)).toList();
-    final schedules =
-        await Future.wait(items.map((e) => Schedule.fromRef(e)).toList());
+
+    final schedules = await Future.wait(
+      timetables.map((e) => Schedule.fromDoc(e)).toList(),
+    );
     return schedules;
   }
 
@@ -70,8 +70,8 @@ class TimetableCubit extends Cubit<TimetableState> {
         .get();
 
     final timetables = timetablesSnap.docs;
-    final items = timetables.map((e) => ScheduleRef.fromDoc(e)).toList();
-    final schedules = await Future.wait(items.map((e) => Schedule.fromRef(e)));
+    final schedules =
+        await Future.wait(timetables.map((e) => Schedule.fromDoc(e)));
     return schedules;
   }
 }

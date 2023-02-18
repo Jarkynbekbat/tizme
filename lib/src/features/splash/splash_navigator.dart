@@ -5,12 +5,13 @@ import 'package:flutter_intro/flutter_intro.dart';
 import 'package:studtime/src/features/home/home_navigator.dart';
 import 'package:studtime/src/features/splash/blocs/init_cubit/init_cubit.dart';
 import 'package:studtime/src/features/splash/pages/intro_page/intro_page.dart';
-import 'package:studtime/src/features/splash/pages/setup_page/blocs/setup_cubit/setup_cubit.dart';
 import 'package:studtime/src/features/splash/pages/setup_page/setup_page.dart';
 import 'package:studtime/src/features/splash/pages/splash_page/splash_page.dart';
 import 'package:studtime/src/shared/data/repos/app_cache_repo.dart';
 import 'package:studtime/src/shared/extensions/on_widget.dart';
 import 'package:studtime/src/shared/widgets/dialogs/confirm_close_app.dart';
+
+import 'pages/setup_page/blocs/setup_list_cubit/setup_list_cubit.dart';
 
 class SplashNavigator extends StatelessWidget {
   static final navKey = GlobalKey<NavigatorState>();
@@ -24,7 +25,7 @@ class SplashNavigator extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => InitCubit(cacheRepo)..initApp()),
-        BlocProvider(create: (_) => SetupCubit(FirebaseFirestore.instance)),
+        BlocProvider(create: (_) => SetupListCubit(FirebaseFirestore.instance)),
       ],
       child: WillPopScope(
         onWillPop: () async {

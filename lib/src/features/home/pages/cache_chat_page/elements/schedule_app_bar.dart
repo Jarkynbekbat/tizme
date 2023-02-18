@@ -14,7 +14,7 @@ class ScheduleAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       title: AutoSizeText(
-        schedule.subject,
+        schedule.subject.name,
         style: const TextStyle(fontSize: 16),
         maxLines: 2,
       ),

@@ -6,7 +6,7 @@ part 'group.g.dart';
 
 @freezed
 class Group with _$Group implements SuggestionItem {
-  const factory Group({
+  factory Group({
     required String id,
     required String name,
   }) = _Group;

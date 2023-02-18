@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:studtime/src/features/home/blocs/settings_cubit.dart';
+import 'package:studtime/src/features/home/blocs/setup_cubit.dart';
 import 'package:studtime/src/features/home/pages/about_page/about_page.dart';
 import 'package:studtime/src/features/home/pages/timetable_page/timetable_page.dart';
 import 'package:studtime/src/features/home/pages/cache_chat_page/cache_chat_page.dart';
@@ -24,7 +24,7 @@ class _HomeNavigatorState extends State<HomeNavigator> {
 
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => SettingsCubit(settingsCache)),
+        BlocProvider(create: (_) => SetupCubit(settingsCache)),
       ],
       child: Navigator(
         initialRoute: '/',

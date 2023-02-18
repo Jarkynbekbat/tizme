@@ -4,6 +4,7 @@ import 'package:studtime/src/features/home/blocs/timetable_cubit/timetable_cubit
 import 'package:studtime/src/features/home/pages/timetable_page/elements/schedule_list_tile.dart';
 import 'package:studtime/src/shared/assets/assets.gen.dart';
 import 'package:studtime/src/shared/data/models/schedule/schedule.dart';
+import 'package:studtime/src/shared/extensions/on_weektype.dart';
 import 'package:studtime/src/shared/styles/app_colors.dart';
 
 class TimetableList extends StatelessWidget {
@@ -17,7 +18,7 @@ class TimetableList extends StatelessWidget {
         return state.when(
           loading: () => const Center(child: CircularProgressIndicator()),
           loaded: (items, isTeacher) {
-            final filtered = items.where((el) => el.day == weekday).toList()
+            final filtered = items.where((el) => el.weekday == weekday).toList()
               ..sort((a, b) => a.time.order - b.time.order);
 
             if (filtered.isEmpty) {
@@ -46,9 +47,9 @@ class TimetableList extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               itemBuilder: (context, index) {
                 final schedule = filtered[index];
-                final isCurrentWeek = schedule.isCurrentWeek;
-                final isEven = schedule.week == WeekType.even;
-                final isOdd = schedule.week == WeekType.odd;
+                final isCurrentWeek = schedule.weekType.isCurrentWeek;
+                final isEven = schedule.weekType == WeekType.even;
+                final isOdd = schedule.weekType == WeekType.odd;
 
                 final hasReplacement = filtered
                     .any((el) => el.time == schedule.time && el != schedule);

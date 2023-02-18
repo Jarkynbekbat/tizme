@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:studtime/src/shared/data/models/schedule/schedule.dart';
 import 'package:studtime/src/shared/extensions/on_context.dart';
+import 'package:studtime/src/shared/extensions/on_lesson_type.dart';
+import 'package:studtime/src/shared/extensions/on_weektype.dart';
 
 class ScheduleListTile extends StatelessWidget {
   final Schedule schedule;
@@ -48,20 +50,18 @@ class ScheduleListTile extends StatelessWidget {
                 ),
               ),
             ),
-            title: Text(schedule.subject),
+            title: Text(schedule.subject.name),
             subtitle: Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Expanded(
                   child: Text(
-                    '${isTeacher ? schedule.group : schedule.teacher} • ${schedule.classroom} • ${schedule.lessonType}',
+                    '${isTeacher ? schedule.group.name : schedule.teacher.name} • ${schedule.classroom.name} • ${schedule.lessonType.title}',
                   ),
                 ),
                 if (showWeekType)
                   Text(
-                    schedule.week == WeekType.even
-                        ? 'Числитель'
-                        : 'Знаменатель',
+                    schedule.weekType.title,
                     style: TextStyle(
                       color: Theme.of(context).primaryColor.withOpacity(0.66),
                     ),

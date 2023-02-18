@@ -5,8 +5,8 @@ part 'teacher.freezed.dart';
 part 'teacher.g.dart';
 
 @freezed
-abstract class Teacher with _$Teacher implements SuggestionItem {
-  const factory Teacher({
+class Teacher with _$Teacher implements SuggestionItem {
+  factory Teacher({
     required String id,
     required String name,
   }) = _Teacher;

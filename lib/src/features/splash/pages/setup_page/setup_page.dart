@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:studtime/src/features/splash/pages/setup_page/blocs/setup_cubit/setup_cubit.dart';
+import 'package:studtime/src/features/splash/pages/setup_page/blocs/setup_list_cubit/setup_list_cubit.dart';
 import 'package:studtime/src/shared/assets/assets.gen.dart';
 import 'package:studtime/src/shared/data/models/suggestion_item.dart';
-import 'package:studtime/src/shared/data/models/settings/user_settings.dart';
+import 'package:studtime/src/shared/data/models/setup/setup.dart';
 import 'package:studtime/src/shared/data/models/teacher/teacher.dart';
 import 'package:studtime/src/shared/data/repos/app_cache_repo.dart';
 import 'package:studtime/src/shared/extensions/on_context.dart';
@@ -34,7 +34,7 @@ class SetupPage extends StatelessWidget {
                 alignment: Alignment.topCenter,
                 child: ElevatedButton.icon(
                   onPressed: () {
-                    final setupCubit = context.read<SetupCubit>();
+                    final setupCubit = context.read<SetupListCubit>();
 
                     setupCubit.state.maybeMap(
                       loaded: (loaded) async {
@@ -45,12 +45,12 @@ class SetupPage extends StatelessWidget {
                         if (selected == null) return;
 
                         await cacheRepo.settingsCache.set(
-                          UserSettings(
+                          Setup(
                             id: selected.id,
                             name: selected.name,
                             type: selected is Teacher
-                                ? UserSettingsType.teacher
-                                : UserSettingsType.student,
+                                ? SetupType.teacher
+                                : SetupType.student,
                           ),
                         );
 
@@ -61,7 +61,7 @@ class SetupPage extends StatelessWidget {
                     );
                   },
                   icon: const Icon(Icons.search),
-                  label: BlocBuilder<SetupCubit, SetupState>(
+                  label: BlocBuilder<SetupListCubit, SetupListState>(
                     builder: (context, state) {
                       return state.map(
                         loading: (_) => Theme(
