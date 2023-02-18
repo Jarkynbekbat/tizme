@@ -1,5 +1,5 @@
 extension OnString on String {
-  String get convertDocIdToDirectoryName {
+  String get toValidPath {
     String validChars =
         'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-';
     String directoryName = '';

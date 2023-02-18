@@ -5,6 +5,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:studtime/src/shared/data/cache/app_cache.dart';
 import 'package:studtime/src/shared/data/models/chat/chat_message.dart';
 import 'package:studtime/src/shared/extensions/on_string.dart';
+import 'package:uuid/uuid.dart';
 
 class ChatCache extends AppCache<List<ChatMessage>> {
   ChatCache(
@@ -47,8 +48,9 @@ class ChatCache extends AppCache<List<ChatMessage>> {
           /// копируем файл в папку приложения
           final directory = await getApplicationDocumentsDirectory();
           final path = directory.path;
-          final subjectId = imageMessage.subjectId.convertDocIdToDirectoryName;
-          final newFilePath = '$path/$subjectId$imageName';
+
+          final uuid = const Uuid().v1().toValidPath;
+          final newFilePath = '$path/$uuid$imageName';
           await tempFile.copy(newFilePath);
 
           /// создаем новое сообщение с новым путем к файлу
@@ -67,8 +69,8 @@ class ChatCache extends AppCache<List<ChatMessage>> {
           /// копируем файл в папку приложения
           final directory = await getApplicationDocumentsDirectory();
           final path = directory.path;
-          final subjectId = fileMessage.subjectId.convertDocIdToDirectoryName;
-          final newFilePath = '$path/$subjectId$imageName';
+          final uuid = const Uuid().v1().toValidPath;
+          final newFilePath = '$path/$uuid$imageName';
           await tempFile.copy(newFilePath);
 
           /// создаем новое сообщение с новым путем к файлу
