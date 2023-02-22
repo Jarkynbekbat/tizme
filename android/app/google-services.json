@@ -76,6 +76,42 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:396986104003:android:a9073ed248cd96d3918a76",
+        "android_client_info": {
+          "package_name": "kg.tizme.mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "396986104003-lh66rr7soqjlqtmgdo806ej36a7hjjnk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2e2Wv-f1gwOUeDpxK1SZeHStKDXYNhBo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "396986104003-lh66rr7soqjlqtmgdo806ej36a7hjjnk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "396986104003-bsaaql1qno27kro2umbhbfttn25qsqni.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.studtimeAdminPanel"
+              }
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"
