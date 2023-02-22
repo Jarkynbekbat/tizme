@@ -58,7 +58,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyD2e2Wv-f1gwOUeDpxK1SZeHStKDXYNhBo',
-    appId: '1:396986104003:android:e6104724f744b4bb918a76',
+    appId: '1:396986104003:android:a9073ed248cd96d3918a76',
     messagingSenderId: '396986104003',
     projectId: 'studtime-e721c',
     storageBucket: 'studtime-e721c.appspot.com',
@@ -66,12 +66,11 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyAWKijtJPp6wIQwwgoR6UOu5BL4GooLaEc',
-    appId: '1:396986104003:ios:6f37579246f4e311918a76',
+    appId: '1:396986104003:ios:8582e0ecb4629f1e918a76',
     messagingSenderId: '396986104003',
     projectId: 'studtime-e721c',
     storageBucket: 'studtime-e721c.appspot.com',
-    iosClientId:
-        '396986104003-crm55ol5f4guto7boqd5c87kckolcis2.apps.googleusercontent.com',
-    iosBundleId: 'com.example.studtime',
+    iosClientId: '396986104003-7mqq0e2dc8596nl70nhqm6bnkrm9clek.apps.googleusercontent.com',
+    iosBundleId: 'kg.tizme.mobile',
   );
 }
