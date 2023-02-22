@@ -16,6 +16,7 @@ class TimetableCubit extends Cubit<TimetableState> {
   final SetupCubit _settingsCubit;
 
   late final StreamSubscription _settingsSub;
+  StreamSubscription? _timetableSub;
 
   TimetableCubit(this._firestore, this._settingsCubit)
       : super(const TimetableState.loading()) {
@@ -26,52 +27,54 @@ class TimetableCubit extends Cubit<TimetableState> {
   @override
   Future<void> close() {
     _settingsSub.cancel();
+    _timetableSub?.cancel();
     return super.close();
   }
 
   /// Обработать изменение настроек пользователя
   void _onSettingsChanged(Setup settings) async {
+    _timetableSub?.cancel();
     emit(const TimetableState.loading());
 
     try {
       final isTeacher = settings.type == SetupType.teacher;
-      final timetable = isTeacher
-          ? await _getTimetableByTeacher(settings.id)
-          : await _getTimetableByGroup(settings.id);
 
-      emit(TimetableState.loaded(items: timetable, isTeacher: isTeacher));
+      if (isTeacher) {
+        final teacherRef = _firestore.doc('teachers/${settings.id}');
+        _timetableSub = _firestore
+            .collection('timetables')
+            .where('teacher_ref', isEqualTo: teacherRef)
+            .snapshots()
+            .listen(
+              (event) => _onTimetableChanged(event, isTeacher: true),
+              onError: (e) => emit(TimetableState.error(e.toString())),
+            );
+      }
+
+      final groupRef = _firestore.doc('groups/${settings.id}');
+      _timetableSub = _firestore
+          .collection('timetables')
+          .where('group_ref', isEqualTo: groupRef)
+          .snapshots()
+          .listen(
+            (event) => _onTimetableChanged(event, isTeacher: false),
+            onError: (e) => emit(TimetableState.error(e.toString())),
+          );
     } on Exception catch (e) {
       emit(TimetableState.error(e.toString()));
     }
   }
 
-  /// Получить расписание по группе
-  Future<List<Schedule>> _getTimetableByGroup(String groupUid) async {
-    final groupRef = _firestore.doc('groups/$groupUid');
-    final timetablesSnap = await _firestore
-        .collection('timetables')
-        .where('group_ref', isEqualTo: groupRef)
-        .get();
-
-    final timetables = timetablesSnap.docs;
-
-    final schedules = await Future.wait(
-      timetables.map((e) => Schedule.fromDoc(e)).toList(),
-    );
-    return schedules;
-  }
-
-  /// Получить расписание по преподавателю
-  Future<List<Schedule>> _getTimetableByTeacher(String teacherUid) async {
-    final teacherRef = _firestore.doc('teachers/$teacherUid');
-    final timetablesSnap = await _firestore
-        .collection('timetables')
-        .where('teacher_ref', isEqualTo: teacherRef)
-        .get();
-
-    final timetables = timetablesSnap.docs;
-    final schedules =
-        await Future.wait(timetables.map((e) => Schedule.fromDoc(e)));
-    return schedules;
+  void _onTimetableChanged(
+    QuerySnapshot<Map<String, dynamic>> event, {
+    required bool isTeacher,
+  }) async {
+    try {
+      final futures = event.docs.map((e) => Schedule.fromDoc(e)).toList();
+      final schedules = await Future.wait(futures);
+      emit(TimetableState.loaded(items: schedules, isTeacher: isTeacher));
+    } catch (e, stackTrace) {
+      return Future.error(e, stackTrace);
+    }
   }
 }
