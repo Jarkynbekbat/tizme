@@ -16,6 +16,7 @@ class App extends StatelessWidget {
       theme: AppThemes.lightTheme,
       darkTheme: AppThemes.darkTheme,
       themeMode: ThemeMode.light,
+      debugShowCheckedModeBanner: false,
       builder: EasyLoading.init(),
       home: const SplashNavigator(),
     );
