@@ -39,6 +39,7 @@ class TimetablePage extends HookWidget {
             TimetableList(weekday: Weekday.wednesday),
             TimetableList(weekday: Weekday.thursday),
             TimetableList(weekday: Weekday.friday),
+            TimetableList(weekday: Weekday.saturday),
           ],
         ),
         bottomNavigationBar: TitledBottomNavigationBar(
@@ -74,6 +75,10 @@ class TimetablePage extends HookWidget {
             TitledNavigationBarItem(
               title: const Text('ПТ'),
               icon: const DateText(4),
+            ),
+            TitledNavigationBarItem(
+              title: const Text('СБ'),
+              icon: const DateText(5),
             ),
           ],
           activeColor: AppColors.primaryColor,

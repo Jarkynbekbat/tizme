@@ -39,6 +39,7 @@ const _$WeekdayEnumMap = {
   Weekday.wednesday: 'wednesday',
   Weekday.thursday: 'thursday',
   Weekday.friday: 'friday',
+  Weekday.saturday: 'saturday',
 };
 
 const _$WeekTypeEnumMap = {

@@ -84,6 +84,9 @@ enum Weekday {
 
   @JsonValue("friday")
   friday,
+
+  @JsonValue("saturday")
+  saturday,
 }
 
 enum Semester {

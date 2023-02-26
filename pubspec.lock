@@ -1072,10 +1072,9 @@ packages:
   titled_navigation_bar:
     dependency: "direct main"
     description:
-      name: titled_navigation_bar
-      sha256: "3e3d42c77bc84132865190d0b53e6fd8890ee9603036c036138c5699e02822dc"
-      url: "https://pub.dev"
-    source: hosted
+      path: "lib/src/shared/packages/titled_navigation_bar"
+      relative: true
+    source: path
     version: "5.0.0-nullsafety.0"
   typed_data:
     dependency: transitive
