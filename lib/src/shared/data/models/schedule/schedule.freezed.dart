@@ -33,7 +33,6 @@ mixin _$Schedule {
   Weekday get weekday => throw _privateConstructorUsedError;
   WeekType get weekType => throw _privateConstructorUsedError;
   LessonType get lessonType => throw _privateConstructorUsedError;
-  Semester get semester => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -55,8 +54,7 @@ abstract class $ScheduleCopyWith<$Res> {
       Time time,
       Weekday weekday,
       WeekType weekType,
-      LessonType lessonType,
-      Semester semester});
+      LessonType lessonType});
 
   $ClassroomCopyWith<$Res> get classroom;
   $GroupCopyWith<$Res> get group;
@@ -87,7 +85,6 @@ class _$ScheduleCopyWithImpl<$Res, $Val extends Schedule>
     Object? weekday = null,
     Object? weekType = null,
     Object? lessonType = null,
-    Object? semester = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -126,10 +123,6 @@ class _$ScheduleCopyWithImpl<$Res, $Val extends Schedule>
           ? _value.lessonType
           : lessonType // ignore: cast_nullable_to_non_nullable
               as LessonType,
-      semester: null == semester
-          ? _value.semester
-          : semester // ignore: cast_nullable_to_non_nullable
-              as Semester,
     ) as $Val);
   }
 
@@ -190,8 +183,7 @@ abstract class _$$_ScheduleCopyWith<$Res> implements $ScheduleCopyWith<$Res> {
       Time time,
       Weekday weekday,
       WeekType weekType,
-      LessonType lessonType,
-      Semester semester});
+      LessonType lessonType});
 
   @override
   $ClassroomCopyWith<$Res> get classroom;
@@ -225,7 +217,6 @@ class __$$_ScheduleCopyWithImpl<$Res>
     Object? weekday = null,
     Object? weekType = null,
     Object? lessonType = null,
-    Object? semester = null,
   }) {
     return _then(_$_Schedule(
       id: null == id
@@ -264,10 +255,6 @@ class __$$_ScheduleCopyWithImpl<$Res>
           ? _value.lessonType
           : lessonType // ignore: cast_nullable_to_non_nullable
               as LessonType,
-      semester: null == semester
-          ? _value.semester
-          : semester // ignore: cast_nullable_to_non_nullable
-              as Semester,
     ));
   }
 }
@@ -284,8 +271,7 @@ class _$_Schedule implements _Schedule {
       required this.time,
       required this.weekday,
       required this.weekType,
-      required this.lessonType,
-      required this.semester});
+      required this.lessonType});
 
   factory _$_Schedule.fromJson(Map<String, dynamic> json) =>
       _$$_ScheduleFromJson(json);
@@ -312,12 +298,10 @@ class _$_Schedule implements _Schedule {
   final WeekType weekType;
   @override
   final LessonType lessonType;
-  @override
-  final Semester semester;
 
   @override
   String toString() {
-    return 'Schedule(id: $id, classroom: $classroom, group: $group, subject: $subject, teacher: $teacher, time: $time, weekday: $weekday, weekType: $weekType, lessonType: $lessonType, semester: $semester)';
+    return 'Schedule(id: $id, classroom: $classroom, group: $group, subject: $subject, teacher: $teacher, time: $time, weekday: $weekday, weekType: $weekType, lessonType: $lessonType)';
   }
 
   @override
@@ -336,15 +320,13 @@ class _$_Schedule implements _Schedule {
             (identical(other.weekType, weekType) ||
                 other.weekType == weekType) &&
             (identical(other.lessonType, lessonType) ||
-                other.lessonType == lessonType) &&
-            (identical(other.semester, semester) ||
-                other.semester == semester));
+                other.lessonType == lessonType));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, classroom, group, subject,
-      teacher, time, weekday, weekType, lessonType, semester);
+      teacher, time, weekday, weekType, lessonType);
 
   @JsonKey(ignore: true)
   @override
@@ -370,8 +352,7 @@ abstract class _Schedule implements Schedule {
       required final Time time,
       required final Weekday weekday,
       required final WeekType weekType,
-      required final LessonType lessonType,
-      required final Semester semester}) = _$_Schedule;
+      required final LessonType lessonType}) = _$_Schedule;
 
   factory _Schedule.fromJson(Map<String, dynamic> json) = _$_Schedule.fromJson;
 
@@ -397,8 +378,6 @@ abstract class _Schedule implements Schedule {
   WeekType get weekType;
   @override
   LessonType get lessonType;
-  @override
-  Semester get semester;
   @override
   @JsonKey(ignore: true)
   _$$_ScheduleCopyWith<_$_Schedule> get copyWith =>

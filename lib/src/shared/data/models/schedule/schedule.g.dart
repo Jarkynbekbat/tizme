@@ -16,7 +16,6 @@ _$_Schedule _$$_ScheduleFromJson(Map<String, dynamic> json) => _$_Schedule(
       weekday: $enumDecode(_$WeekdayEnumMap, json['weekday']),
       weekType: $enumDecode(_$WeekTypeEnumMap, json['weekType']),
       lessonType: $enumDecode(_$LessonTypeEnumMap, json['lessonType']),
-      semester: $enumDecode(_$SemesterEnumMap, json['semester']),
     );
 
 Map<String, dynamic> _$$_ScheduleToJson(_$_Schedule instance) =>
@@ -30,7 +29,6 @@ Map<String, dynamic> _$$_ScheduleToJson(_$_Schedule instance) =>
       'weekday': _$WeekdayEnumMap[instance.weekday]!,
       'weekType': _$WeekTypeEnumMap[instance.weekType]!,
       'lessonType': _$LessonTypeEnumMap[instance.lessonType]!,
-      'semester': _$SemesterEnumMap[instance.semester]!,
     };
 
 const _$WeekdayEnumMap = {
@@ -52,9 +50,4 @@ const _$LessonTypeEnumMap = {
   LessonType.practice: 'practice',
   LessonType.lab: 'lab',
   LessonType.exam: 'exam',
-};
-
-const _$SemesterEnumMap = {
-  Semester.first: 'first',
-  Semester.second: 'second',
 };

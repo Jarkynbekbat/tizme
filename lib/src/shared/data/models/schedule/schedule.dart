@@ -31,7 +31,6 @@ class Schedule with _$Schedule {
     required Weekday weekday,
     required WeekType weekType,
     required LessonType lessonType,
-    required Semester semester,
   }) = _Schedule;
 
   factory Schedule.fromJson(Map<String, dynamic> json) =>
@@ -64,7 +63,6 @@ class Schedule with _$Schedule {
       "weekday": data['weekday'],
       "weekType": data['week_type'],
       "lessonType": data['lesson_type'],
-      "semester": data['semester'],
     });
   }
 }
@@ -87,14 +85,6 @@ enum Weekday {
 
   @JsonValue("saturday")
   saturday,
-}
-
-enum Semester {
-  @JsonValue("first")
-  first,
-
-  @JsonValue("second")
-  second,
 }
 
 enum WeekType {
