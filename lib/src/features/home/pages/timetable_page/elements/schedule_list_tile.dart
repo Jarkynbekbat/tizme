@@ -22,6 +22,13 @@ class ScheduleListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final target = isTeacher
+        ? schedule.map(group: (s) => s.group.name, way: (s) => s.way.name)
+        : '${schedule.teacher.grade.name} ${schedule.teacher.name}';
+
+    final subtitle =
+        '$target • ${schedule.classroom.name} • ${schedule.lessonType.title}';
+
     return CupertinoButton(
       onPressed: () {
         context.pushNamed('/schedule', arguments: schedule);
@@ -55,9 +62,7 @@ class ScheduleListTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Expanded(
-                  child: Text(
-                    '${isTeacher ? schedule.group.name : schedule.teacher.name} • ${schedule.classroom.name} • ${schedule.lessonType.title}',
-                  ),
+                  child: Text(subtitle),
                 ),
                 if (showWeekType)
                   Text(

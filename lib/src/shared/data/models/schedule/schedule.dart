@@ -1,110 +1,125 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:studtime/src/shared/data/models/classroom/classroom.dart';
-import 'package:studtime/src/shared/data/models/group/group.dart';
+import 'package:studtime/src/shared/data/models/schedule/group_schedule.dart';
+import 'package:studtime/src/shared/data/models/schedule/way_schedule.dart';
 import 'package:studtime/src/shared/data/models/subject/subject.dart';
 import 'package:studtime/src/shared/data/models/teacher/teacher.dart';
 import 'package:studtime/src/shared/data/models/time/time.dart';
-import 'package:studtime/src/shared/extensions/on_doc_ref.dart';
 
-part 'schedule.freezed.dart';
-part 'schedule.g.dart';
+final fs = FirebaseFirestore.instance;
 
 typedef MapDocRef = DocumentReference<Map<String, dynamic>>;
 typedef MapDocSnap = DocumentSnapshot<Map<String, dynamic>>;
 typedef MapQDocSnap = QueryDocumentSnapshot<Map<String, dynamic>>;
 
-/// Модель элемента расписания
-@freezed
-class Schedule with _$Schedule {
-  factory Schedule({
-    required String id,
+/// Интерфейс элемента расписания
+abstract class Schedule {
+  final String id;
 
-    /// doc refs
-    required Classroom classroom,
-    required Group group,
-    required Subject subject,
-    required Teacher teacher,
-    required Time time,
+  /// doc refs,
+  final Classroom classroom;
+  final Subject subject;
+  final Teacher teacher;
+  final Time time;
+
+  final DocumentReference targetRef;
+
+  /// enums,
+  final Weekday weekday;
+  final WeekType weekType;
+  final LessonType lessonType;
+  final Semester semester;
+  final TargetType targetType;
+
+  const Schedule({
+    required this.id,
+
+    /// doc refs,
+    required this.classroom,
+    required this.subject,
+    required this.teacher,
+    required this.time,
+    required this.targetRef,
 
     /// enums,
-    required Weekday weekday,
-    required WeekType weekType,
-    required LessonType lessonType,
-  }) = _Schedule;
+    required this.weekday,
+    required this.weekType,
+    required this.lessonType,
+    required this.semester,
+    required this.targetType,
+  });
 
-  factory Schedule.fromJson(Map<String, dynamic> json) =>
-      _$ScheduleFromJson(json);
+  static Future<Schedule> fromDoc(MapDocSnap doc) {
+    final data = doc.data()!;
+    final targetType = TargetType.values.firstWhere(
+      (e) => e.name == data['target_type'],
+    );
 
-  static Future<Schedule> fromDoc(MapQDocSnap doc) async {
-    final data = doc.data();
+    switch (targetType) {
+      case TargetType.group:
+        return GroupSchedule.fromDoc(doc);
+      case TargetType.way:
+        return WaySchedule.fromDoc(doc);
+      default:
+        throw Exception('Unknown target type');
+    }
+  }
 
-    final classroomRef = data['classroom_ref'] as MapDocRef;
-    final groupRef = data['group_ref'] as MapDocRef;
-    final subjectRef = data['subject_ref'] as MapDocRef;
-    final teacherRef = data['teacher_ref'] as MapDocRef;
-    final timeRef = data['time_ref'] as MapDocRef;
+  Map<String, dynamic> toFirestoreMap() {
+    return {
+      'classroom_ref': fs.doc('/classroms/${classroom.id}'),
+      'subject_ref': fs.doc('/subjects/${subject.id}'),
+      'teacher_ref': fs.doc('/teachers/${teacher.id}'),
+      'time_ref': fs.doc('/times/${time.id}'),
+      'target_ref': targetRef,
+      'weekday': weekday.name,
+      'week_type': weekType.name,
+      'lesson_type': lessonType.name,
+      'semester': semester.name,
+    };
+  }
 
-    final results = await Future.wait([
-      classroomRef.flyweightFetch(),
-      groupRef.flyweightFetch(),
-      subjectRef.flyweightFetch(),
-      teacherRef.flyweightFetch(),
-      timeRef.flyweightFetch(),
-    ]);
-
-    return Schedule.fromJson({
-      "id": doc.id,
-      "classroom": {'id': classroomRef.id, ...results[0].data()!},
-      "group": {'id': groupRef.id, ...results[1].data()!},
-      "subject": {'id': subjectRef.id, ...results[2].data()!},
-      "teacher": {'id': teacherRef.id, ...results[3].data()!},
-      "time": {'id': timeRef.id, ...results[4].data()!},
-      "weekday": data['weekday'],
-      "weekType": data['week_type'],
-      "lessonType": data['lesson_type'],
-    });
+  T map<T>({
+    required T Function(GroupSchedule) group,
+    required T Function(WaySchedule) way,
+  }) {
+    if (this is GroupSchedule) {
+      return group(this as GroupSchedule);
+    } else if (this is WaySchedule) {
+      return way(this as WaySchedule);
+    } else {
+      throw Exception('Unknown schedule type');
+    }
   }
 }
 
+enum Semester {
+  first,
+  second,
+}
+
 enum Weekday {
-  @JsonValue("monday")
   monday,
-
-  @JsonValue("tuesday")
   tuesday,
-
-  @JsonValue("wednesday")
   wednesday,
-
-  @JsonValue("thursday")
   thursday,
-
-  @JsonValue("friday")
   friday,
-
-  @JsonValue("saturday")
   saturday,
 }
 
 enum WeekType {
-  @JsonValue("even")
   even,
-
-  @JsonValue("odd")
   odd,
 }
 
 enum LessonType {
-  @JsonValue("lecture")
   lecture,
-
-  @JsonValue("practice")
   practice,
-
-  @JsonValue("lab")
   lab,
-
-  @JsonValue("exam")
   exam,
+}
+
+enum TargetType {
+  group,
+  way,
 }

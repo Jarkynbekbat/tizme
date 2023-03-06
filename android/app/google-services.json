@@ -45,7 +45,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:396986104003:android:5e805b54b7d51aa4918a76",
         "android_client_info": {
-          "package_name": "com.example.studtime_admin_panel"
+          "package_name": "com.example.studtime"
         }
       },
       "oauth_client": [

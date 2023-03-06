@@ -7,13 +7,15 @@ part of 'time.dart';
 // **************************************************************************
 
 _$_Time _$$_TimeFromJson(Map<String, dynamic> json) => _$_Time(
-      order: json['order'] as int,
+      id: json['id'] as String,
       from: json['from'] as String,
       to: json['to'] as String,
+      order: json['order'] as int,
     );
 
 Map<String, dynamic> _$$_TimeToJson(_$_Time instance) => <String, dynamic>{
-      'order': instance.order,
+      'id': instance.id,
       'from': instance.from,
       'to': instance.to,
+      'order': instance.order,
     };

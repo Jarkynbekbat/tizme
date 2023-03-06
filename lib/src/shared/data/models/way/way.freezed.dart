@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'classroom.dart';
+part of 'way.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,33 +14,32 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-Classroom _$ClassroomFromJson(Map<String, dynamic> json) {
-  return _Classroom.fromJson(json);
+Way _$WayFromJson(Map<String, dynamic> json) {
+  return _Way.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Classroom {
+mixin _$Way {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  Department get department => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ClassroomCopyWith<Classroom> get copyWith =>
-      throw _privateConstructorUsedError;
+  $WayCopyWith<Way> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ClassroomCopyWith<$Res> {
-  factory $ClassroomCopyWith(Classroom value, $Res Function(Classroom) then) =
-      _$ClassroomCopyWithImpl<$Res, Classroom>;
+abstract class $WayCopyWith<$Res> {
+  factory $WayCopyWith(Way value, $Res Function(Way) then) =
+      _$WayCopyWithImpl<$Res, Way>;
   @useResult
-  $Res call({String id, String name});
+  $Res call({String id, String name, Department department});
 }
 
 /// @nodoc
-class _$ClassroomCopyWithImpl<$Res, $Val extends Classroom>
-    implements $ClassroomCopyWith<$Res> {
-  _$ClassroomCopyWithImpl(this._value, this._then);
+class _$WayCopyWithImpl<$Res, $Val extends Way> implements $WayCopyWith<$Res> {
+  _$WayCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -52,6 +51,7 @@ class _$ClassroomCopyWithImpl<$Res, $Val extends Classroom>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? department = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -62,26 +62,27 @@ class _$ClassroomCopyWithImpl<$Res, $Val extends Classroom>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      department: freezed == department
+          ? _value.department
+          : department // ignore: cast_nullable_to_non_nullable
+              as Department,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_ClassroomCopyWith<$Res> implements $ClassroomCopyWith<$Res> {
-  factory _$$_ClassroomCopyWith(
-          _$_Classroom value, $Res Function(_$_Classroom) then) =
-      __$$_ClassroomCopyWithImpl<$Res>;
+abstract class _$$_WayCopyWith<$Res> implements $WayCopyWith<$Res> {
+  factory _$$_WayCopyWith(_$_Way value, $Res Function(_$_Way) then) =
+      __$$_WayCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String name});
+  $Res call({String id, String name, Department department});
 }
 
 /// @nodoc
-class __$$_ClassroomCopyWithImpl<$Res>
-    extends _$ClassroomCopyWithImpl<$Res, _$_Classroom>
-    implements _$$_ClassroomCopyWith<$Res> {
-  __$$_ClassroomCopyWithImpl(
-      _$_Classroom _value, $Res Function(_$_Classroom) _then)
+class __$$_WayCopyWithImpl<$Res> extends _$WayCopyWithImpl<$Res, _$_Way>
+    implements _$$_WayCopyWith<$Res> {
+  __$$_WayCopyWithImpl(_$_Way _value, $Res Function(_$_Way) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -89,8 +90,9 @@ class __$$_ClassroomCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? department = freezed,
   }) {
-    return _then(_$_Classroom(
+    return _then(_$_Way(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -99,68 +101,79 @@ class __$$_ClassroomCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      department: freezed == department
+          ? _value.department
+          : department // ignore: cast_nullable_to_non_nullable
+              as Department,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_Classroom implements _Classroom {
-  const _$_Classroom({required this.id, required this.name});
+class _$_Way implements _Way {
+  const _$_Way(
+      {required this.id, required this.name, required this.department});
 
-  factory _$_Classroom.fromJson(Map<String, dynamic> json) =>
-      _$$_ClassroomFromJson(json);
+  factory _$_Way.fromJson(Map<String, dynamic> json) => _$$_WayFromJson(json);
 
   @override
   final String id;
   @override
   final String name;
+  @override
+  final Department department;
 
   @override
   String toString() {
-    return 'Classroom(id: $id, name: $name)';
+    return 'Way(id: $id, name: $name, department: $department)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Classroom &&
+            other is _$_Way &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name));
+            (identical(other.name, name) || other.name == name) &&
+            const DeepCollectionEquality()
+                .equals(other.department, department));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name);
+  int get hashCode => Object.hash(
+      runtimeType, id, name, const DeepCollectionEquality().hash(department));
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ClassroomCopyWith<_$_Classroom> get copyWith =>
-      __$$_ClassroomCopyWithImpl<_$_Classroom>(this, _$identity);
+  _$$_WayCopyWith<_$_Way> get copyWith =>
+      __$$_WayCopyWithImpl<_$_Way>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ClassroomToJson(
+    return _$$_WayToJson(
       this,
     );
   }
 }
 
-abstract class _Classroom implements Classroom {
-  const factory _Classroom(
-      {required final String id, required final String name}) = _$_Classroom;
+abstract class _Way implements Way {
+  const factory _Way(
+      {required final String id,
+      required final String name,
+      required final Department department}) = _$_Way;
 
-  factory _Classroom.fromJson(Map<String, dynamic> json) =
-      _$_Classroom.fromJson;
+  factory _Way.fromJson(Map<String, dynamic> json) = _$_Way.fromJson;
 
   @override
   String get id;
   @override
   String get name;
   @override
+  Department get department;
+  @override
   @JsonKey(ignore: true)
-  _$$_ClassroomCopyWith<_$_Classroom> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_WayCopyWith<_$_Way> get copyWith => throw _privateConstructorUsedError;
 }

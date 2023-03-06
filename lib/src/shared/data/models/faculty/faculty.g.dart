@@ -1,20 +1,18 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'teacher.dart';
+part of 'faculty.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Teacher _$$_TeacherFromJson(Map<String, dynamic> json) => _$_Teacher(
+_$_Faculty _$$_FacultyFromJson(Map<String, dynamic> json) => _$_Faculty(
       id: json['id'] as String,
       name: json['name'] as String,
-      grade: Grade.fromJson(json['grade'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_TeacherToJson(_$_Teacher instance) =>
+Map<String, dynamic> _$$_FacultyToJson(_$_Faculty instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'grade': instance.grade,
     };

@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:studtime/src/features/home/blocs/setup_cubit.dart';
+import 'package:studtime/src/shared/data/models/group/group.dart';
 import 'package:studtime/src/shared/data/models/schedule/schedule.dart';
 import 'package:studtime/src/shared/data/models/setup/setup.dart';
 
@@ -52,9 +53,13 @@ class TimetableCubit extends Cubit<TimetableState> {
       }
 
       final groupRef = _firestore.doc('groups/${settings.id}');
+      final groupDoc = await groupRef.get();
+      final group = await Group.fromDoc(groupDoc);
+      final wayRef = _firestore.doc('ways/${group.way.id}');
+
       _timetableSub = _firestore
           .collection('timetables')
-          .where('group_ref', isEqualTo: groupRef)
+          .where('target_ref', whereIn: [groupRef, wayRef])
           .snapshots()
           .listen(
             (event) => _onTimetableChanged(event, isTeacher: false),

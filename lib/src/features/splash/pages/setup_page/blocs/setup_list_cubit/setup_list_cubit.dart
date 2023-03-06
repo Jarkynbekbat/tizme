@@ -22,16 +22,21 @@ class SetupListCubit extends Cubit<SetupListState> {
         _firestore.collection('groups').get(),
       ]);
 
-      final teacherMaps = results[0].docs.map((e) => {'id': e.id, ...e.data()});
-      final groupMaps = results[1].docs.map((e) => {'id': e.id, ...e.data()});
+      final groupDocs = results[1].docs;
+      final teacherDocs = results[0].docs;
 
-      final teachers = teacherMaps.map((e) => Teacher.fromJson(e)).toList();
-      final groups = groupMaps.map((e) => Group.fromJson(e)).toList();
+      final groupFutures = groupDocs.map((e) => Group.fromDoc(e));
+      final teacherFutures = teacherDocs.map((e) => Teacher.fromDoc(e));
 
-      final suggestions = [...teachers, ...groups];
+      final suggestions = await Future.wait([
+        ...groupFutures,
+        ...teacherFutures,
+      ]);
+
       emit(SetupListState.loaded(suggestions));
     } catch (e) {
       emit(SetupListState.error(e.toString()));
+      rethrow;
     }
   }
 }

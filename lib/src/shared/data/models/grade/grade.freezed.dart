@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'classroom.dart';
+part of 'grade.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,33 +14,32 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-Classroom _$ClassroomFromJson(Map<String, dynamic> json) {
-  return _Classroom.fromJson(json);
+Grade _$GradeFromJson(Map<String, dynamic> json) {
+  return _Grade.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Classroom {
+mixin _$Grade {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ClassroomCopyWith<Classroom> get copyWith =>
-      throw _privateConstructorUsedError;
+  $GradeCopyWith<Grade> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ClassroomCopyWith<$Res> {
-  factory $ClassroomCopyWith(Classroom value, $Res Function(Classroom) then) =
-      _$ClassroomCopyWithImpl<$Res, Classroom>;
+abstract class $GradeCopyWith<$Res> {
+  factory $GradeCopyWith(Grade value, $Res Function(Grade) then) =
+      _$GradeCopyWithImpl<$Res, Grade>;
   @useResult
   $Res call({String id, String name});
 }
 
 /// @nodoc
-class _$ClassroomCopyWithImpl<$Res, $Val extends Classroom>
-    implements $ClassroomCopyWith<$Res> {
-  _$ClassroomCopyWithImpl(this._value, this._then);
+class _$GradeCopyWithImpl<$Res, $Val extends Grade>
+    implements $GradeCopyWith<$Res> {
+  _$GradeCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -67,21 +66,18 @@ class _$ClassroomCopyWithImpl<$Res, $Val extends Classroom>
 }
 
 /// @nodoc
-abstract class _$$_ClassroomCopyWith<$Res> implements $ClassroomCopyWith<$Res> {
-  factory _$$_ClassroomCopyWith(
-          _$_Classroom value, $Res Function(_$_Classroom) then) =
-      __$$_ClassroomCopyWithImpl<$Res>;
+abstract class _$$_GradeCopyWith<$Res> implements $GradeCopyWith<$Res> {
+  factory _$$_GradeCopyWith(_$_Grade value, $Res Function(_$_Grade) then) =
+      __$$_GradeCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String id, String name});
 }
 
 /// @nodoc
-class __$$_ClassroomCopyWithImpl<$Res>
-    extends _$ClassroomCopyWithImpl<$Res, _$_Classroom>
-    implements _$$_ClassroomCopyWith<$Res> {
-  __$$_ClassroomCopyWithImpl(
-      _$_Classroom _value, $Res Function(_$_Classroom) _then)
+class __$$_GradeCopyWithImpl<$Res> extends _$GradeCopyWithImpl<$Res, _$_Grade>
+    implements _$$_GradeCopyWith<$Res> {
+  __$$_GradeCopyWithImpl(_$_Grade _value, $Res Function(_$_Grade) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -90,7 +86,7 @@ class __$$_ClassroomCopyWithImpl<$Res>
     Object? id = null,
     Object? name = null,
   }) {
-    return _then(_$_Classroom(
+    return _then(_$_Grade(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -105,11 +101,11 @@ class __$$_ClassroomCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Classroom implements _Classroom {
-  const _$_Classroom({required this.id, required this.name});
+class _$_Grade implements _Grade {
+  const _$_Grade({required this.id, required this.name});
 
-  factory _$_Classroom.fromJson(Map<String, dynamic> json) =>
-      _$$_ClassroomFromJson(json);
+  factory _$_Grade.fromJson(Map<String, dynamic> json) =>
+      _$$_GradeFromJson(json);
 
   @override
   final String id;
@@ -118,14 +114,14 @@ class _$_Classroom implements _Classroom {
 
   @override
   String toString() {
-    return 'Classroom(id: $id, name: $name)';
+    return 'Grade(id: $id, name: $name)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Classroom &&
+            other is _$_Grade &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name));
   }
@@ -137,23 +133,22 @@ class _$_Classroom implements _Classroom {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ClassroomCopyWith<_$_Classroom> get copyWith =>
-      __$$_ClassroomCopyWithImpl<_$_Classroom>(this, _$identity);
+  _$$_GradeCopyWith<_$_Grade> get copyWith =>
+      __$$_GradeCopyWithImpl<_$_Grade>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ClassroomToJson(
+    return _$$_GradeToJson(
       this,
     );
   }
 }
 
-abstract class _Classroom implements Classroom {
-  const factory _Classroom(
-      {required final String id, required final String name}) = _$_Classroom;
+abstract class _Grade implements Grade {
+  const factory _Grade({required final String id, required final String name}) =
+      _$_Grade;
 
-  factory _Classroom.fromJson(Map<String, dynamic> json) =
-      _$_Classroom.fromJson;
+  factory _Grade.fromJson(Map<String, dynamic> json) = _$_Grade.fromJson;
 
   @override
   String get id;
@@ -161,6 +156,6 @@ abstract class _Classroom implements Classroom {
   String get name;
   @override
   @JsonKey(ignore: true)
-  _$$_ClassroomCopyWith<_$_Classroom> get copyWith =>
+  _$$_GradeCopyWith<_$_Grade> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -20,9 +20,10 @@ Time _$TimeFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Time {
-  int get order => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
   String get from => throw _privateConstructorUsedError;
   String get to => throw _privateConstructorUsedError;
+  int get order => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +35,7 @@ abstract class $TimeCopyWith<$Res> {
   factory $TimeCopyWith(Time value, $Res Function(Time) then) =
       _$TimeCopyWithImpl<$Res, Time>;
   @useResult
-  $Res call({int order, String from, String to});
+  $Res call({String id, String from, String to, int order});
 }
 
 /// @nodoc
@@ -50,15 +51,16 @@ class _$TimeCopyWithImpl<$Res, $Val extends Time>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? order = null,
+    Object? id = null,
     Object? from = null,
     Object? to = null,
+    Object? order = null,
   }) {
     return _then(_value.copyWith(
-      order: null == order
-          ? _value.order
-          : order // ignore: cast_nullable_to_non_nullable
-              as int,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       from: null == from
           ? _value.from
           : from // ignore: cast_nullable_to_non_nullable
@@ -67,6 +69,10 @@ class _$TimeCopyWithImpl<$Res, $Val extends Time>
           ? _value.to
           : to // ignore: cast_nullable_to_non_nullable
               as String,
+      order: null == order
+          ? _value.order
+          : order // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -77,7 +83,7 @@ abstract class _$$_TimeCopyWith<$Res> implements $TimeCopyWith<$Res> {
       __$$_TimeCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int order, String from, String to});
+  $Res call({String id, String from, String to, int order});
 }
 
 /// @nodoc
@@ -89,15 +95,16 @@ class __$$_TimeCopyWithImpl<$Res> extends _$TimeCopyWithImpl<$Res, _$_Time>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? order = null,
+    Object? id = null,
     Object? from = null,
     Object? to = null,
+    Object? order = null,
   }) {
     return _then(_$_Time(
-      order: null == order
-          ? _value.order
-          : order // ignore: cast_nullable_to_non_nullable
-              as int,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       from: null == from
           ? _value.from
           : from // ignore: cast_nullable_to_non_nullable
@@ -106,6 +113,10 @@ class __$$_TimeCopyWithImpl<$Res> extends _$TimeCopyWithImpl<$Res, _$_Time>
           ? _value.to
           : to // ignore: cast_nullable_to_non_nullable
               as String,
+      order: null == order
+          ? _value.order
+          : order // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -113,20 +124,26 @@ class __$$_TimeCopyWithImpl<$Res> extends _$TimeCopyWithImpl<$Res, _$_Time>
 /// @nodoc
 @JsonSerializable()
 class _$_Time implements _Time {
-  const _$_Time({required this.order, required this.from, required this.to});
+  const _$_Time(
+      {required this.id,
+      required this.from,
+      required this.to,
+      required this.order});
 
   factory _$_Time.fromJson(Map<String, dynamic> json) => _$$_TimeFromJson(json);
 
   @override
-  final int order;
+  final String id;
   @override
   final String from;
   @override
   final String to;
+  @override
+  final int order;
 
   @override
   String toString() {
-    return 'Time(order: $order, from: $from, to: $to)';
+    return 'Time(id: $id, from: $from, to: $to, order: $order)';
   }
 
   @override
@@ -134,14 +151,15 @@ class _$_Time implements _Time {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Time &&
-            (identical(other.order, order) || other.order == order) &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.from, from) || other.from == from) &&
-            (identical(other.to, to) || other.to == to));
+            (identical(other.to, to) || other.to == to) &&
+            (identical(other.order, order) || other.order == order));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, order, from, to);
+  int get hashCode => Object.hash(runtimeType, id, from, to, order);
 
   @JsonKey(ignore: true)
   @override
@@ -159,18 +177,21 @@ class _$_Time implements _Time {
 
 abstract class _Time implements Time {
   const factory _Time(
-      {required final int order,
+      {required final String id,
       required final String from,
-      required final String to}) = _$_Time;
+      required final String to,
+      required final int order}) = _$_Time;
 
   factory _Time.fromJson(Map<String, dynamic> json) = _$_Time.fromJson;
 
   @override
-  int get order;
+  String get id;
   @override
   String get from;
   @override
   String get to;
+  @override
+  int get order;
   @override
   @JsonKey(ignore: true)
   _$$_TimeCopyWith<_$_Time> get copyWith => throw _privateConstructorUsedError;

@@ -22,6 +22,7 @@ Teacher _$TeacherFromJson(Map<String, dynamic> json) {
 mixin _$Teacher {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  Grade get grade => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -33,7 +34,9 @@ abstract class $TeacherCopyWith<$Res> {
   factory $TeacherCopyWith(Teacher value, $Res Function(Teacher) then) =
       _$TeacherCopyWithImpl<$Res, Teacher>;
   @useResult
-  $Res call({String id, String name});
+  $Res call({String id, String name, Grade grade});
+
+  $GradeCopyWith<$Res> get grade;
 }
 
 /// @nodoc
@@ -51,6 +54,7 @@ class _$TeacherCopyWithImpl<$Res, $Val extends Teacher>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? grade = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -61,7 +65,19 @@ class _$TeacherCopyWithImpl<$Res, $Val extends Teacher>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      grade: null == grade
+          ? _value.grade
+          : grade // ignore: cast_nullable_to_non_nullable
+              as Grade,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $GradeCopyWith<$Res> get grade {
+    return $GradeCopyWith<$Res>(_value.grade, (value) {
+      return _then(_value.copyWith(grade: value) as $Val);
+    });
   }
 }
 
@@ -72,7 +88,10 @@ abstract class _$$_TeacherCopyWith<$Res> implements $TeacherCopyWith<$Res> {
       __$$_TeacherCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String name});
+  $Res call({String id, String name, Grade grade});
+
+  @override
+  $GradeCopyWith<$Res> get grade;
 }
 
 /// @nodoc
@@ -87,6 +106,7 @@ class __$$_TeacherCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? grade = null,
   }) {
     return _then(_$_Teacher(
       id: null == id
@@ -97,6 +117,10 @@ class __$$_TeacherCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      grade: null == grade
+          ? _value.grade
+          : grade // ignore: cast_nullable_to_non_nullable
+              as Grade,
     ));
   }
 }
@@ -104,7 +128,7 @@ class __$$_TeacherCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Teacher implements _Teacher {
-  _$_Teacher({required this.id, required this.name});
+  const _$_Teacher({required this.id, required this.name, required this.grade});
 
   factory _$_Teacher.fromJson(Map<String, dynamic> json) =>
       _$$_TeacherFromJson(json);
@@ -113,10 +137,12 @@ class _$_Teacher implements _Teacher {
   final String id;
   @override
   final String name;
+  @override
+  final Grade grade;
 
   @override
   String toString() {
-    return 'Teacher(id: $id, name: $name)';
+    return 'Teacher(id: $id, name: $name, grade: $grade)';
   }
 
   @override
@@ -125,12 +151,13 @@ class _$_Teacher implements _Teacher {
         (other.runtimeType == runtimeType &&
             other is _$_Teacher &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name));
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.grade, grade) || other.grade == grade));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name);
+  int get hashCode => Object.hash(runtimeType, id, name, grade);
 
   @JsonKey(ignore: true)
   @override
@@ -147,8 +174,10 @@ class _$_Teacher implements _Teacher {
 }
 
 abstract class _Teacher implements Teacher {
-  factory _Teacher({required final String id, required final String name}) =
-      _$_Teacher;
+  const factory _Teacher(
+      {required final String id,
+      required final String name,
+      required final Grade grade}) = _$_Teacher;
 
   factory _Teacher.fromJson(Map<String, dynamic> json) = _$_Teacher.fromJson;
 
@@ -156,6 +185,8 @@ abstract class _Teacher implements Teacher {
   String get id;
   @override
   String get name;
+  @override
+  Grade get grade;
   @override
   @JsonKey(ignore: true)
   _$$_TeacherCopyWith<_$_Teacher> get copyWith =>

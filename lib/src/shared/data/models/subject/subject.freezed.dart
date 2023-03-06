@@ -22,6 +22,7 @@ Subject _$SubjectFromJson(Map<String, dynamic> json) {
 mixin _$Subject {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  Way get way => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -33,7 +34,7 @@ abstract class $SubjectCopyWith<$Res> {
   factory $SubjectCopyWith(Subject value, $Res Function(Subject) then) =
       _$SubjectCopyWithImpl<$Res, Subject>;
   @useResult
-  $Res call({String id, String name});
+  $Res call({String id, String name, Way way});
 }
 
 /// @nodoc
@@ -51,6 +52,7 @@ class _$SubjectCopyWithImpl<$Res, $Val extends Subject>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? way = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -61,6 +63,10 @@ class _$SubjectCopyWithImpl<$Res, $Val extends Subject>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      way: freezed == way
+          ? _value.way
+          : way // ignore: cast_nullable_to_non_nullable
+              as Way,
     ) as $Val);
   }
 }
@@ -72,7 +78,7 @@ abstract class _$$_SubjectCopyWith<$Res> implements $SubjectCopyWith<$Res> {
       __$$_SubjectCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String name});
+  $Res call({String id, String name, Way way});
 }
 
 /// @nodoc
@@ -87,6 +93,7 @@ class __$$_SubjectCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? way = freezed,
   }) {
     return _then(_$_Subject(
       id: null == id
@@ -97,6 +104,10 @@ class __$$_SubjectCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      way: freezed == way
+          ? _value.way
+          : way // ignore: cast_nullable_to_non_nullable
+              as Way,
     ));
   }
 }
@@ -104,7 +115,7 @@ class __$$_SubjectCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Subject implements _Subject {
-  _$_Subject({required this.id, required this.name});
+  const _$_Subject({required this.id, required this.name, required this.way});
 
   factory _$_Subject.fromJson(Map<String, dynamic> json) =>
       _$$_SubjectFromJson(json);
@@ -113,10 +124,12 @@ class _$_Subject implements _Subject {
   final String id;
   @override
   final String name;
+  @override
+  final Way way;
 
   @override
   String toString() {
-    return 'Subject(id: $id, name: $name)';
+    return 'Subject(id: $id, name: $name, way: $way)';
   }
 
   @override
@@ -125,12 +138,14 @@ class _$_Subject implements _Subject {
         (other.runtimeType == runtimeType &&
             other is _$_Subject &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name));
+            (identical(other.name, name) || other.name == name) &&
+            const DeepCollectionEquality().equals(other.way, way));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name);
+  int get hashCode => Object.hash(
+      runtimeType, id, name, const DeepCollectionEquality().hash(way));
 
   @JsonKey(ignore: true)
   @override
@@ -147,8 +162,10 @@ class _$_Subject implements _Subject {
 }
 
 abstract class _Subject implements Subject {
-  factory _Subject({required final String id, required final String name}) =
-      _$_Subject;
+  const factory _Subject(
+      {required final String id,
+      required final String name,
+      required final Way way}) = _$_Subject;
 
   factory _Subject.fromJson(Map<String, dynamic> json) = _$_Subject.fromJson;
 
@@ -156,6 +173,8 @@ abstract class _Subject implements Subject {
   String get id;
   @override
   String get name;
+  @override
+  Way get way;
   @override
   @JsonKey(ignore: true)
   _$$_SubjectCopyWith<_$_Subject> get copyWith =>

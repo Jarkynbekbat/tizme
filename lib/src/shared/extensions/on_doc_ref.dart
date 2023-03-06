@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:studtime/src/shared/widgets/app_error_text.dart';
 
 extension OnDocRef on DocumentReference<Map<String, dynamic>> {
-  Future<DocumentSnapshot<Map<String, dynamic>>> flyweightFetch() async {
+  Future<DocumentSnapshot<Map<String, dynamic>>> localFirstFetch() async {
     try {
       final snapshot = await get(const GetOptions(source: Source.cache));
       if (snapshot.exists) {
@@ -22,7 +22,7 @@ extension OnDocRef on DocumentReference<Map<String, dynamic>> {
     Widget Function(String?)? error,
   }) {
     return FutureBuilder(
-      future: flyweightFetch(),
+      future: localFirstFetch(),
       builder: (context, snapshot) {
         return AnimatedSwitcher(
           duration: const Duration(milliseconds: 300),
