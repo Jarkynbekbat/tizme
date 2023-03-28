@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_intro/flutter_intro.dart';
 import 'package:studtime/src/features/home/blocs/setup_cubit.dart';
+import 'package:studtime/src/features/home/pages/timetable_page/elements/barcode_widget.dart';
 import 'package:studtime/src/features/splash/pages/setup_page/blocs/setup_list_cubit/setup_list_cubit.dart';
 import 'package:studtime/src/shared/data/models/setup/setup.dart';
 import 'package:studtime/src/shared/data/models/suggestion_item.dart';
@@ -37,6 +38,9 @@ class HomeAppBar extends StatelessWidget with PreferredSizeWidget {
       ),
       child: AppBar(
         centerTitle: true,
+        actions: [
+          BarcodeWidget(),
+        ],
         title: BlocBuilder<SetupCubit, Setup>(
           key: key,
           builder: (context, state) {
