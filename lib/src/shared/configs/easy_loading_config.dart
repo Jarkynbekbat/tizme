@@ -18,5 +18,5 @@ void setupEasyLoading() {
 
     ///
     ..indicatorType = EasyLoadingIndicatorType.fadingCircle
-    ..indicatorColor = AppColors.primaryColor;
+    ..indicatorColor = Colors.white;
 }
