@@ -64,7 +64,7 @@ class ScanQR extends StatelessWidget {
                       child: ClassroomSchedulePage(classroom: classroom),
                     ),
                   );
-                } on Exception {
+                } catch (e) {
                   EasyLoading.showError("Не удалось найти аудиторию");
                 }
               },
