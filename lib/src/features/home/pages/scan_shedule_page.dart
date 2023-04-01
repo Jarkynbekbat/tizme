@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:studtime/src/features/home/pages/timetable_page/elements/schedule_list_tile.dart';
-import 'package:studtime/src/features/home/pages/timetable_page/elements/timetable_list.dart';
 import 'package:studtime/src/shared/data/models/schedule/schedule.dart';
 import 'package:studtime/src/features/home/blocs/timetable_cubit/timetable_cubit.dart';
 import 'package:studtime/src/shared/extensions/on_weektype.dart';
@@ -12,15 +11,15 @@ import '../../../shared/styles/app_colors.dart';
 import '../blocs/setup_cubit.dart';
 
 class ScanShedulePage extends StatelessWidget {
-  String? classroom;
-  ScanShedulePage({this.classroom, super.key});
+ final String? classroom;
+  const ScanShedulePage({this.classroom, super.key});
 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
     appBar: AppBar(
-      title: Text('График расписаний в аудитории'),
+      title: const Text('График расписаний в аудитории'),
     ),
     body: BlocProvider(
       create: (_) => TimetableCubit(
