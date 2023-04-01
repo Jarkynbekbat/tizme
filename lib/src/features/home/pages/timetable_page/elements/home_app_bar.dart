@@ -27,8 +27,68 @@ class HomeAppBar extends StatelessWidget with PreferredSizeWidget {
       ),
       child: AppBar(
         centerTitle: true,
+<<<<<<< HEAD
         actions: const [ScanQR()],
         title: const HomeCurrentTarget(),
+=======
+        actions: const [
+          BarcodeWidget(),
+        ],
+        title: BlocBuilder<SetupCubit, Setup>(
+          key: key,
+          builder: (context, state) {
+            final appCacheRepo = context.read<AppCacheRepo>();
+            final isIntroShown = appCacheRepo.isIntroShownCache.get();
+
+            if (!isIntroShown) {
+              Future.delayed(const Duration(milliseconds: 500), () {
+                Intro.of(context).start();
+                appCacheRepo.isIntroShownCache.set(true);
+              });
+            }
+
+            return CupertinoButton(
+              onPressed: () async {
+                final items =
+                    setupListCubit.state.maybeMap<List<SuggestionItem>>(
+                  loaded: (loaded) => loaded.items,
+                  orElse: () => [],
+                );
+
+                final selected = await showSearch(
+                  context: context,
+                  delegate: AppSearchDelegate(items),
+                );
+
+                if (selected == null) return;
+
+                setupCubit.setSettings(
+                  Setup(
+                    id: selected.id,
+                    name: selected.name,
+                    type: selected is Teacher
+                        ? SetupType.teacher
+                        : SetupType.student,
+                  ),
+                );
+              },
+              child: IntroStepBuilder(
+                order: 1,
+                text: "Нажмите сюда, чтобы выбрать\n группу или преподавателя",
+                builder: (context, key) {
+                  return Text(
+                    state.name,
+                    key: key,
+                    style: const TextStyle(
+                      fontSize: 16.0,
+                    ),
+                  );
+                },
+              ),
+            );
+          },
+        ),
+>>>>>>> 3194f129c976f4a44015ffc79500b622085ffc19
       ),
     );
   }
