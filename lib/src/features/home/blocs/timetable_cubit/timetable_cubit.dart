@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:studtime/src/features/home/blocs/setup_cubit.dart';
+import 'package:studtime/src/shared/data/models/classroom/classroom.dart';
 import 'package:studtime/src/shared/data/models/group/group.dart';
 import 'package:studtime/src/shared/data/models/schedule/schedule.dart';
 import 'package:studtime/src/shared/data/models/setup/setup.dart';
@@ -30,6 +31,27 @@ class TimetableCubit extends Cubit<TimetableState> {
     _settingsSub.cancel();
     _timetableSub?.cancel();
     return super.close();
+  }
+
+  ///  подписаться на расписание аудитории
+  void subscribeToClassroom(Classroom classroom) {
+    _timetableSub?.cancel();
+    emit(const TimetableState.loading());
+
+    final classroomRef = _firestore.doc('classroms/${classroom.id}');
+    _timetableSub = _firestore
+        .collection('timetables')
+        .where('classroom_ref', isEqualTo: classroomRef)
+        .snapshots()
+        .listen(
+          (event) => _onTimetableChanged(event, isTeacher: false),
+          onError: (e) => emit(TimetableState.error(e.toString())),
+        );
+  }
+
+  /// Отписаться от расписания аудитории
+  void unsubscrideFromClassroom() {
+    _onSettingsChanged(_settingsCubit.state);
   }
 
   /// Обработать изменение настроек пользователя

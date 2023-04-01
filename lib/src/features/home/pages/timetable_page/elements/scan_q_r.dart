@@ -5,10 +5,11 @@ import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:studtime/src/features/home/blocs/timetable_cubit/timetable_cubit.dart';
-import 'package:studtime/src/features/home/pages/classroom_schedule_page/classroom_schedule_page.dart';
+import 'package:studtime/src/shared/data/models/classroom/classroom.dart';
+import 'package:studtime/src/shared/data/models/schedule/schedule.dart';
 import 'package:studtime/src/shared/extensions/on_context.dart';
 
-import '../../../../../shared/data/models/schedule/schedule.dart';
+import '../../classroom_page/classroom_page.dart';
 
 class ScanQR extends StatelessWidget {
   const ScanQR({super.key});
@@ -17,62 +18,47 @@ class ScanQR extends StatelessWidget {
   Widget build(BuildContext context) {
     final timetableCubit = context.read<TimetableCubit>();
 
-    return BlocBuilder<TimetableCubit, TimetableState>(
-      builder: (context, state) {
-        List<Schedule> items = [];
-
-        bool ignoring = true;
-        double opacity = 0.3;
-
-        state.mapOrNull(
-          loaded: (loaded) {
-            items = loaded.items;
-            ignoring = false;
-            opacity = 1.0;
-          },
+    return IconButton(
+      onPressed: () async {
+        EasyLoading.show();
+        final scannedName = await FlutterBarcodeScanner.scanBarcode(
+          "#ff6666",
+          "Отмена",
+          true,
+          ScanMode.BARCODE,
         );
+        EasyLoading.dismiss();
 
-        return IgnorePointer(
-          ignoring: ignoring,
-          child: AnimatedOpacity(
-            opacity: opacity,
-            duration: const Duration(milliseconds: 300),
-            child: IconButton(
-              onPressed: () async {
-                EasyLoading.show();
-                final scanResult = await FlutterBarcodeScanner.scanBarcode(
-                  "#ff6666",
-                  "Отмена",
-                  true,
-                  ScanMode.BARCODE,
-                );
-                EasyLoading.dismiss();
+        final hasResult = scannedName.isNotEmpty && scannedName != "-1";
+        if (!hasResult) {
+          return EasyLoading.showError("QR-код не отсканирован");
+        }
 
-                final hasResult = scanResult.isNotEmpty && scanResult != "-1";
-                if (!hasResult) {
-                  EasyLoading.showError("QR-код не отсканирован");
-                }
+        try {
+          final snap = await fs
+              .collection('classroms')
+              .where('name', isEqualTo: scannedName)
+              .limit(1)
+              .get();
 
-                try {
-                  final classroom = items
-                      .map((schedule) => schedule.classroom)
-                      .firstWhere((classroom) => classroom.name == scanResult);
+          final classroom = Classroom.fromDoc(
+            snap.docs.first,
+          );
 
-                  context.push(
-                    BlocProvider.value(
-                      value: timetableCubit,
-                      child: ClassroomSchedulePage(classroom: classroom),
-                    ),
-                  );
-                } catch (e) {
-                  EasyLoading.showError("Не удалось найти аудиторию");
-                }
-              },
-              icon: const Icon(Icons.qr_code_scanner),
+          await context.push(
+            BlocProvider.value(
+              value: timetableCubit..subscribeToClassroom(classroom),
+              child: ClassroomPage(classroom: classroom),
             ),
-          ),
-        );
+          );
+          timetableCubit.unsubscrideFromClassroom();
+        } catch (e) {
+          EasyLoading.showError(
+            "Не удалось найти расписание для аудитории $scannedName",
+          );
+        }
       },
+      icon: const Icon(Icons.qr_code_scanner),
     );
   }
 }
