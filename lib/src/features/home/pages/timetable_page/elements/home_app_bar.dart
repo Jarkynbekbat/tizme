@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:studtime/src/features/home/pages/timetable_page/elements/scan_q_r.dart';
 
-import 'elements/home_current_target.dart';
+import 'home_current_target.dart';
 
 class HomeAppBar extends StatelessWidget with PreferredSizeWidget {
   const HomeAppBar({

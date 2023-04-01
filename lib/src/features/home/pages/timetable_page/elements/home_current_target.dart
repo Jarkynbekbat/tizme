@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_intro/flutter_intro.dart';
 
-import '../../../../../../shared/data/models/setup/setup.dart';
-import '../../../../../../shared/data/models/suggestion_item.dart';
-import '../../../../../../shared/data/models/teacher/teacher.dart';
-import '../../../../../../shared/data/repos/app_cache_repo.dart';
-import '../../../../../../shared/widgets/app_search_delegate.dart';
-import '../../../../../splash/pages/setup_page/blocs/setup_list_cubit/setup_list_cubit.dart';
-import '../../../../blocs/setup_cubit.dart';
+import '../../../../../shared/data/models/setup/setup.dart';
+import '../../../../../shared/data/models/suggestion_item.dart';
+import '../../../../../shared/data/models/teacher/teacher.dart';
+import '../../../../../shared/data/repos/app_cache_repo.dart';
+import '../../../../../shared/widgets/app_search_delegate.dart';
+import '../../../../splash/pages/setup_page/blocs/setup_list_cubit/setup_list_cubit.dart';
+import '../../../blocs/setup_cubit.dart';
 
 class HomeCurrentTarget extends StatelessWidget {
   const HomeCurrentTarget({super.key});
