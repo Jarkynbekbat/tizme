@@ -20,7 +20,7 @@ class ScanShedulePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
     appBar: AppBar(
-      title: Text('График расписаний в аудитории'),
+      title: Text('График расписания в аудитории'),
     ),
     body: BlocProvider(
       create: (_) => TimetableCubit(
@@ -35,7 +35,7 @@ class ScanShedulePage extends StatelessWidget {
               return state.when(
                 loading: () => const Center(child: CircularProgressIndicator()),
                 loaded: (items, isTeacher) {
-                  final filtered = items.where((el) => el.classroom.name.contains(classroom.toString())).toList()
+                  final filtered = items.where((el) => el.classroom.toString().contains(classroom.toString())).toList()
                     ..sort((a, b) => a.time.order - b.time.order);
 
                   if (filtered.isEmpty) {
