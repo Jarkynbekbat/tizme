@@ -38,7 +38,7 @@ class HomeAppBar extends StatelessWidget with PreferredSizeWidget {
       ),
       child: AppBar(
         centerTitle: true,
-        actions: const [
+        actions: [
           BarcodeWidget(),
         ],
         title: BlocBuilder<SetupCubit, Setup>(
