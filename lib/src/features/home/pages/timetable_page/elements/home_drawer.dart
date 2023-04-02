@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:studtime/src/features/home/pages/timetable_page/elements/theme_toggle_button.dart';
 import 'package:studtime/src/shared/assets/assets.gen.dart';
 import 'package:studtime/src/shared/extensions/on_widget.dart';
 import 'package:studtime/src/shared/styles/app_colors.dart';
@@ -15,13 +16,10 @@ class HomeDrawer extends StatelessWidget {
         child: Stack(
       alignment: Alignment.center,
       children: [
-        Positioned(
+        const Positioned(
           top: 20,
           right: 20,
-          child: IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.dark_mode),
-          ),
+          child: ThemeToggleButton(),
         ),
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
