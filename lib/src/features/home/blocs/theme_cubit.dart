@@ -8,17 +8,21 @@ class ThemeCubit extends Cubit<ThemeMode> {
   Future<void> init() async {
     final sharedPreferences = await SharedPreferences.getInstance();
 
-    final isDarkMode = sharedPreferences.getBool('isDarkMode') ?? false;
+    final isDarkMode = sharedPreferences.containsKey('isDarkMode')
+        ? sharedPreferences.getBool('isDarkMode')
+        : null;
 
-    emit(isDarkMode ? ThemeMode.dark : ThemeMode.light);
+    if (isDarkMode != null) {
+      emit(isDarkMode ? ThemeMode.dark : ThemeMode.light);
+    }
   }
 
   void toggleTheme() async {
     final sharedPreferences = await SharedPreferences.getInstance();
-    final isDarkMode = sharedPreferences.getBool('isDarkMode') ?? false;
+    var isDarkMode = sharedPreferences.getBool('isDarkMode') ?? false;
 
     sharedPreferences.setBool('isDarkMode', !isDarkMode);
 
-    emit(isDarkMode ? ThemeMode.light : ThemeMode.dark);
+    emit(isDarkMode ? ThemeMode.dark : ThemeMode.light);
   }
 }
