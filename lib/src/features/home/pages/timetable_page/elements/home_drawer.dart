@@ -17,7 +17,7 @@ class HomeDrawer extends StatelessWidget {
       alignment: Alignment.center,
       children: [
         const Positioned(
-          top: 20,
+          bottom: 20,
           right: 20,
           child: ThemeToggleButton(),
         ),
