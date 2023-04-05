@@ -8,7 +8,7 @@ class ThemeCubit extends Cubit<ThemeMode> {
   ThemeCubit() : super(ThemeMode.system) {
     init();
   }
-// надо получить AppCahceRepo()
+// надо получить AppCahceRepo() чтобы достучатся до themeCache
   Future<void> init() async {
     final sharedPreferences = await SharedPreferences.getInstance();
 
