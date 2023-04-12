@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:studtime/src/features/home/pages/timetable_page/elements/theme_toggle_button.dart';
 import 'package:studtime/src/shared/assets/assets.gen.dart';
 import 'package:studtime/src/shared/extensions/on_widget.dart';
 import 'package:studtime/src/shared/styles/app_colors.dart';
@@ -12,41 +13,50 @@ class HomeDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          AppDrawerMenuItem(
-            onTap: () {},
-            leading: const Icon(
-              Icons.school_outlined,
-              color: AppColors.primaryColor,
+        child: Stack(
+      alignment: Alignment.center,
+      children: [
+        const Positioned(
+          bottom: 20,
+          right: 20,
+          child: ThemeToggleButton(),
+        ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            AppDrawerMenuItem(
+              onTap: () {},
+              leading: const Icon(
+                Icons.school_outlined,
+                color: AppColors.primaryColor,
+              ),
+              title: 'График сессий',
+            ).dev(),
+            AppDrawerMenuItem(
+              onTap: () {},
+              leading: const Icon(
+                Icons.school_outlined,
+                color: AppColors.primaryColor,
+              ),
+              title: 'График модулей',
+              isLast: true,
+            ).dev(),
+            const SizedBox(height: 40.0),
+            AppDrawerMenuItem(
+              onTap: () {
+                Scaffold.of(context).openEndDrawer();
+                Navigator.of(context).pushNamed('/about');
+              },
+              leading: Assets.icLauncher.image(
+                width: 32.0,
+                height: 32.0,
+              ),
+              title: 'О приложении',
+              isLast: true,
             ),
-            title: 'График сессий',
-          ).dev(),
-          AppDrawerMenuItem(
-            onTap: () {},
-            leading: const Icon(
-              Icons.school_outlined,
-              color: AppColors.primaryColor,
-            ),
-            title: 'График модулей',
-            isLast: true,
-          ).dev(),
-          const SizedBox(height: 40.0),
-          AppDrawerMenuItem(
-            onTap: () {
-              Scaffold.of(context).openEndDrawer();
-              Navigator.of(context).pushNamed('/about');
-            },
-            leading: Assets.icLauncher.image(
-              width: 32.0,
-              height: 32.0,
-            ),
-            title: 'О приложении',
-            isLast: true,
-          ),
-        ],
-      ),
-    );
+          ],
+        )
+      ],
+    ));
   }
 }
