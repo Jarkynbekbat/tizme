@@ -23,8 +23,6 @@ dependencies:
   introduction_screen: ^3.1.4
   flutter_svg: ^1.1.6
   flutter_easyloading: ^3.0.5
-  titled_navigation_bar:
-    path: ./lib/src/shared/packages/titled_navigation_bar/
 
   flutter_intro: ^3.0.2
   equatable: ^2.0.5

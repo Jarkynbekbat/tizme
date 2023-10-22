@@ -1077,13 +1077,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.1"
-  titled_navigation_bar:
-    dependency: "direct main"
-    description:
-      path: "lib/src/shared/packages/titled_navigation_bar"
-      relative: true
-    source: path
-    version: "5.0.0-nullsafety.0"
   typed_data:
     dependency: transitive
     description:
