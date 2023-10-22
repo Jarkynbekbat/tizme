@@ -20,7 +20,7 @@ Faculty _$FacultyFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Faculty {
-  String get id => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -33,7 +33,7 @@ abstract class $FacultyCopyWith<$Res> {
   factory $FacultyCopyWith(Faculty value, $Res Function(Faculty) then) =
       _$FacultyCopyWithImpl<$Res, Faculty>;
   @useResult
-  $Res call({String id, String name});
+  $Res call({int id, String name});
 }
 
 /// @nodoc
@@ -56,7 +56,7 @@ class _$FacultyCopyWithImpl<$Res, $Val extends Faculty>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -72,7 +72,7 @@ abstract class _$$_FacultyCopyWith<$Res> implements $FacultyCopyWith<$Res> {
       __$$_FacultyCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String name});
+  $Res call({int id, String name});
 }
 
 /// @nodoc
@@ -92,7 +92,7 @@ class __$$_FacultyCopyWithImpl<$Res>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -110,7 +110,7 @@ class _$_Faculty implements _Faculty {
       _$$_FacultyFromJson(json);
 
   @override
-  final String id;
+  final int id;
   @override
   final String name;
 
@@ -147,13 +147,13 @@ class _$_Faculty implements _Faculty {
 }
 
 abstract class _Faculty implements Faculty {
-  const factory _Faculty(
-      {required final String id, required final String name}) = _$_Faculty;
+  const factory _Faculty({required final int id, required final String name}) =
+      _$_Faculty;
 
   factory _Faculty.fromJson(Map<String, dynamic> json) = _$_Faculty.fromJson;
 
   @override
-  String get id;
+  int get id;
   @override
   String get name;
   @override

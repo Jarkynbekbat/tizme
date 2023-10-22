@@ -20,7 +20,7 @@ Teacher _$TeacherFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Teacher {
-  String get id => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   Grade get grade => throw _privateConstructorUsedError;
 
@@ -34,9 +34,7 @@ abstract class $TeacherCopyWith<$Res> {
   factory $TeacherCopyWith(Teacher value, $Res Function(Teacher) then) =
       _$TeacherCopyWithImpl<$Res, Teacher>;
   @useResult
-  $Res call({String id, String name, Grade grade});
-
-  $GradeCopyWith<$Res> get grade;
+  $Res call({int id, String name, Grade grade});
 }
 
 /// @nodoc
@@ -60,7 +58,7 @@ class _$TeacherCopyWithImpl<$Res, $Val extends Teacher>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -71,14 +69,6 @@ class _$TeacherCopyWithImpl<$Res, $Val extends Teacher>
               as Grade,
     ) as $Val);
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $GradeCopyWith<$Res> get grade {
-    return $GradeCopyWith<$Res>(_value.grade, (value) {
-      return _then(_value.copyWith(grade: value) as $Val);
-    });
-  }
 }
 
 /// @nodoc
@@ -88,10 +78,7 @@ abstract class _$$_TeacherCopyWith<$Res> implements $TeacherCopyWith<$Res> {
       __$$_TeacherCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String name, Grade grade});
-
-  @override
-  $GradeCopyWith<$Res> get grade;
+  $Res call({int id, String name, Grade grade});
 }
 
 /// @nodoc
@@ -112,7 +99,7 @@ class __$$_TeacherCopyWithImpl<$Res>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -134,7 +121,7 @@ class _$_Teacher implements _Teacher {
       _$$_TeacherFromJson(json);
 
   @override
-  final String id;
+  final int id;
   @override
   final String name;
   @override
@@ -175,14 +162,14 @@ class _$_Teacher implements _Teacher {
 
 abstract class _Teacher implements Teacher {
   const factory _Teacher(
-      {required final String id,
+      {required final int id,
       required final String name,
       required final Grade grade}) = _$_Teacher;
 
   factory _Teacher.fromJson(Map<String, dynamic> json) = _$_Teacher.fromJson;
 
   @override
-  String get id;
+  int get id;
   @override
   String get name;
   @override

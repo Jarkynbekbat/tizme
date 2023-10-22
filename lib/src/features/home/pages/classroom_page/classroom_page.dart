@@ -45,30 +45,12 @@ class ClassroomPage extends HookWidget {
         },
         currentIndex: navigationIndex.value,
         items: const [
-          BottomNavigationBarItem(
-            icon: Text('ПН'),
-            // icon: const DateText(0),
-          ),
-          BottomNavigationBarItem(
-            icon: Text('ВТ'),
-            // icon: const DateText(1),
-          ),
-          BottomNavigationBarItem(
-            icon: Text('СР'),
-            // icon: const DateText(2),
-          ),
-          BottomNavigationBarItem(
-            icon: Text('ЧТ'),
-            // icon: const DateText(3),
-          ),
-          BottomNavigationBarItem(
-            icon: Text('ПТ'),
-            // icon: const DateText(4),
-          ),
-          BottomNavigationBarItem(
-            icon: Text('СБ'),
-            // icon: const DateText(5),
-          ),
+          BottomNavigationBarItem(icon: Text('ПН'), label: 'ПН'),
+          BottomNavigationBarItem(icon: Text('ВТ'), label: 'ВТ'),
+          BottomNavigationBarItem(icon: Text('СР'), label: 'СР'),
+          BottomNavigationBarItem(icon: Text('ЧТ'), label: 'ЧТ'),
+          BottomNavigationBarItem(icon: Text('ПТ'), label: 'ПТ'),
+          BottomNavigationBarItem(icon: Text('СБ'), label: 'СБ'),
         ],
         // activeColor: AppColors.primaryColor,
         // inactiveColor: Colors.blueGrey,

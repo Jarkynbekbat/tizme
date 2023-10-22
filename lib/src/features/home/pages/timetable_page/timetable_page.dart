@@ -1,13 +1,14 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:studtime/src/features/home/blocs/setup_cubit.dart';
 import 'package:studtime/src/features/home/blocs/timetable_cubit/timetable_cubit.dart';
+import 'package:studtime/src/features/home/pages/timetable_page/elements/date_text.dart';
 import 'package:studtime/src/features/home/pages/timetable_page/elements/home_app_bar.dart';
 import 'package:studtime/src/features/home/pages/timetable_page/elements/home_drawer.dart';
 import 'package:studtime/src/features/home/pages/timetable_page/elements/timetable_list.dart';
 import 'package:studtime/src/shared/data/models/schedule/schedule.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class TimetablePage extends HookWidget {
   const TimetablePage({Key? key}) : super(key: key);
@@ -19,7 +20,7 @@ class TimetablePage extends HookWidget {
 
     return BlocProvider(
       create: (_) => TimetableCubit(
-        FirebaseFirestore.instance,
+        Supabase.instance.client,
         context.read<SetupCubit>(),
       ),
       child: Scaffold(
@@ -48,31 +49,54 @@ class TimetablePage extends HookWidget {
             );
           },
           currentIndex: navigationIndex.value,
-          items: const [
+          items: [
             BottomNavigationBarItem(
-              icon: Text('ПН'),
-              // icon: const DateText(0),
+              icon: const Text(
+                'ПН',
+                style: TextStyle(fontSize: 17, fontWeight: FontWeight.w300),
+              ),
+              activeIcon: const SizedBox.shrink(),
+              label: DateText.getDateByWeekday(0),
             ),
             BottomNavigationBarItem(
-              icon: Text('ВТ'),
-
-              // icon: const DateText(1),
+              icon: const Text(
+                'ВТ',
+                style: TextStyle(fontSize: 17, fontWeight: FontWeight.w300),
+              ),
+              activeIcon: const SizedBox.shrink(),
+              label: DateText.getDateByWeekday(1),
             ),
             BottomNavigationBarItem(
-              icon: Text('СР'),
-              // icon: const DateText(2),
+              icon: const Text(
+                'СР',
+                style: TextStyle(fontSize: 17, fontWeight: FontWeight.w300),
+              ),
+              label: DateText.getDateByWeekday(2),
+              activeIcon: const SizedBox.shrink(),
             ),
             BottomNavigationBarItem(
-              icon: Text('ЧТ'),
-              // icon: const DateText(3),
+              icon: const Text(
+                'ЧТ',
+                style: TextStyle(fontSize: 17, fontWeight: FontWeight.w300),
+              ),
+              label: DateText.getDateByWeekday(3),
+              activeIcon: const SizedBox.shrink(),
             ),
             BottomNavigationBarItem(
-              icon: Text('ПТ'),
-              // icon: const DateText(4),
+              icon: const Text(
+                'ПТ',
+                style: TextStyle(fontSize: 17, fontWeight: FontWeight.w300),
+              ),
+              label: DateText.getDateByWeekday(4),
+              activeIcon: const SizedBox.shrink(),
             ),
             BottomNavigationBarItem(
-              icon: Text('СБ'),
-              // icon: const DateText(5),
+              icon: const Text(
+                'СБ',
+                style: TextStyle(fontSize: 17, fontWeight: FontWeight.w300),
+              ),
+              label: DateText.getDateByWeekday(5),
+              activeIcon: const SizedBox.shrink(),
             ),
           ],
           // activeColor: AppColors.primaryColor,

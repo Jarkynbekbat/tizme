@@ -7,7 +7,7 @@ part of 'setup.dart';
 // **************************************************************************
 
 _$_Setup _$$_SetupFromJson(Map<String, dynamic> json) => _$_Setup(
-      id: json['id'] as String,
+      id: json['id'] as int,
       name: json['name'] as String,
       type: $enumDecode(_$SetupTypeEnumMap, json['type']),
     );

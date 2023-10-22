@@ -7,13 +7,13 @@ part of 'way.dart';
 // **************************************************************************
 
 _$_Way _$$_WayFromJson(Map<String, dynamic> json) => _$_Way(
-      id: json['id'] as String,
+      id: json['id'] as int,
       name: json['name'] as String,
-      department: json['department'],
+      departmentId: json['department_id'] as int,
     );
 
 Map<String, dynamic> _$$_WayToJson(_$_Way instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'department': instance.department,
+      'department_id': instance.departmentId,
     };

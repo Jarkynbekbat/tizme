@@ -15,6 +15,20 @@ abstract class AppThemes {
       primary: AppColors.primaryColor,
       secondary: AppColors.secondaryColor,
     ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: Colors.white,
+      selectedItemColor: AppColors.primaryColor,
+      unselectedItemColor: Colors.grey[300],
+      selectedLabelStyle: const TextStyle(
+        fontWeight: FontWeight.w400,
+        fontSize: 17,
+        height: 0.95,
+      ),
+      unselectedLabelStyle: const TextStyle(
+        fontWeight: FontWeight.w300,
+      ),
+    ),
   );
+
   static ThemeData darkTheme = ThemeData.dark(useMaterial3: true);
 }

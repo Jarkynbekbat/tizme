@@ -16,7 +16,7 @@ class ChatFile extends ChatMessage {
     return ChatFile(
       json['path'] as String,
       createdAt: DateTime.parse(json['created_at']),
-      subjectId: json['subject_id'] as String,
+      subjectId: json['subject_id'] as int,
     );
   }
 
@@ -36,7 +36,7 @@ class ChatFile extends ChatMessage {
   ChatFile copyWith({
     String? path,
     DateTime? createdAt,
-    String? subjectId,
+    int? subjectId,
   }) {
     return ChatFile(
       path ?? this.path,

@@ -20,9 +20,9 @@ Group _$GroupFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Group {
-  String get id => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  Way get way => throw _privateConstructorUsedError;
+  int get wayId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +34,7 @@ abstract class $GroupCopyWith<$Res> {
   factory $GroupCopyWith(Group value, $Res Function(Group) then) =
       _$GroupCopyWithImpl<$Res, Group>;
   @useResult
-  $Res call({String id, String name, Way way});
+  $Res call({int id, String name, int wayId});
 }
 
 /// @nodoc
@@ -52,21 +52,21 @@ class _$GroupCopyWithImpl<$Res, $Val extends Group>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? way = freezed,
+    Object? wayId = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      way: freezed == way
-          ? _value.way
-          : way // ignore: cast_nullable_to_non_nullable
-              as Way,
+      wayId: null == wayId
+          ? _value.wayId
+          : wayId // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -77,7 +77,7 @@ abstract class _$$_GroupCopyWith<$Res> implements $GroupCopyWith<$Res> {
       __$$_GroupCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String name, Way way});
+  $Res call({int id, String name, int wayId});
 }
 
 /// @nodoc
@@ -91,21 +91,21 @@ class __$$_GroupCopyWithImpl<$Res> extends _$GroupCopyWithImpl<$Res, _$_Group>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? way = freezed,
+    Object? wayId = null,
   }) {
     return _then(_$_Group(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      way: freezed == way
-          ? _value.way
-          : way // ignore: cast_nullable_to_non_nullable
-              as Way,
+      wayId: null == wayId
+          ? _value.wayId
+          : wayId // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -113,21 +113,21 @@ class __$$_GroupCopyWithImpl<$Res> extends _$GroupCopyWithImpl<$Res, _$_Group>
 /// @nodoc
 @JsonSerializable()
 class _$_Group implements _Group {
-  const _$_Group({required this.id, required this.name, required this.way});
+  const _$_Group({required this.id, required this.name, required this.wayId});
 
   factory _$_Group.fromJson(Map<String, dynamic> json) =>
       _$$_GroupFromJson(json);
 
   @override
-  final String id;
+  final int id;
   @override
   final String name;
   @override
-  final Way way;
+  final int wayId;
 
   @override
   String toString() {
-    return 'Group(id: $id, name: $name, way: $way)';
+    return 'Group(id: $id, name: $name, wayId: $wayId)';
   }
 
   @override
@@ -137,13 +137,12 @@ class _$_Group implements _Group {
             other is _$_Group &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            const DeepCollectionEquality().equals(other.way, way));
+            (identical(other.wayId, wayId) || other.wayId == wayId));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, name, const DeepCollectionEquality().hash(way));
+  int get hashCode => Object.hash(runtimeType, id, name, wayId);
 
   @JsonKey(ignore: true)
   @override
@@ -161,18 +160,18 @@ class _$_Group implements _Group {
 
 abstract class _Group implements Group {
   const factory _Group(
-      {required final String id,
+      {required final int id,
       required final String name,
-      required final Way way}) = _$_Group;
+      required final int wayId}) = _$_Group;
 
   factory _Group.fromJson(Map<String, dynamic> json) = _$_Group.fromJson;
 
   @override
-  String get id;
+  int get id;
   @override
   String get name;
   @override
-  Way get way;
+  int get wayId;
   @override
   @JsonKey(ignore: true)
   _$$_GroupCopyWith<_$_Group> get copyWith =>

@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_intro/flutter_intro.dart';
@@ -10,6 +9,7 @@ import 'package:studtime/src/features/splash/pages/splash_page/splash_page.dart'
 import 'package:studtime/src/shared/data/repos/app_cache_repo.dart';
 import 'package:studtime/src/shared/extensions/on_widget.dart';
 import 'package:studtime/src/shared/widgets/dialogs/confirm_close_app.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'pages/setup_page/blocs/setup_list_cubit/setup_list_cubit.dart';
 
@@ -25,7 +25,7 @@ class SplashNavigator extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => InitCubit(cacheRepo)..initApp()),
-        BlocProvider(create: (_) => SetupListCubit(FirebaseFirestore.instance)),
+        BlocProvider(create: (_) => SetupListCubit(Supabase.instance.client)),
       ],
       child: WillPopScope(
         onWillPop: () async {

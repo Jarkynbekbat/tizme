@@ -7,7 +7,7 @@ part of 'faculty.dart';
 // **************************************************************************
 
 _$_Faculty _$$_FacultyFromJson(Map<String, dynamic> json) => _$_Faculty(
-      id: json['id'] as String,
+      id: json['id'] as int,
       name: json['name'] as String,
     );
 

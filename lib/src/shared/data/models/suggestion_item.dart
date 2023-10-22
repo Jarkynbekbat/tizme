@@ -1,4 +1,4 @@
 abstract class SuggestionItem {
-  String get id;
+  int get id;
   String get name;
 }

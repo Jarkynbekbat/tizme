@@ -22,7 +22,7 @@ Setup _$SetupFromJson(Map<String, dynamic> json) {
 mixin _$Setup {
   /// student - id группы,
   /// teacher - id преподавателя
-  String get id => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   SetupType get type => throw _privateConstructorUsedError;
 
@@ -36,7 +36,7 @@ abstract class $SetupCopyWith<$Res> {
   factory $SetupCopyWith(Setup value, $Res Function(Setup) then) =
       _$SetupCopyWithImpl<$Res, Setup>;
   @useResult
-  $Res call({String id, String name, SetupType type});
+  $Res call({int id, String name, SetupType type});
 }
 
 /// @nodoc
@@ -60,7 +60,7 @@ class _$SetupCopyWithImpl<$Res, $Val extends Setup>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -79,7 +79,7 @@ abstract class _$$_SetupCopyWith<$Res> implements $SetupCopyWith<$Res> {
       __$$_SetupCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String name, SetupType type});
+  $Res call({int id, String name, SetupType type});
 }
 
 /// @nodoc
@@ -99,7 +99,7 @@ class __$$_SetupCopyWithImpl<$Res> extends _$SetupCopyWithImpl<$Res, _$_Setup>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -123,7 +123,7 @@ class _$_Setup implements _Setup {
   /// student - id группы,
   /// teacher - id преподавателя
   @override
-  final String id;
+  final int id;
   @override
   final String name;
   @override
@@ -164,7 +164,7 @@ class _$_Setup implements _Setup {
 
 abstract class _Setup implements Setup {
   factory _Setup(
-      {required final String id,
+      {required final int id,
       required final String name,
       required final SetupType type}) = _$_Setup;
 
@@ -174,7 +174,7 @@ abstract class _Setup implements Setup {
 
   /// student - id группы,
   /// teacher - id преподавателя
-  String get id;
+  int get id;
   @override
   String get name;
   @override

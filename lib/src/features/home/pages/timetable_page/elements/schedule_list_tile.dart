@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:studtime/src/shared/data/models/schedule/schedule.dart';
 import 'package:studtime/src/shared/extensions/on_context.dart';
 import 'package:studtime/src/shared/extensions/on_lesson_type.dart';
+import 'package:studtime/src/shared/extensions/on_time_slot.dart';
 import 'package:studtime/src/shared/extensions/on_weektype.dart';
 
 class ScheduleListTile extends StatelessWidget {
@@ -23,7 +24,7 @@ class ScheduleListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final target = isTeacher
-        ? schedule.map(group: (s) => s.group.name, way: (s) => s.way.name)
+        ? schedule.map(group: (s) => s.group!.name, way: (s) => s.way!.name)
         : '${schedule.teacher.grade.name} ${schedule.teacher.name}';
 
     final subtitle =
@@ -51,7 +52,7 @@ class ScheduleListTile extends StatelessWidget {
                   ),
                 ),
                 child: Text(
-                  '${schedule.time.from}\n${schedule.time.to}',
+                  schedule.timeSlot.ruTitle,
                   textAlign: TextAlign.center,
                   style: const TextStyle(fontSize: 18.0),
                 ),

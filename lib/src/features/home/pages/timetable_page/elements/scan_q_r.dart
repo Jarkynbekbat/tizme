@@ -6,8 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:studtime/src/features/home/blocs/timetable_cubit/timetable_cubit.dart';
 import 'package:studtime/src/shared/data/models/classroom/classroom.dart';
-import 'package:studtime/src/shared/data/models/schedule/schedule.dart';
 import 'package:studtime/src/shared/extensions/on_context.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../classroom_page/classroom_page.dart';
 
@@ -35,19 +35,20 @@ class ScanQR extends StatelessWidget {
         }
 
         try {
-          final snap = await fs
-              .collection('classroms')
-              .where('name', isEqualTo: scannedName)
+          final rawClassroom = await Supabase.instance.client
+              .from('classroms')
+              .select()
+              .eq('name', scannedName)
               .limit(1)
-              .get();
+              .single();
 
-          final classroom = Classroom.fromDoc(
-            snap.docs.first,
+          final classroom = Classroom.fromJson(
+            rawClassroom,
           );
 
           await context.push(
             BlocProvider.value(
-              value: timetableCubit..subscribeToClassroom(classroom),
+              value: timetableCubit..fetchForClassroom(classroom),
               child: ClassroomPage(classroom: classroom),
             ),
           );

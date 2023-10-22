@@ -13,7 +13,7 @@ class ChatImage extends ChatMessage {
     return ChatImage(
       json['path'] as String,
       createdAt: DateTime.parse(json['created_at']),
-      subjectId: json['subject_id'] as String,
+      subjectId: json['subject_id'] as int,
     );
   }
 
@@ -33,7 +33,7 @@ class ChatImage extends ChatMessage {
   ChatImage copyWith({
     String? path,
     DateTime? createdAt,
-    String? subjectId,
+    int? subjectId,
   }) {
     return ChatImage(
       path ?? this.path,

@@ -20,7 +20,7 @@ Classroom _$ClassroomFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Classroom {
-  String get id => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -34,7 +34,7 @@ abstract class $ClassroomCopyWith<$Res> {
   factory $ClassroomCopyWith(Classroom value, $Res Function(Classroom) then) =
       _$ClassroomCopyWithImpl<$Res, Classroom>;
   @useResult
-  $Res call({String id, String name});
+  $Res call({int id, String name});
 }
 
 /// @nodoc
@@ -57,7 +57,7 @@ class _$ClassroomCopyWithImpl<$Res, $Val extends Classroom>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -73,7 +73,7 @@ abstract class _$$_ClassroomCopyWith<$Res> implements $ClassroomCopyWith<$Res> {
       __$$_ClassroomCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String name});
+  $Res call({int id, String name});
 }
 
 /// @nodoc
@@ -94,7 +94,7 @@ class __$$_ClassroomCopyWithImpl<$Res>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -112,7 +112,7 @@ class _$_Classroom implements _Classroom {
       _$$_ClassroomFromJson(json);
 
   @override
-  final String id;
+  final int id;
   @override
   final String name;
 
@@ -150,13 +150,13 @@ class _$_Classroom implements _Classroom {
 
 abstract class _Classroom implements Classroom {
   const factory _Classroom(
-      {required final String id, required final String name}) = _$_Classroom;
+      {required final int id, required final String name}) = _$_Classroom;
 
   factory _Classroom.fromJson(Map<String, dynamic> json) =
       _$_Classroom.fromJson;
 
   @override
-  String get id;
+  int get id;
   @override
   String get name;
   @override

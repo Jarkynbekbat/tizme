@@ -20,9 +20,9 @@ Way _$WayFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Way {
-  String get id => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  Department get department => throw _privateConstructorUsedError;
+  int get departmentId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +34,7 @@ abstract class $WayCopyWith<$Res> {
   factory $WayCopyWith(Way value, $Res Function(Way) then) =
       _$WayCopyWithImpl<$Res, Way>;
   @useResult
-  $Res call({String id, String name, Department department});
+  $Res call({int id, String name, int departmentId});
 }
 
 /// @nodoc
@@ -51,21 +51,21 @@ class _$WayCopyWithImpl<$Res, $Val extends Way> implements $WayCopyWith<$Res> {
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? department = freezed,
+    Object? departmentId = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      department: freezed == department
-          ? _value.department
-          : department // ignore: cast_nullable_to_non_nullable
-              as Department,
+      departmentId: null == departmentId
+          ? _value.departmentId
+          : departmentId // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -76,7 +76,7 @@ abstract class _$$_WayCopyWith<$Res> implements $WayCopyWith<$Res> {
       __$$_WayCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String name, Department department});
+  $Res call({int id, String name, int departmentId});
 }
 
 /// @nodoc
@@ -90,21 +90,21 @@ class __$$_WayCopyWithImpl<$Res> extends _$WayCopyWithImpl<$Res, _$_Way>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? department = freezed,
+    Object? departmentId = null,
   }) {
     return _then(_$_Way(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      department: freezed == department
-          ? _value.department
-          : department // ignore: cast_nullable_to_non_nullable
-              as Department,
+      departmentId: null == departmentId
+          ? _value.departmentId
+          : departmentId // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -113,20 +113,20 @@ class __$$_WayCopyWithImpl<$Res> extends _$WayCopyWithImpl<$Res, _$_Way>
 @JsonSerializable()
 class _$_Way implements _Way {
   const _$_Way(
-      {required this.id, required this.name, required this.department});
+      {required this.id, required this.name, required this.departmentId});
 
   factory _$_Way.fromJson(Map<String, dynamic> json) => _$$_WayFromJson(json);
 
   @override
-  final String id;
+  final int id;
   @override
   final String name;
   @override
-  final Department department;
+  final int departmentId;
 
   @override
   String toString() {
-    return 'Way(id: $id, name: $name, department: $department)';
+    return 'Way(id: $id, name: $name, departmentId: $departmentId)';
   }
 
   @override
@@ -136,14 +136,13 @@ class _$_Way implements _Way {
             other is _$_Way &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            const DeepCollectionEquality()
-                .equals(other.department, department));
+            (identical(other.departmentId, departmentId) ||
+                other.departmentId == departmentId));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, name, const DeepCollectionEquality().hash(department));
+  int get hashCode => Object.hash(runtimeType, id, name, departmentId);
 
   @JsonKey(ignore: true)
   @override
@@ -161,18 +160,18 @@ class _$_Way implements _Way {
 
 abstract class _Way implements Way {
   const factory _Way(
-      {required final String id,
+      {required final int id,
       required final String name,
-      required final Department department}) = _$_Way;
+      required final int departmentId}) = _$_Way;
 
   factory _Way.fromJson(Map<String, dynamic> json) = _$_Way.fromJson;
 
   @override
-  String get id;
+  int get id;
   @override
   String get name;
   @override
-  Department get department;
+  int get departmentId;
   @override
   @JsonKey(ignore: true)
   _$$_WayCopyWith<_$_Way> get copyWith => throw _privateConstructorUsedError;

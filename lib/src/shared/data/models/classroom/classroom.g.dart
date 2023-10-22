@@ -7,7 +7,7 @@ part of 'classroom.dart';
 // **************************************************************************
 
 _$_Classroom _$$_ClassroomFromJson(Map<String, dynamic> json) => _$_Classroom(
-      id: json['id'] as String,
+      id: json['id'] as int,
       name: json['name'] as String,
     );
 

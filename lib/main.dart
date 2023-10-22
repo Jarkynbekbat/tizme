@@ -1,75 +1,20 @@
-import 'dart:async';
-import 'dart:isolate';
-
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:studtime/app.dart';
 import 'package:studtime/src/shared/data/repos/app_cache_repo.dart';
-import 'package:studtime/src/shared/configs/firebase_options.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
-  if (kIsWeb) return await _webRunApp();
-
-  runZonedGuarded(
-    () async {
-      WidgetsFlutterBinding.ensureInitialized();
-
-      ///  Инициализация firebase
-      await Firebase.initializeApp(
-        options: DefaultFirebaseOptions.currentPlatform,
-      );
-
-      /// Отключаем Crashlytics в режиме дебаг
-      await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(
-        !kDebugMode,
-      );
-
-      /// Перехватываем ошибки в Flutter
-      FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
-
-      /// Перехватываем ошибки в Isolate (вне Flutter)
-      Isolate.current.addErrorListener(RawReceivePort((pair) async {
-        final List<dynamic> errorAndStacktrace = pair;
-        await FirebaseCrashlytics.instance.recordError(
-          errorAndStacktrace.first,
-          errorAndStacktrace.last,
-        );
-      }).sendPort);
-
-      /// Ограничиваем ориентацию экрана только в портретный режим
-      await SystemChrome.setPreferredOrientations(
-        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown],
-      );
-
-      runApp(
-        MultiRepositoryProvider(
-          providers: [
-            RepositoryProvider(create: (_) => AppCacheRepo()),
-          ],
-          child: const App(),
-        ),
-      );
-    },
-
-    /// Перехватываем ошибки в Dart
-    (error, stack) => FirebaseCrashlytics.instance.recordError(error, stack),
-  );
-}
-
-Future<void> _webRunApp() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  ///  Инициализация firebase
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
+  /// Инициализация Supabase
+  await Supabase.initialize(
+    url: 'https://xecwlnynqnjbxxdmpqst.supabase.co',
+    anonKey:
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhlY3dsbnlucW5qYnh4ZG1wcXN0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTc3NTQxMzgsImV4cCI6MjAxMzMzMDEzOH0.SDuLO0y9JHO9vlo3boPWk-R3pARED7ejOvcAHgHjbdo',
+    schema: 'public',
   );
-
-  /// Перехватываем ошибки в Flutter
-  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
 
   /// Ограничиваем ориентацию экрана только в портретный режим
   await SystemChrome.setPreferredOrientations(

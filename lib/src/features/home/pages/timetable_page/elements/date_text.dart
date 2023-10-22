@@ -5,7 +5,7 @@ class DateText extends StatelessWidget {
   final int weekdayIndex;
   const DateText(this.weekdayIndex, {super.key});
 
-  String getDateByWeekday(int weekday) {
+  static String getDateByWeekday(int weekday) {
     final now = DateTime.now();
     final daysUntilTarget = weekday - now.weekday;
     final targetDate = now.add(Duration(days: daysUntilTarget));

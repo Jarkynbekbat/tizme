@@ -16,7 +16,7 @@ class Setup with _$Setup {
   factory Setup({
     /// student - id группы,
     /// teacher - id преподавателя
-    required String id,
+    required int id,
     required String name,
     required SetupType type,
   }) = _Setup;

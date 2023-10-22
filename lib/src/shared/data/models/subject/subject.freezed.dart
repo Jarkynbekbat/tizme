@@ -20,9 +20,9 @@ Subject _$SubjectFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Subject {
-  String get id => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  Way get way => throw _privateConstructorUsedError;
+  int get wayId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +34,7 @@ abstract class $SubjectCopyWith<$Res> {
   factory $SubjectCopyWith(Subject value, $Res Function(Subject) then) =
       _$SubjectCopyWithImpl<$Res, Subject>;
   @useResult
-  $Res call({String id, String name, Way way});
+  $Res call({int id, String name, int wayId});
 }
 
 /// @nodoc
@@ -52,21 +52,21 @@ class _$SubjectCopyWithImpl<$Res, $Val extends Subject>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? way = freezed,
+    Object? wayId = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      way: freezed == way
-          ? _value.way
-          : way // ignore: cast_nullable_to_non_nullable
-              as Way,
+      wayId: null == wayId
+          ? _value.wayId
+          : wayId // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -78,7 +78,7 @@ abstract class _$$_SubjectCopyWith<$Res> implements $SubjectCopyWith<$Res> {
       __$$_SubjectCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String name, Way way});
+  $Res call({int id, String name, int wayId});
 }
 
 /// @nodoc
@@ -93,21 +93,21 @@ class __$$_SubjectCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? way = freezed,
+    Object? wayId = null,
   }) {
     return _then(_$_Subject(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      way: freezed == way
-          ? _value.way
-          : way // ignore: cast_nullable_to_non_nullable
-              as Way,
+      wayId: null == wayId
+          ? _value.wayId
+          : wayId // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -115,21 +115,21 @@ class __$$_SubjectCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Subject implements _Subject {
-  const _$_Subject({required this.id, required this.name, required this.way});
+  const _$_Subject({required this.id, required this.name, required this.wayId});
 
   factory _$_Subject.fromJson(Map<String, dynamic> json) =>
       _$$_SubjectFromJson(json);
 
   @override
-  final String id;
+  final int id;
   @override
   final String name;
   @override
-  final Way way;
+  final int wayId;
 
   @override
   String toString() {
-    return 'Subject(id: $id, name: $name, way: $way)';
+    return 'Subject(id: $id, name: $name, wayId: $wayId)';
   }
 
   @override
@@ -139,13 +139,12 @@ class _$_Subject implements _Subject {
             other is _$_Subject &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            const DeepCollectionEquality().equals(other.way, way));
+            (identical(other.wayId, wayId) || other.wayId == wayId));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, name, const DeepCollectionEquality().hash(way));
+  int get hashCode => Object.hash(runtimeType, id, name, wayId);
 
   @JsonKey(ignore: true)
   @override
@@ -163,18 +162,18 @@ class _$_Subject implements _Subject {
 
 abstract class _Subject implements Subject {
   const factory _Subject(
-      {required final String id,
+      {required final int id,
       required final String name,
-      required final Way way}) = _$_Subject;
+      required final int wayId}) = _$_Subject;
 
   factory _Subject.fromJson(Map<String, dynamic> json) = _$_Subject.fromJson;
 
   @override
-  String get id;
+  int get id;
   @override
   String get name;
   @override
-  Way get way;
+  int get wayId;
   @override
   @JsonKey(ignore: true)
   _$$_SubjectCopyWith<_$_Subject> get copyWith =>

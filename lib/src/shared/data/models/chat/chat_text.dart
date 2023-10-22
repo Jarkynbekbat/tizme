@@ -13,7 +13,7 @@ class ChatText extends ChatMessage {
     return ChatText(
       json['text'] as String,
       createdAt: DateTime.parse(json['created_at']),
-      subjectId: json['subject_id'] as String,
+      subjectId: json['subject_id'] as int,
     );
   }
 
@@ -33,7 +33,7 @@ class ChatText extends ChatMessage {
   ChatText copyWith({
     String? text,
     DateTime? createdAt,
-    String? subjectId,
+    int? subjectId,
   }) {
     return ChatText(
       text ?? this.text,

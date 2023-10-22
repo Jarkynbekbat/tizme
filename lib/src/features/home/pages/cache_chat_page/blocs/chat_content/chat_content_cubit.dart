@@ -11,7 +11,7 @@ part 'chat_content_cubit.freezed.dart';
 
 class ChatContentCubit extends Cubit<ChatContentState> {
   final ChatCache chatCache;
-  final String subjectId;
+  final int subjectId;
 
   ChatContentCubit(this.chatCache, this.subjectId)
       : super(const ChatContentState.loading());

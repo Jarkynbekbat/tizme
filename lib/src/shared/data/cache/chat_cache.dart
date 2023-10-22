@@ -30,8 +30,6 @@ class ChatCache extends AppCache<List<ChatMessage>> {
 
   Future<bool> add(ChatMessage message) async {
     try {
-      await message.logSelf();
-
       await message.map(
         text: (textMessage) async {
           final messages = get();

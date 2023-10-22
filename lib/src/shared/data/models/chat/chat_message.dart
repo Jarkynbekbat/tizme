@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:equatable/equatable.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:studtime/src/shared/data/models/chat/chat_file.dart';
 import 'package:studtime/src/shared/data/models/chat/chat_image.dart';
 import 'package:studtime/src/shared/data/models/chat/chat_text.dart';
@@ -13,7 +12,7 @@ abstract class ChatMessage extends Equatable {
   final DateTime createdAt;
 
   /// id дисциплины, к которой относится сообщение
-  final String subjectId;
+  final int subjectId;
 
   const ChatMessage({
     required this.createdAt,
@@ -37,16 +36,6 @@ abstract class ChatMessage extends Equatable {
       default:
         throw Exception('Unknown message type: $type');
     }
-  }
-
-  Future<void> logSelf() async {
-    await FirebaseAnalytics.instance.logEvent(
-      name: "save_message",
-      parameters: {
-        "message_type": runtimeType.toString(),
-        "message_size": fileSize(),
-      },
-    );
   }
 
   String fileSize() {
