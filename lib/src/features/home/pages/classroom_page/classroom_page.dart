@@ -15,8 +15,8 @@ class ClassroomPage extends HookWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final pageController = useMemoized(
-        () => PageController(initialPage: DateTime.now().weekday - 1));
+    final pageController = useMemoized(() =>
+        PageController(initialPage: (DateTime.now().weekday - 1).clamp(0, 5)));
     final navigationIndex = useState(pageController.initialPage);
 
     return Scaffold(

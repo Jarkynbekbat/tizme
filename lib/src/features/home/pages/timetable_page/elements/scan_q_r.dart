@@ -36,7 +36,7 @@ class ScanQR extends StatelessWidget {
 
         try {
           final rawClassroom = await Supabase.instance.client
-              .from('classroms')
+              .from('classrooms')
               .select()
               .eq('name', scannedName)
               .limit(1)
@@ -54,6 +54,7 @@ class ScanQR extends StatelessWidget {
           );
           timetableCubit.unsubscrideFromClassroom();
         } catch (e) {
+          print('E: $e');
           EasyLoading.showError(
             "Не удалось найти расписание для аудитории $scannedName",
           );

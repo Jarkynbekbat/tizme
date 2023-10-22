@@ -15,7 +15,9 @@ class TimetablePage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final pageController = useMemoized(
-        () => PageController(initialPage: DateTime.now().weekday - 1));
+      () =>
+          PageController(initialPage: (DateTime.now().weekday - 1).clamp(0, 5)),
+    );
     final navigationIndex = useState(pageController.initialPage);
 
     return BlocProvider(

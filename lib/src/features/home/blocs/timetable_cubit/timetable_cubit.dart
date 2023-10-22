@@ -39,7 +39,7 @@ class TimetableCubit extends Cubit<TimetableState> {
       final schedules = await _supabase
           .from('schedules')
           .select<List<Map<String, dynamic>>>(
-              '*, classroom(*), subject(*), teacher(*), group(*), way(*)')
+              '*, classrooms(*), subjects(*), teachers(*), groups(*), ways(*)')
           .eq('classroom_id', classroom.id);
       _onTimetableChanged(schedules, isTeacher: false);
     } on Exception catch (ex) {
@@ -64,7 +64,7 @@ class TimetableCubit extends Cubit<TimetableState> {
 
         final rawSchedules = await _supabase
             .from('schedules')
-            .select(
+            .select<List<Map<String, dynamic>>>(
                 '*, classrooms(*), subjects(*), teachers(*), groups(*), ways(*)')
             .eq('teacher_id', teacherId);
         _onTimetableChanged(rawSchedules, isTeacher: true);
