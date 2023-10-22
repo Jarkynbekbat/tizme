@@ -54,7 +54,6 @@ class ScanQR extends StatelessWidget {
           );
           timetableCubit.unsubscrideFromClassroom();
         } catch (e) {
-          print('E: $e');
           EasyLoading.showError(
             "Не удалось найти расписание для аудитории $scannedName",
           );
