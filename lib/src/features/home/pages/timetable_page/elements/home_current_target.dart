@@ -40,7 +40,7 @@ class HomeCurrentTarget extends StatelessWidget {
 
             final selected = await showSearch(
               context: context,
-              delegate: AppSearchDelegate(items),
+              delegate: AppSearchDelegate(items, context),
             );
 
             if (selected == null) return;

@@ -30,5 +30,32 @@ abstract class AppThemes {
     ),
   );
 
-  static ThemeData darkTheme = ThemeData.dark(useMaterial3: true);
+  static ThemeData darkTheme = ThemeData.dark(useMaterial3: true).copyWith(
+    scaffoldBackgroundColor: Colors.grey[900],
+    appBarTheme: AppBarTheme(
+      titleTextStyle: TextStyle(
+        color: Colors.white.withOpacity(0.88),
+        fontSize: 18.0,
+      ),
+    ),
+    primaryColor: AppColors.primaryColor,
+    colorScheme: const ColorScheme.dark(
+      primary: AppColors.primaryColor,
+      secondary: AppColors.secondaryColor,
+    ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: Colors.grey[850],
+      selectedItemColor: AppColors.primaryColor,
+      unselectedItemColor: Colors.grey[500],
+      selectedLabelStyle: const TextStyle(
+        fontWeight: FontWeight.w400,
+        fontSize: 17,
+        height: 0.95,
+      ),
+      unselectedLabelStyle: TextStyle(
+        fontWeight: FontWeight.w300,
+        color: Colors.grey[500],
+      ),
+    ),
+  );
 }

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:studtime/src/shared/data/models/suggestion_item.dart';
 import 'package:studtime/src/shared/data/models/group/group.dart';
-import 'package:studtime/src/shared/styles/app_colors.dart';
 
 class AppSearchDelegate extends SearchDelegate<SuggestionItem?> {
   final List<SuggestionItem> items;
+  final BuildContext context;
 
-  AppSearchDelegate(this.items)
+  AppSearchDelegate(this.items, this.context)
       : super(
           searchFieldLabel: "Поиск",
           searchFieldStyle: TextStyle(
-            color: AppColors.secondaryColor.withOpacity(0.66),
+            color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
           ),
         );
 
@@ -53,7 +53,7 @@ class AppSearchDelegate extends SearchDelegate<SuggestionItem?> {
           onTap: () => close(context, item),
           leading: Icon(
             item is Group ? Icons.group : Icons.person,
-            color: AppColors.primaryColor,
+            color: Theme.of(context).colorScheme.primary,
           ),
           title: Text(item.name),
         );
@@ -82,7 +82,7 @@ class AppSearchDelegate extends SearchDelegate<SuggestionItem?> {
           onTap: () => close(context, item),
           leading: Icon(
             item is Group ? Icons.groups_rounded : Icons.person,
-            color: AppColors.primaryColor,
+            color: Theme.of(context).colorScheme.primary,
           ),
           title: Text(
             item.name,

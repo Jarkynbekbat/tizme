@@ -24,6 +24,7 @@ class ChatImageItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final chatContentCubit = context.read<ChatContentCubit>();
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     return CupertinoButton(
       padding: const EdgeInsets.all(0.0),
@@ -91,7 +92,7 @@ class ChatImageItem extends StatelessWidget {
             ),
             padding: const EdgeInsets.all(4.0),
             decoration: BoxDecoration(
-              color: Colors.grey[300],
+              color: colorScheme.surface, // Use surface color
               borderRadius: BorderRadius.circular(12.0),
             ),
             child: Column(
@@ -147,8 +148,9 @@ class ChatImageItem extends StatelessWidget {
                 const SizedBox(height: 4.0),
                 Text(
                   chatImage.createdAt.toChatDateTime(),
-                  style: const TextStyle(
-                    color: Colors.grey,
+                  style: TextStyle(
+                    color: colorScheme.onSurface
+                        .withOpacity(0.6), // Dimmed text color
                     fontSize: 12.0,
                   ),
                 ),

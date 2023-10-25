@@ -40,7 +40,7 @@ class SetupPage extends StatelessWidget {
                       loaded: (loaded) async {
                         final selected = await showSearch<SuggestionItem?>(
                           context: context,
-                          delegate: AppSearchDelegate(loaded.items),
+                          delegate: AppSearchDelegate(loaded.items, context),
                         );
                         if (selected == null) return;
 

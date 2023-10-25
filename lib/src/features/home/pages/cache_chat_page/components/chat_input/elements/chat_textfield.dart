@@ -12,17 +12,19 @@ class ChatTextfield extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+
     return TextField(
       controller: textController,
       focusNode: focusNode,
       keyboardType: TextInputType.multiline,
       maxLines: 5,
       minLines: 1,
-      decoration: const InputDecoration(
+      decoration: InputDecoration(
         hintText: 'Введите заметку',
         border: InputBorder.none,
         hintStyle: TextStyle(
-          color: Colors.black12,
+          color: colorScheme.onSurface.withOpacity(0.6),
         ),
       ),
     );

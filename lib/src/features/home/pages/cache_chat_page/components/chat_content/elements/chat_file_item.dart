@@ -23,6 +23,7 @@ class ChatFileItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final chatContentCubit = context.read<ChatContentCubit>();
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     return CupertinoButton(
       padding: const EdgeInsets.all(0.0),
@@ -90,7 +91,7 @@ class ChatFileItem extends StatelessWidget {
             ),
             padding: const EdgeInsets.all(8.0),
             decoration: BoxDecoration(
-              color: Colors.grey[300],
+              color: colorScheme.surface,
               borderRadius: BorderRadius.circular(12.0),
             ),
             child: Row(
@@ -133,8 +134,9 @@ class ChatFileItem extends StatelessWidget {
                           ),
                           Text(
                             chatFile.createdAt.toChatDateTime(),
-                            style: const TextStyle(
-                              color: Colors.grey,
+                            style: TextStyle(
+                              color: colorScheme.onSurface
+                                  .withOpacity(0.6), // Dimmed text color
                               fontSize: 12.0,
                             ),
                           ),

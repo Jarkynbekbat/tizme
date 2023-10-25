@@ -20,6 +20,7 @@ class ChatTextItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final chatContentCubit = context.read<ChatContentCubit>();
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     return SwipeActionCell(
       key: ObjectKey(message),
@@ -85,17 +86,24 @@ class ChatTextItem extends StatelessWidget {
           ),
           padding: const EdgeInsets.all(8.0),
           decoration: BoxDecoration(
-            color: Colors.grey[300],
+            color: colorScheme
+                .surface, // Use surface color for chat bubble background
             borderRadius: BorderRadius.circular(12.0),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Text(message.text),
+              Text(
+                message.text,
+                style: TextStyle(
+                  color: colorScheme.onSurface, // Dynamic text color
+                ),
+              ),
               Text(
                 message.createdAt.toChatDateTime(),
-                style: const TextStyle(
-                  color: Colors.grey,
+                style: TextStyle(
+                  color: colorScheme.onSurface
+                      .withOpacity(0.6), // Dimmed text color for date/time
                   fontSize: 12.0,
                 ),
               ),
