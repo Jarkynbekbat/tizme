@@ -2,7 +2,7 @@ import 'package:studtime/src/shared/data/models/schedule/schedule.dart';
 import 'package:studtime/src/shared/extensions/on_datetime.dart';
 
 extension OnWeekType on WeekType {
-  String get title {
+  String get ruTitle {
     switch (this) {
       case WeekType.even:
         return 'Числитель';

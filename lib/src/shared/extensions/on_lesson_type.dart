@@ -1,7 +1,7 @@
 import 'package:studtime/src/shared/data/models/schedule/schedule.dart';
 
 extension OnLessonType on LessonType {
-  String get title {
+  String get ruTitle {
     switch (this) {
       case LessonType.lecture:
         return 'Лекция';

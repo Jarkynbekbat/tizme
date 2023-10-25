@@ -16,4 +16,4 @@ class Teacher extends SuggestionItem with _$Teacher {
       _$TeacherFromJson(json);
 }
 
-enum Grade { professor, docent, teacher }
+enum Grade { professor, docent, teacher, srteacher }

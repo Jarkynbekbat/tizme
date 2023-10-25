@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:studtime/src/shared/data/models/schedule/schedule.dart';
 import 'package:studtime/src/shared/extensions/on_context.dart';
+import 'package:studtime/src/shared/extensions/on_grade.dart';
 import 'package:studtime/src/shared/extensions/on_lesson_type.dart';
 import 'package:studtime/src/shared/extensions/on_time_slot.dart';
 import 'package:studtime/src/shared/extensions/on_weektype.dart';
@@ -25,10 +26,10 @@ class ScheduleListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final target = isTeacher
         ? schedule.map(group: (s) => s.group!.name, way: (s) => s.way!.name)
-        : '${schedule.teacher.grade.name} ${schedule.teacher.name}';
+        : '${schedule.teacher.grade.ruTitle} ${schedule.teacher.name}';
 
     final subtitle =
-        '$target • ${schedule.classroom.name} • ${schedule.lessonType.title}';
+        '$target • ${schedule.classroom.name} • ${schedule.lessonType.ruTitle}';
 
     return CupertinoButton(
       onPressed: () {
@@ -67,7 +68,7 @@ class ScheduleListTile extends StatelessWidget {
                 ),
                 if (showWeekType)
                   Text(
-                    schedule.weekType.title,
+                    schedule.weekType.ruTitle,
                     style: TextStyle(
                       color: Theme.of(context).primaryColor.withOpacity(0.66),
                     ),
