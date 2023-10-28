@@ -23,4 +23,5 @@ const _$GradeEnumMap = {
   Grade.professor: 'professor',
   Grade.docent: 'docent',
   Grade.teacher: 'teacher',
+  Grade.srteacher: 'srteacher',
 };
