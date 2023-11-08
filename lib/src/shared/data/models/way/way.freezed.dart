@@ -22,7 +22,7 @@ Way _$WayFromJson(Map<String, dynamic> json) {
 mixin _$Way {
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  int get departmentId => throw _privateConstructorUsedError;
+  int get facultyId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +34,7 @@ abstract class $WayCopyWith<$Res> {
   factory $WayCopyWith(Way value, $Res Function(Way) then) =
       _$WayCopyWithImpl<$Res, Way>;
   @useResult
-  $Res call({int id, String name, int departmentId});
+  $Res call({int id, String name, int facultyId});
 }
 
 /// @nodoc
@@ -51,7 +51,7 @@ class _$WayCopyWithImpl<$Res, $Val extends Way> implements $WayCopyWith<$Res> {
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? departmentId = null,
+    Object? facultyId = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -62,9 +62,9 @@ class _$WayCopyWithImpl<$Res, $Val extends Way> implements $WayCopyWith<$Res> {
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      departmentId: null == departmentId
-          ? _value.departmentId
-          : departmentId // ignore: cast_nullable_to_non_nullable
+      facultyId: null == facultyId
+          ? _value.facultyId
+          : facultyId // ignore: cast_nullable_to_non_nullable
               as int,
     ) as $Val);
   }
@@ -76,7 +76,7 @@ abstract class _$$_WayCopyWith<$Res> implements $WayCopyWith<$Res> {
       __$$_WayCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String name, int departmentId});
+  $Res call({int id, String name, int facultyId});
 }
 
 /// @nodoc
@@ -90,7 +90,7 @@ class __$$_WayCopyWithImpl<$Res> extends _$WayCopyWithImpl<$Res, _$_Way>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? departmentId = null,
+    Object? facultyId = null,
   }) {
     return _then(_$_Way(
       id: null == id
@@ -101,9 +101,9 @@ class __$$_WayCopyWithImpl<$Res> extends _$WayCopyWithImpl<$Res, _$_Way>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      departmentId: null == departmentId
-          ? _value.departmentId
-          : departmentId // ignore: cast_nullable_to_non_nullable
+      facultyId: null == facultyId
+          ? _value.facultyId
+          : facultyId // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -112,8 +112,7 @@ class __$$_WayCopyWithImpl<$Res> extends _$WayCopyWithImpl<$Res, _$_Way>
 /// @nodoc
 @JsonSerializable()
 class _$_Way implements _Way {
-  const _$_Way(
-      {required this.id, required this.name, required this.departmentId});
+  const _$_Way({required this.id, required this.name, required this.facultyId});
 
   factory _$_Way.fromJson(Map<String, dynamic> json) => _$$_WayFromJson(json);
 
@@ -122,11 +121,11 @@ class _$_Way implements _Way {
   @override
   final String name;
   @override
-  final int departmentId;
+  final int facultyId;
 
   @override
   String toString() {
-    return 'Way(id: $id, name: $name, departmentId: $departmentId)';
+    return 'Way(id: $id, name: $name, facultyId: $facultyId)';
   }
 
   @override
@@ -136,13 +135,13 @@ class _$_Way implements _Way {
             other is _$_Way &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.departmentId, departmentId) ||
-                other.departmentId == departmentId));
+            (identical(other.facultyId, facultyId) ||
+                other.facultyId == facultyId));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, departmentId);
+  int get hashCode => Object.hash(runtimeType, id, name, facultyId);
 
   @JsonKey(ignore: true)
   @override
@@ -162,7 +161,7 @@ abstract class _Way implements Way {
   const factory _Way(
       {required final int id,
       required final String name,
-      required final int departmentId}) = _$_Way;
+      required final int facultyId}) = _$_Way;
 
   factory _Way.fromJson(Map<String, dynamic> json) = _$_Way.fromJson;
 
@@ -171,7 +170,7 @@ abstract class _Way implements Way {
   @override
   String get name;
   @override
-  int get departmentId;
+  int get facultyId;
   @override
   @JsonKey(ignore: true)
   _$$_WayCopyWith<_$_Way> get copyWith => throw _privateConstructorUsedError;

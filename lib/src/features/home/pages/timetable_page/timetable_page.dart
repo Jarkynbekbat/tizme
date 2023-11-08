@@ -58,7 +58,7 @@ class TimetablePage extends HookWidget {
                 style: TextStyle(fontSize: 17, fontWeight: FontWeight.w300),
               ),
               activeIcon: const SizedBox.shrink(),
-              label: DateText.getDateByWeekday(0),
+              label: DateText.getDateByWeekday(1),
             ),
             BottomNavigationBarItem(
               icon: const Text(
@@ -66,19 +66,11 @@ class TimetablePage extends HookWidget {
                 style: TextStyle(fontSize: 17, fontWeight: FontWeight.w300),
               ),
               activeIcon: const SizedBox.shrink(),
-              label: DateText.getDateByWeekday(1),
+              label: DateText.getDateByWeekday(2),
             ),
             BottomNavigationBarItem(
               icon: const Text(
                 'СР',
-                style: TextStyle(fontSize: 17, fontWeight: FontWeight.w300),
-              ),
-              label: DateText.getDateByWeekday(2),
-              activeIcon: const SizedBox.shrink(),
-            ),
-            BottomNavigationBarItem(
-              icon: const Text(
-                'ЧТ',
                 style: TextStyle(fontSize: 17, fontWeight: FontWeight.w300),
               ),
               label: DateText.getDateByWeekday(3),
@@ -86,7 +78,7 @@ class TimetablePage extends HookWidget {
             ),
             BottomNavigationBarItem(
               icon: const Text(
-                'ПТ',
+                'ЧТ',
                 style: TextStyle(fontSize: 17, fontWeight: FontWeight.w300),
               ),
               label: DateText.getDateByWeekday(4),
@@ -94,15 +86,21 @@ class TimetablePage extends HookWidget {
             ),
             BottomNavigationBarItem(
               icon: const Text(
-                'СБ',
+                'ПТ',
                 style: TextStyle(fontSize: 17, fontWeight: FontWeight.w300),
               ),
               label: DateText.getDateByWeekday(5),
               activeIcon: const SizedBox.shrink(),
             ),
+            BottomNavigationBarItem(
+              icon: const Text(
+                'СБ',
+                style: TextStyle(fontSize: 17, fontWeight: FontWeight.w300),
+              ),
+              label: DateText.getDateByWeekday(6),
+              activeIcon: const SizedBox.shrink(),
+            ),
           ],
-          // activeColor: AppColors.primaryColor,
-          // inactiveColor: Colors.blueGrey,
         ),
       ),
     );

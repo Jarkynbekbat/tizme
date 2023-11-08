@@ -8,7 +8,7 @@ abstract class Way with _$Way {
   const factory Way({
     required int id,
     required String name,
-    required int departmentId,
+    required int facultyId,
   }) = _Way;
 
   factory Way.fromJson(Map<String, dynamic> json) => _$WayFromJson(json);
