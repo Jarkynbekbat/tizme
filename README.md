@@ -10,7 +10,7 @@ A convenient tool that allows students and teachers to regularly attend classes 
 ![Screenshot 4](assets/screenshots/image4.webp)
 
 # Dev commands
-fvm flutter packages pub run build_runner build --delete-conflicting-outputs
+fvm flutter packages pub run build_runner build --delete-conflicting-outputs 
 fvm flutter pub run easy_localization:generate -f keys -o locale_keys.g.dart --source-dir ./assets/translations
 fvm flutter pub run flutter_launcher_icons:main
 fvm flutter pub run flutter_native_splash:create
